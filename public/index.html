@@ -14,37 +14,17 @@
   <input type="text">
   <button>测试</button>
   <button>回放</button>
-  <script src="https://cdn.jsdelivr.net/npm/rrweb@latest/dist/rrweb.min.js"></script>
+  <script src="https://cdn.bootcss.com/axios/0.18.0/axios.min.js"></script>
+  <script src="./js/operationRecord.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/rrweb-player@latest/dist/index.js"></script>
   <script>
-    // let events = [];
-    // let stopFn = rrweb.record({
-    //   emit(event) {
-    //     // 将 event 存入 events 数组中
-    //     events.push(event);
-    //   },
-    // });
-    // document.querySelectorAll('button')[0].addEventListener('click', function (params) {
-    //   document.querySelector('input').value = '132';
-    //   console.log(events);
+    let a = new Record({
+      url: '/operationRecord/add',
+      success: function (res) {
+        console.log(res);
 
-    //   setTimeout(() => {
-    //     confirm('录制完成');
-    //     stopFn();
-    //   }, 1000);
-    // });
-    // document.querySelectorAll('button')[1].addEventListener('click', function (params) {
-    //   new rrwebPlayer({
-    //     target: document.body, // 可以自定义 DOM 元素
-    //     data: {
-    //       events,
-    //     },
-    //   });
-    // });
-
-    let a=new Date().getTime();
-    console.log(a);
-    
+      }
+    });
   </script>
 </body>
 

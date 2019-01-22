@@ -2040,3 +2040,51 @@ var rrweb = (function (exports) {
   return exports;
 
 }({}));
+
+class Record {
+  constructor(options) {
+    this.url = options.url;
+    this.interval = options.interval || 10000;
+    this.success = options.success || function () { };
+    this.error = options.error || function () { };
+    this.interval = options.interval || 10000;
+    this.events = [];
+    this.create = this.create.bind(this);
+    this.ajax = this.ajax.bind(this);
+    this.stop = this.stop.bind(this);
+    this.timeOutFn = this.timeOutFn.bind(this);
+    this.timeOut = null;
+    this.create();
+    this.timeOutFn();
+  }
+  timeOutFn() {
+    this.ajax();
+    if (this.timeOut !== null) {
+      clearTimeout(this.timeOut);
+    };
+    this.timeOut = setTimeout(() => {
+      this.timeOutFn();
+    }, this.interval);
+  }
+  create() {
+    const that = this;
+    this.rrewb = rrweb.record({
+      emit(event) {
+        // 将 event 存入 events 数组中
+        that.events.push(event);
+      },
+    });
+  }
+  ajax() {
+    axios.post(this.url, {
+      data: this.events
+    }).then((res) => {
+      this.success(res);
+    }).catch((err) => {
+      this.error(err);
+    });
+  }
+  stop() {
+    this.rrewb();
+  }
+};

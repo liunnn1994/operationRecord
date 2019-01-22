@@ -27,9 +27,9 @@ app.post('/', function (req, res) {
 
 //根据表名查询数据
 app.get('/operationRecord/query', function (req, res, next) {
-  const { Table, page, pageSize } = req.query;
+  const { table, page, pageSize } = req.query;
 
-  mysql.query(Table, page, pageSize).then((dataBase) => {
+  mysql.query(table, page, pageSize).then((dataBase) => {
     for (let i = 0, len = dataBase.list.length; i < len; i++) {
       dataBase.list[i].dataFile = dataBase.list[i].dataFile.replace(/.\/datas\//ig, '');
     };
