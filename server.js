@@ -9,6 +9,7 @@ const app = express();
 const port = 3001;
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'datas')));
 
 //查询所有表名
 app.post('/', function (req, res) {
@@ -27,7 +28,11 @@ app.post('/', function (req, res) {
 //根据表名查询数据
 app.get('/operationRecord/query', function (req, res, next) {
   const { Table, page, pageSize } = req.query;
+
   mysql.query(Table, page, pageSize).then((dataBase) => {
+    for (let i = 0, len = dataBase.list.length; i < len; i++) {
+      dataBase.list[i].dataFile = dataBase.list[i].dataFile.replace(/.\/datas\//ig, '');
+    };
     res.send(dataBase);
   });
 });
