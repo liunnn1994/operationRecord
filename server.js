@@ -9,18 +9,24 @@ const path = require('path'); //系统路径模块
 const app = express();
 const port = 3001;
 
-//app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/operationRecord/query', function (req, res, next) {
-  console.log(req.query);
-  const Table = 'data';
-  mysql.query(Table,1).then((dataBase) => {
-    //console.log(dataBase);
+//查询所有表名
+app.post('/', function (req, res) {
+  mysql.getAllTables().then((dataBase) => {
     res.send(dataBase);
   });
-  
 });
 
+//根据表名查询数据
+app.get('/operationRecord/query', function (req, res, next) {
+  const { Table, page, pageSize } = req.query;
+  mysql.query(Table, page, pageSize).then((dataBase) => {
+    res.send(dataBase);
+  });
+});
+
+//添加数据
 app.post('/operationRecord/add', function (req, res) {
   res.send('POST request to the homepage')
 });

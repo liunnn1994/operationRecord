@@ -62,5 +62,18 @@ module.exports = {
       });
     });
     return p;
+  },
+  getAllTables: function () {
+    const getAllTables = `SELECT table_name FROM information_schema.tables WHERE table_schema = '${databaseConfig.database}'`;
+    const p = new Promise(function (res, rej) {
+      connection.query(getAllTables, function (err, result) {
+        if (err) {
+          rej(err.message);
+        } else {
+          res(result);
+        };
+      });
+    });
+    return p;
   }
 };
