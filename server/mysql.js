@@ -47,11 +47,12 @@ module.exports = {
     return p;
   },
   /**
-   * 
+   * 添加数据
    * @param {[操作人姓名,上传ip,上传时间,文件名,是否认为上报,]} params 
+   * @param {表名} table 
    */
-  add: function (params = ['', '', '', '', '']) {
-    var addSql = 'INSERT INTO data(Id,name,ip,date,dataFile,isReport) VALUES(0,?,?,?,?,?)';
+  add: function (params = ['', '', '', '', ''], table) {
+    var addSql = `INSERT INTO ${table}(Id,name,ip,date,dataFile,isReport) VALUES(0,?,?,?,?,?)`;
     const p = new Promise(function (res, rej) {
       connection.query(addSql, params, function (err, result) {
         if (err) {
