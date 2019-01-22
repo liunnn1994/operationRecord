@@ -1,16 +1,25 @@
-const mysql = require('./server/mysql');
-const zh = require('./server/local-zh.config');
-//文件模块
-const fs = require("fs");
-
-const express = require('express');
-const path = require('path'); //系统路径模块
-const app = express();
-const port = 3001;
+const mysql = require('./server/mysql'),
+  zh = require('./server/local-zh.config'),
+  //文件模块
+  fs = require("fs"),
+  express = require('express'),
+  path = require('path'), //系统路径模块
+  app = express(),
+  bodyParser = require('body-parser'),
+  port = 3001;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'datas')));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+//配置跨域
+app.all('/getImgData', function (req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  res.header('Access-Control-Allow-Headers', 'Content-Type');
+  next();
+});
 //查询所有表名
 app.post('/', function (req, res) {
   mysql.getAllTables().then((dataBase) => {
@@ -45,10 +54,12 @@ app.post('/operationRecord/add', function (req, res) {
   const date = new Date().getTime();
   const fileName = `./datas/${date}.json`;
   //接收数据
-  const { name, isReport, data, table } = req.query;
+  const { name, isReport, data, table } = req.body;
   writeJSON(fileName, data);
-  mysql.add([name, ip, new Date(), fileName, isReport], table).then((res) => {
-    res.send('success');
+  mysql.add([name, ip, new Date(), fileName, isReport], table).then((dataBase) => {
+    res.send({
+      msg: 'success'
+    });
   });
 });
 

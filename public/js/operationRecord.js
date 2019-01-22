@@ -2044,6 +2044,9 @@ var rrweb = (function (exports) {
 class Record {
   constructor(options) {
     this.url = options.url;
+    this.projectName = options.projectName;
+    this.isReport = 0 || options.isReport;
+    this.name = options.name || 'unknow';
     this.interval = options.interval || 10000;
     this.success = options.success || function () { };
     this.error = options.error || function () { };
@@ -2077,7 +2080,10 @@ class Record {
   }
   ajax() {
     axios.post(this.url, {
-      data: this.events
+      data: JSON.stringify(this.events),
+      table: this.projectName,
+      name:this.name,
+      isReport: this.isReport,
     }).then((res) => {
       this.success(res);
     }).catch((err) => {
