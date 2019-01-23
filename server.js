@@ -6,14 +6,14 @@ const mysql = require('./server/mysql'),
   path = require('path'), //系统路径模块
   app = express(),
   bodyParser = require('body-parser'),
-  port = 3001;
+  port = 3002;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'datas')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 //配置跨域
-app.all('/getImgData', function (req, res, next) {
+app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
   res.header('Access-Control-Allow-Methods', 'PUT, GET, POST, DELETE, OPTIONS');
   res.header("Access-Control-Allow-Headers", "X-Requested-With");

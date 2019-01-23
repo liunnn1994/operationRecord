@@ -2041,6 +2041,7 @@ var rrweb = (function (exports) {
 
 }({}));
 
+//Record类
 class Record {
   constructor(options) {
     this.url = options.url;
@@ -2048,6 +2049,7 @@ class Record {
     this.isReport = 0 || options.isReport;
     this.name = options.name || 'unknow';
     this.interval = options.interval || 10000;
+    this.ajaxFn = options.ajax || axios;
     this.success = options.success || function () { };
     this.error = options.error || function () { };
     this.interval = options.interval || 10000;
@@ -2061,9 +2063,9 @@ class Record {
     this.timeOutFn();
   }
   timeOutFn() {
-    this.ajax();
     if (this.timeOut !== null) {
       clearTimeout(this.timeOut);
+      this.ajax();
     };
     this.timeOut = setTimeout(() => {
       this.timeOutFn();
@@ -2079,7 +2081,7 @@ class Record {
     });
   }
   ajax() {
-    axios.post(this.url, {
+    this.ajaxFn.post(this.url, {
       data: JSON.stringify(this.events),
       table: this.projectName,
       name: this.name,
