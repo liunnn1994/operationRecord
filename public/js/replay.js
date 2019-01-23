@@ -6,7 +6,7 @@ const app = new Vue({
   data() {
     return {
       tables: [],
-      activeIndex:'0',
+      activeIndex: '0',
       centerDialogVisible: false,
       dialogTitle: '',
       dialogFooter: '',
@@ -23,7 +23,7 @@ const app = new Vue({
     };
   },
   created() {
-    this.getAllTables().then(()=>{
+    this.getAllTables().then(() => {
       this.query();
     });
   },
@@ -114,7 +114,6 @@ const app = new Vue({
     },
     clickMenu(item, index) {
       console.log(item, index);
-
     }
   }
 });
