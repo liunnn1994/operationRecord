@@ -2082,7 +2082,7 @@ class Record {
     axios.post(this.url, {
       data: JSON.stringify(this.events),
       table: this.projectName,
-      name:this.name,
+      name: this.name,
       isReport: this.isReport,
     }).then((res) => {
       this.success(res);
