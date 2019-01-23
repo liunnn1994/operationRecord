@@ -6,10 +6,83 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>回放</title>
+  <link rel="stylesheet" href="./css/reset.min.css">
+  <link rel="stylesheet" href="./css/player.min.css">
+  <link rel="stylesheet" href="./css/element.min.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-  回放
+  <div id="app">
+    <el-container>
+      <el-aside :class='{"aside-collapse":isCollapse}' class="el-menu-vertical-table" style="background-color: rgb(238, 241, 246)">
+        <el-menu class="el-menu-vertical-table" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
+          <el-menu-item index="1">
+            <i class="el-icon-menu"></i>
+            <span slot="title">导航一</span>
+          </el-menu-item>
+          <el-menu-item index="2">
+            <i class="el-icon-menu"></i>
+            <span slot="title">导航二</span>
+          </el-menu-item>
+          <el-menu-item index="3" disabled>
+            <i class="el-icon-document"></i>
+            <span slot="title">导航三</span>
+          </el-menu-item>
+          <el-menu-item index="4">
+            <i class="el-icon-setting"></i>
+            <span slot="title">导航四</span>
+          </el-menu-item>
+        </el-menu>
+        <el-button type="primary" @click='handleCollapse' v-text="isCollapse?'&gt;':'&lt;'" />
+      </el-aside>
+
+      <el-container>
+        <el-main>
+          <el-table ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange"
+            :row-class-name="tableRowClassName">
+            <el-table-column type="selection">
+            </el-table-column>
+            <el-table-column prop="name" label="上报人">
+            </el-table-column>
+            <el-table-column prop="ip" label="上报IP" show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column prop="date" label="上报时间">
+            </el-table-column>
+            <el-table-column prop="isReport" label="是否人为上报" show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button type="success" round plain size="mini" @click="handlePlayOne(scope.$index, scope.row)">播放此条</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div>
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+              :page-sizes="[10, 50, 200, 500]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+              :total="totalSize">
+            </el-pagination>
+          </div>
+          <div @mousedown='moveBtn()' :style="{left:playBtnX,top:playBtnY}" class="multiple-btn-box">
+            <transition name="el-zoom-in-center">
+              <div v-show="showMultipleBtn" class="transition-box">
+                <el-tooltip effect="dark" placement="bottom">
+                  <div slot="content">合并播放选中文件<br />拖拽可挪动位置</div>
+                  <el-button circle icon='el-icon-caret-right
+                ' type='success' @click="" />
+                </el-tooltip>
+              </div>
+            </transition>
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script src="./js/element.min.js"></script>
+  <script src="./js/axios.min.js"></script>
+  <script src="./js/player.min.js"></script>
+  <script src="./js/replay.js"></script>
 </body>
 
 </html>

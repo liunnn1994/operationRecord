@@ -1,0 +1,45 @@
+.el-container {
+  min-height: 100vh;
+}
+
+.el-menu--collapse {
+  width: 70px;
+}
+
+.el-menu-vertical-table:not(.el-menu--collapse) {
+  width: 200px;
+}
+
+.el-aside:not(.aside-collapse) {
+  width: 201px !important;
+}
+
+.el-aside {
+  width: 71px !important;
+  transition: width 0.3s ease-in-out;
+  position: relative;
+}
+
+.el-aside>button {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  text-align: center;
+  width: 100%;
+}
+
+.multiple-btn-box {
+  width: 40px;
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  transition: 0.1s ease-in-out;
+  z-index: 999;
+}
+.el-table .warning-row {
+  background: oldlace;
+}
+
+.el-table .success-row {
+  background: #f0f9eb;
+}

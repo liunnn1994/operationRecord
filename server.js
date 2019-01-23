@@ -12,6 +12,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'datas')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+
 //配置跨域
 app.all('*', function (req, res, next) {
   res.header("Access-Control-Allow-Origin", "*");
@@ -37,7 +38,6 @@ app.post('/', function (req, res) {
 //根据表名查询数据
 app.get('/operationRecord/query', function (req, res, next) {
   const { table, page, pageSize } = req.query;
-
   mysql.query(table, page, pageSize).then((dataBase) => {
     for (let i = 0, len = dataBase.list.length; i < len; i++) {
       dataBase.list[i].dataFile = dataBase.list[i].dataFile.replace(/.\/datas\//ig, '');

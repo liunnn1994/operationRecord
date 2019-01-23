@@ -16,8 +16,10 @@ module.exports = {
    */
   query: function (Table, page, pageSize = 10) {
     const start = (page - 1) * pageSize;
-    const end = start + pageSize;
-    const sql = `SELECT * FROM ${Table} limit ${start},${end}`;
+    const end = start*1 + pageSize*1;
+    console.log(start,end);
+    
+    const sql = `SELECT * FROM ${Table} limit ${start},${pageSize}`;
     //查询条数
     const count = `SELECT COUNT(*) FROM ${Table}`;
     //promise 便于调用
