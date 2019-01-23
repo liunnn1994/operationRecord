@@ -66,10 +66,9 @@
       </el-container>
     </el-container>
 
-    <el-dialog width='100%' height='100%' :title="dialogTitle" :visible.sync="centerDialogVisible">
-      <span>需要注意的是内容是默认不居中的</span>
-      <div class="footer-tag">
-        <el-tag>标签一</el-tag>
+    <el-dialog width='100%' height='100%' :title="dialogTitle" :visible.sync="centerDialogVisible" @close='handleClose'>
+      <div id="player">
+
       </div>
       <span slot="footer" class="dialog-footer">
         <el-button size="medium" type="danger" @click="centerDialogVisible = false">关 闭</el-button>

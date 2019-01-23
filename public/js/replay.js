@@ -1,5 +1,6 @@
-const allTablesUrl = '/operationRecord/getAllTables',
-  queryUrl = '/operationRecord/query';
+const host='';
+const allTablesUrl = host+'/operationRecord/getAllTables',
+  queryUrl = host+'/operationRecord/query';
 
 const app = new Vue({
   el: '#app',
@@ -9,7 +10,6 @@ const app = new Vue({
       activeIndex: '0',
       centerDialogVisible: false,
       dialogTitle: '',
-      dialogFooter: '',
       table: '',
       totalSize: 0,
       pageSize: localStorage.getItem('pageSize') === null ? 10 : Number(localStorage.getItem('pageSize')),
@@ -109,8 +109,21 @@ const app = new Vue({
     },
     handlePlayOne(index, row) {
       this.dialogTitle = `上报人：${row.name}`;
-      this.dialogFooter = row.ip;
       this.centerDialogVisible = true;
+      axios.get(`${host}/${row.dataFile}`).then((res)=>{
+        console.log(res);
+        new rrwebPlayer({
+          target: document.querySelector('#player'), // 可以自定义 DOM 元素
+          data: {
+            events:res.data,
+          },
+        });
+      });
+      
+    },
+    handleClose(){
+      console.log(1);
+      document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
     },
     clickMenu(item, index) {
       console.log(item, index);
