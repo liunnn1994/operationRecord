@@ -43,3 +43,10 @@
 .el-table .success-row {
   background: #f0f9eb;
 }
+.footer-tag{
+  text-align: left;
+  margin-bottom: 20px;
+}
+.dialog-footer{
+  text-align: right;
+}

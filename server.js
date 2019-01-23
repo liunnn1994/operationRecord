@@ -22,7 +22,7 @@ app.all('*', function (req, res, next) {
   next();
 });
 //查询所有表名
-app.post('/', function (req, res) {
+app.post('/operationRecord/getAllTables', function (req, res) {
   mysql.getAllTables().then((dataBase) => {
     let msg = [];
     for (let i = 0, len = dataBase.length; i < len; i++) {

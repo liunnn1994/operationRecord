@@ -1,8 +1,16 @@
-new Vue({
+const allTablesUrl = '/operationRecord/getAllTables',
+  queryUrl = '/operationRecord/query';
+
+const app = new Vue({
   el: '#app',
   data() {
     return {
-      table: 'data',
+      tables: [],
+      activeIndex:'0',
+      centerDialogVisible: false,
+      dialogTitle: '',
+      dialogFooter: '',
+      table: '',
       totalSize: 0,
       pageSize: localStorage.getItem('pageSize') === null ? 10 : Number(localStorage.getItem('pageSize')),
       playBtnX: localStorage.getItem('x') === null ? 'auto' : localStorage.getItem('x'),
@@ -15,7 +23,9 @@ new Vue({
     };
   },
   created() {
-    this.query();
+    this.getAllTables().then(()=>{
+      this.query();
+    });
   },
   methods: {
     tableRowClassName({ row }) {
@@ -24,8 +34,14 @@ new Vue({
       };
       return '';
     },
+    getAllTables() {
+      return axios.post(allTablesUrl).then((res) => {
+        this.tables = res.data;
+        this.table = res.data[0].en;
+      });
+    },
     query() {
-      axios.get('/operationRecord/query', {
+      axios.get(queryUrl, {
         params: {
           table: this.table,
           page: this.currentPage,
@@ -35,12 +51,6 @@ new Vue({
         this.totalSize = res.data.totalSize;
         this.tableData = res.data.list;
       });
-    },
-    handleOpen(key, keyPath) {
-      console.log(key, keyPath);
-    },
-    handleClose(key, keyPath) {
-      console.log(key, keyPath);
     },
     handleCollapse() {
       this.isCollapse = !this.isCollapse;
@@ -64,12 +74,13 @@ new Vue({
     },
     handleSizeChange(val) {
       this.pageSize = val;
+      this.currentPage = 1;
       localStorage.setItem('pageSize', val);
+      this.query();
     },
     handleCurrentChange(val) {
-      this.currentPage=val;
+      this.currentPage = val;
       this.query();
-      console.log(`当前页: ${val}`);
     },
     moveBtn() {
       const that = this;
@@ -96,8 +107,14 @@ new Vue({
         localStorage.setItem('y', e.clientY - 20 + 'px');
       });
     },
-    handlePlayOne(index, row){
-      console.log(index, row);
+    handlePlayOne(index, row) {
+      this.dialogTitle = `上报人：${row.name}`;
+      this.dialogFooter = row.ip;
+      this.centerDialogVisible = true;
+    },
+    clickMenu(item, index) {
+      console.log(item, index);
+
     }
   }
 });

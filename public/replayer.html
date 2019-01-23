@@ -15,23 +15,11 @@
 <body>
   <div id="app">
     <el-container>
-      <el-aside :class='{"aside-collapse":isCollapse}' class="el-menu-vertical-table" style="background-color: rgb(238, 241, 246)">
-        <el-menu class="el-menu-vertical-table" @open="handleOpen" @close="handleClose" :collapse="isCollapse">
-          <el-menu-item index="1">
+      <el-aside :class='{"aside-collapse":isCollapse}' class="el-menu-vertical-table">
+        <el-menu class="el-menu-vertical-table" :collapse="isCollapse" :default-active='activeIndex'>
+          <el-menu-item v-for='(item, index) in tables' index="index" key="index" @click='clickMenu(item,index)'>
             <i class="el-icon-menu"></i>
-            <span slot="title">导航一</span>
-          </el-menu-item>
-          <el-menu-item index="2">
-            <i class="el-icon-menu"></i>
-            <span slot="title">导航二</span>
-          </el-menu-item>
-          <el-menu-item index="3" disabled>
-            <i class="el-icon-document"></i>
-            <span slot="title">导航三</span>
-          </el-menu-item>
-          <el-menu-item index="4">
-            <i class="el-icon-setting"></i>
-            <span slot="title">导航四</span>
+            <span slot="title" v-text='item.zh'></span>
           </el-menu-item>
         </el-menu>
         <el-button type="primary" @click='handleCollapse' v-text="isCollapse?'&gt;':'&lt;'" />
@@ -77,6 +65,16 @@
         </el-main>
       </el-container>
     </el-container>
+
+    <el-dialog width='100%' height='100%' :title="dialogTitle" :visible.sync="centerDialogVisible">
+      <span>需要注意的是内容是默认不居中的</span>
+      <div class="footer-tag">
+        <el-tag>标签一</el-tag>
+      </div>
+      <span slot="footer" class="dialog-footer">
+        <el-button size="medium" type="danger" @click="centerDialogVisible = false">关 闭</el-button>
+      </span>
+    </el-dialog>
   </div>
   <script src="./js/vue.js"></script>
   <script src="./js/element.min.js"></script>
