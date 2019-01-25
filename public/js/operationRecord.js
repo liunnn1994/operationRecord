@@ -2063,6 +2063,42 @@ class Record {
     this.timeOut = null;
     this.create();
     this.timeOutFn();
+    options.commitBug === undefined ? options.commitBug = true : '';
+    if (options.commitBug) {
+      this.bugBtn();
+    };
+  }
+  bugBtn() {
+    const btn = document.createElement('div');
+    btn.innerText = '提交';
+    btn.title = '点击提交bug';
+    btn.setAttribute('class', 'bug-commit-btn');
+    const styles = {
+      'width': '40px',
+      'height': '40px',
+      'fontSize': '12px',
+      'borderRadius': '50%',
+      'cursor': 'pointer',
+      'border': '1px solid #666',
+      'textAlign': 'center',
+      'lineHeight': '40px',
+      'position': 'fixed',
+      'right': '20px',
+      'bottom': '20px',
+    };
+    for (const key in styles) {
+      btn.style[key] = styles[key];
+    };
+    document.body.appendChild(btn);
+    const that = this;
+    btn.addEventListener('click', function (params) {
+      const msg = prompt('请言输入bug上报原因，最多255个字符。多余字符将被截取不会提交。');
+      that.isReport = 1;
+      if (msg !== null) {
+        msg.length > 255 ? that.msg = msg.substring(0, 255) : that.msg = msg;
+        that.ajax();
+      };
+    });
   }
   timeOutFn() {
     if (this.timeOut !== null) {
