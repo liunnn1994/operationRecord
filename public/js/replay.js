@@ -1,6 +1,6 @@
-const host='';
-const allTablesUrl = host+'/operationRecord/getAllTables',
-  queryUrl = host+'/operationRecord/query';
+const host = '';
+const allTablesUrl = host + '/operationRecord/getAllTables',
+  queryUrl = host + '/operationRecord/query';
 
 const app = new Vue({
   el: '#app',
@@ -110,20 +110,24 @@ const app = new Vue({
     handlePlayOne(index, row) {
       this.dialogTitle = `上报人：${row.name}`;
       this.centerDialogVisible = true;
-      axios.get(`${host}/${row.dataFile}`).then((res)=>{
-        console.log(res);
-        new rrwebPlayer({
+
+      axios.get(`${host}/${row.dataFile}`).then((res) => {
+        let a = new rrwebPlayer({
           target: document.querySelector('#player'), // 可以自定义 DOM 元素
           data: {
-            events:res.data,
+            events: res.data,
           },
         });
+        if (document.querySelectorAll('.rr-player').length > 1) {
+          document.querySelectorAll('.rr-player')[0].parentNode.removeChild(document.querySelectorAll('.rr-player')[0]);
+        };
+        
       });
-      
+
     },
-    handleClose(){
-      console.log(1);
-      document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
+    handleClose() {
+      // console.log(1);
+      // document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
     },
     clickMenu(item, index) {
       console.log(item, index);
