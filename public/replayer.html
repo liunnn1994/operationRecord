@@ -27,8 +27,8 @@
 
       <el-container>
         <el-main>
-          <el-table v-loading="loading" ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%" @selection-change="handleSelectionChange"
-            :row-class-name="tableRowClassName">
+          <el-table v-loading="loading" ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"
+            @selection-change="handleSelectionChange" :row-class-name="tableRowClassName">
             <el-table-column type="selection">
             </el-table-column>
             <el-table-column prop="name" label="上报人">
@@ -39,7 +39,10 @@
             </el-table-column>
             <el-table-column prop="msg" label="上报信息" show-overflow-tooltip>
             </el-table-column>
-            <el-table-column prop="isReport" label="是否人为上报" show-overflow-tooltip>
+            <el-table-column label="是否人为上报" show-overflow-tooltip>
+              <template slot-scope="scope">
+                {{Number(scope.row.isReport)===0?'否':'是'}}
+              </template>
             </el-table-column>
             <el-table-column label="操作">
               <template slot-scope="scope">

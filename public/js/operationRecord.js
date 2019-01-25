@@ -2046,7 +2046,7 @@ class Record {
   constructor(options) {
     this.url = options.url;
     this.projectName = options.projectName;
-    this.isReport = 0 || options.isReport;
+    this.isReport = options.isReport || 0;
     this.name = options.name || 'unknow';
     this.interval = options.interval || 10000;
     this.ajaxFn = options.ajax || axios;
@@ -2058,7 +2058,7 @@ class Record {
     this.events = [];
     this.create = this.create.bind(this);
     this.ajax = this.ajax.bind(this);
-    this.stop = this.stop.bind(this);
+    this.destroy = this.destroy.bind(this);
     this.timeOutFn = this.timeOutFn.bind(this);
     this.timeOut = null;
     this.create();
@@ -2131,7 +2131,7 @@ class Record {
       this.error(err);
     });
   }
-  stop() {
+  destroy() {
     this.rrewb();
   }
 };

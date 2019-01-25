@@ -6,7 +6,7 @@ const mysql = require('./server/mysql'),
   path = require('path'), //系统路径模块
   app = express(),
   bodyParser = require('body-parser'),
-  port = 3002;
+  port = 9527;
 
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'datas')));
