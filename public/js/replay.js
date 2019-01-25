@@ -7,8 +7,12 @@ const app = new Vue({
   data() {
     return {
       loading: true,
+      mPlayerState: false,
+      modalLoading: false,
+      activeName: 0,
       tables: [],
       cache: {},
+      mDatas: [],
       activeIndex: '0',
       centerDialogVisible: false,
       dialogTitle: '',
@@ -69,6 +73,8 @@ const app = new Vue({
       }
     },
     handleSelectionChange(val) {
+      this.mDatas = val;
+
       if (val.length > 1) {
         this.showMultipleBtn = true;
       } else {
@@ -103,21 +109,24 @@ const app = new Vue({
         };
         that.playBtnX = x + 'px';
         that.playBtnY = y + 'px';
+        localStorage.setItem('x', e.clientX - 20 + 'px');
+        localStorage.setItem('y', e.clientY - 20 + 'px');
       };
       document.addEventListener('mousemove', moveBtn);
       document.addEventListener('mouseup', (e) => {
         document.removeEventListener('mousemove', moveBtn);
-        localStorage.setItem('x', e.clientX - 20 + 'px');
-        localStorage.setItem('y', e.clientY - 20 + 'px');
       });
     },
     handlePlayOne(index, row) {
+      this.mPlayerState = false;
+      this.modalLoading = true;
       this.dialogTitle = `上报人：${row.name}`;
       this.centerDialogVisible = true;
       const key = `p${this.currentPage}i${index}`;
       //新增缓存
       if (this.cache[key] === undefined) {
         axios.get(`${host}/${row.dataFile}`).then((res) => {
+          this.modalLoading = false;
           this.cache[key] = res.data;
           new rrwebPlayer({
             target: document.querySelector('#player'), // 可以自定义 DOM 元素
@@ -127,6 +136,7 @@ const app = new Vue({
           });
         });
       } else {
+        this.modalLoading = false;
         new rrwebPlayer({
           target: document.querySelector('#player'), // 可以自定义 DOM 元素
           data: {
@@ -136,10 +146,37 @@ const app = new Vue({
       };
     },
     handleClose() {
-      document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
+      const child = document.querySelectorAll('.rr-player');
+      for (let i = 0, len = child.length; i < len; i++) {
+        child[i].parentNode.removeChild(child[i]);
+      };
+      this.modalLoading = false;
     },
     clickMenu(item, index) {
       console.log(item, index);
+    },
+    tabClick(tab, event) {
+      console.log(tab, event);
+    },
+    multiplePlayer() {
+      this.modalLoading = true;
+      this.mPlayerState = true;
+      let tmp = [];
+      for (let i = 0, len = this.mDatas.length; i < len; i++) {
+        tmp.push(axios.get(`${host}/${this.mDatas[i].dataFile}`));
+      };
+      this.centerDialogVisible = true;
+      axios.all(tmp).then((res) => {
+        for (let i = 0, len = res.length; i < len; i++) {
+          new rrwebPlayer({
+            target: document.querySelector(`#player${i}`), // 可以自定义 DOM 元素
+            data: {
+              events: res[i].data,
+            },
+          });
+          this.modalLoading = false;
+        };
+      });
     }
   }
 });

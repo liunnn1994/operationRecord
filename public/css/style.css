@@ -54,8 +54,8 @@
 .multiple-btn-box {
   width: 40px;
   position: fixed;
-  top: 20px;
-  right: 20px;
+  bottom: 40px;
+  right: 40px;
   transition: 0.1s ease-in-out;
   z-index: 999;
 }
@@ -76,4 +76,7 @@
 .el-tooltip__popper{
   max-width: 98vw;
   word-break: break-all;
+}
+.el-loading-mask{
+  z-index: 99999 !important;
 }

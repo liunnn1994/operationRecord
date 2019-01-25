@@ -56,7 +56,7 @@
               :total="totalSize">
             </el-pagination>
           </div>
-          <div @mousedown='moveBtn()' :style="{left:playBtnX,top:playBtnY}" class="multiple-btn-box">
+          <div @mousedown='moveBtn' @click='multiplePlayer' :style="{left:playBtnX,top:playBtnY}" class="multiple-btn-box">
             <transition name="el-zoom-in-center">
               <div v-show="showMultipleBtn" class="transition-box">
                 <el-tooltip effect="dark" placement="bottom">
@@ -71,10 +71,18 @@
       </el-container>
     </el-container>
 
-    <el-dialog width='98%' top='5vh' :title="dialogTitle" :visible.sync="centerDialogVisible" @close='handleClose'>
-      <div id="player">
-
+    <el-dialog  v-loading.fullscreen.lock="modalLoading" width='98%' top='5vh' :title="dialogTitle" :visible.sync="centerDialogVisible" @close='handleClose'>
+      <div v-if="mPlayerState">
+        <div>
+          <el-tabs v-model="activeName" type="card" @tab-click="tabClick">
+            <el-tab-pane v-for='(item,index) in mDatas' :key='index' :label="`${index+1}. 上报人：${item.name}`" :name="index+''">
+              <div :id='`player${index}`'></div>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
       </div>
+      <div id="player" v-else></div>
+
       <span slot="footer" class="dialog-footer">
         <el-button size="medium" type="danger" @click="centerDialogVisible = false">关 闭</el-button>
       </span>
