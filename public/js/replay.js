@@ -8,6 +8,7 @@ const app = new Vue({
     return {
       loading: true,
       tables: [],
+      cache: {},
       activeIndex: '0',
       centerDialogVisible: false,
       dialogTitle: '',
@@ -113,16 +114,25 @@ const app = new Vue({
     handlePlayOne(index, row) {
       this.dialogTitle = `上报人：${row.name}`;
       this.centerDialogVisible = true;
-
-      axios.get(`${host}/${row.dataFile}`).then((res) => {
-        let a = new rrwebPlayer({
+      const key = `p${this.currentPage}i${index}`;
+      if (this.cache[key] === undefined) {
+        axios.get(`${host}/${row.dataFile}`).then((res) => {
+          this.cache[key] = res.data;
+          new rrwebPlayer({
+            target: document.querySelector('#player'), // 可以自定义 DOM 元素
+            data: {
+              events: res.data,
+            },
+          });
+        });
+      } else {
+        new rrwebPlayer({
           target: document.querySelector('#player'), // 可以自定义 DOM 元素
           data: {
-            events: res.data,
+            events: this.cache[key],
           },
         });
-      });
-
+      };
     },
     handleClose() {
       document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
