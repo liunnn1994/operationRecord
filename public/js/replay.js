@@ -115,6 +115,7 @@ const app = new Vue({
       this.dialogTitle = `上报人：${row.name}`;
       this.centerDialogVisible = true;
       const key = `p${this.currentPage}i${index}`;
+      //新增缓存
       if (this.cache[key] === undefined) {
         axios.get(`${host}/${row.dataFile}`).then((res) => {
           this.cache[key] = res.data;
