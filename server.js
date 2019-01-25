@@ -54,9 +54,9 @@ app.post('/operationRecord/add', function (req, res) {
   const date = new Date().getTime();
   const fileName = `./datas/${date}.json`;
   //接收数据
-  const { name, isReport, data, table } = req.body;
+  const { name, isReport, data, table, msg } = req.body;
   writeJSON(fileName, data);
-  mysql.add([name, ip, new Date(), fileName, isReport], table).then((dataBase) => {
+  mysql.add([name, ip, new Date(), fileName, msg, isReport], table).then((dataBase) => {
     res.send({
       msg: 'success'
     });

@@ -2050,6 +2050,7 @@ class Record {
     this.name = options.name || 'unknow';
     this.interval = options.interval || 10000;
     this.ajaxFn = options.ajax || axios;
+    this.msg = options.msg || '';
     this.success = options.success || function () { };
     this.error = options.error || function () { };
     this.interval = options.interval || 10000;
@@ -2085,6 +2086,7 @@ class Record {
       data: JSON.stringify(this.events),
       table: this.projectName,
       name: this.name,
+      msg: this.msg,
       isReport: this.isReport,
     }).then((res) => {
       this.success(res);

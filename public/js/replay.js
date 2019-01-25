@@ -6,6 +6,7 @@ const app = new Vue({
   el: '#app',
   data() {
     return {
+      loading: true,
       tables: [],
       activeIndex: '0',
       centerDialogVisible: false,
@@ -26,6 +27,7 @@ const app = new Vue({
     this.getAllTables().then(() => {
       this.query();
     });
+    this.ip();
   },
   methods: {
     tableRowClassName({ row }) {
@@ -41,6 +43,7 @@ const app = new Vue({
       });
     },
     query() {
+      this.loading = true;
       axios.get(queryUrl, {
         params: {
           table: this.table,
@@ -50,6 +53,7 @@ const app = new Vue({
       }).then((res) => {
         this.totalSize = res.data.totalSize;
         this.tableData = res.data.list;
+        this.loading = false;
       });
     },
     handleCollapse() {
