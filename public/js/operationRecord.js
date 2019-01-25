@@ -2050,6 +2050,7 @@ class Record {
     this.name = options.name || 'unknow';
     this.interval = options.interval || 10000;
     this.ajaxFn = options.ajax || axios;
+    options.msg.length >= 255 ? options.msg = options.msg.substring(0, 255) : '';
     this.msg = options.msg || '';
     this.success = options.success || function () { };
     this.error = options.error || function () { };

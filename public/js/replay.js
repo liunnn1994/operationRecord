@@ -27,7 +27,6 @@ const app = new Vue({
     this.getAllTables().then(() => {
       this.query();
     });
-    this.ip();
   },
   methods: {
     tableRowClassName({ row }) {

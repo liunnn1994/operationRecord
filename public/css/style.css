@@ -73,3 +73,7 @@
 .dialog-footer{
   text-align: right;
 }
+.el-tooltip__popper{
+  max-width: 98vw;
+  word-break: break-all;
+}
