@@ -118,16 +118,11 @@ const app = new Vue({
             events: res.data,
           },
         });
-        if (document.querySelectorAll('.rr-player').length > 1) {
-          document.querySelectorAll('.rr-player')[0].parentNode.removeChild(document.querySelectorAll('.rr-player')[0]);
-        };
-        
       });
 
     },
     handleClose() {
-      // console.log(1);
-      // document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
+      document.querySelector('.rr-player').parentNode.removeChild(document.querySelector('.rr-player'));
     },
     clickMenu(item, index) {
       console.log(item, index);
