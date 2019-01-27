@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>test</title>
+</head>
+
+<body>
+  <h1>test</h1>
+  <input type="text">
+  <button>测试</button>
+  <button>回放</button>
+  <script src="./js/axios.min.js"></script>
+  <script src="./js/operationRecord.js"></script>
+  <script>
+    let a = new Record({
+      url: '/operationRecord/add',
+      name: 'liu',
+      projectName: 'qdTax',
+      msg:'',
+      interval:50000,
+      success: function (res) {
+        console.log(res);
+      }
+    });
+  </script>
+</body>
+
+</html>

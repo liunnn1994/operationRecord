@@ -5,28 +5,101 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>test</title>
+  <title>回放</title>
+  <link rel="stylesheet" href="./css/reset.min.css">
+  <link rel="stylesheet" href="./css/player.min.css">
+  <link rel="stylesheet" href="./css/element.min.css">
+  <link rel="stylesheet" href="./css/style.css">
 </head>
 
 <body>
-  <h1>test</h1>
-  <input type="text">
-  <button>测试</button>
-  <button>回放</button>
+  <div id="app">
+    <el-container>
+      <el-aside :class='{"aside-collapse":isCollapse}' class="el-menu-vertical-table">
+        <el-menu class="el-menu-vertical-table" :collapse="isCollapse" :default-active='activeIndex'>
+          <el-menu-item v-for='(item, index) in tables' :index="index+''" :key="index" @click='clickMenu(item,index)'>
+            <i class="el-icon-menu"></i>
+            <span slot="title" v-text='item.zh'></span>
+          </el-menu-item>
+        </el-menu>
+        <el-button type="primary" @click='handleCollapse' v-text="isCollapse?'&gt;':'&lt;'" />
+      </el-aside>
+
+      <el-container>
+        <el-main>
+          <el-table v-loading="loading" ref="multipleTable" :data="tableData" tooltip-effect="dark" style="width: 100%"
+            @selection-change="handleSelectionChange" :row-class-name="tableRowClassName">
+            <el-table-column type="selection">
+            </el-table-column>
+            <el-table-column prop="name" label="上报人">
+            </el-table-column>
+            <el-table-column prop="ip" label="上报IP" show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column prop="date" label="上报时间">
+            </el-table-column>
+            <el-table-column prop="msg" label="上报信息" show-overflow-tooltip>
+            </el-table-column>
+            <el-table-column label="情感倾向分析（越高心态越崩）" show-overflow-tooltip>
+              <template slot-scope="scope">
+                <span :style='{color:getColorByEmotion((scope.row.emotion*100).toFixed(2)),fontWeight:parseInt(scope.row.emotion*10)*100}'>{{(scope.row.emotion*100).toFixed(2)}}</span>
+                <span v-if='scope.row.emotion>0.7'><a href="https://www.12306.cn/index/" title="快点买票" target="_blank">（卧槽!别看了，赶紧删库跑路吧）</a></span>
+              </template>
+            </el-table-column>
+            <el-table-column label="是否人为上报" show-overflow-tooltip>
+              <template slot-scope="scope">
+                {{Number(scope.row.isReport)===0?'否':'是'}}
+              </template>
+            </el-table-column>
+            <el-table-column label="操作">
+              <template slot-scope="scope">
+                <el-button type="success" round plain size="mini" @click="handlePlayOne(scope.$index, scope.row)">播放此条</el-button>
+              </template>
+            </el-table-column>
+          </el-table>
+          <div>
+            <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="currentPage"
+              :page-sizes="[10, 50, 200, 500]" :page-size="pageSize" layout="total, sizes, prev, pager, next, jumper"
+              :total="totalSize">
+            </el-pagination>
+          </div>
+          <div @mousedown='moveBtn' @click='multiplePlayer' :style="{left:playBtnX,top:playBtnY}" class="multiple-btn-box">
+            <transition name="el-zoom-in-center">
+              <div v-show="showMultipleBtn" class="transition-box">
+                <el-tooltip effect="dark" placement="bottom">
+                  <div slot="content">合并播放选中文件<br />拖拽可挪动位置</div>
+                  <el-button circle icon='el-icon-caret-right
+                ' type='success' @click="" />
+                </el-tooltip>
+              </div>
+            </transition>
+          </div>
+        </el-main>
+      </el-container>
+    </el-container>
+
+    <el-dialog v-loading.fullscreen.lock="modalLoading" width='98%' top='5vh' :title="dialogTitle" :visible.sync="centerDialogVisible"
+      @close='handleClose'>
+      <div v-if="mPlayerState">
+        <div>
+          <el-tabs v-model="activeName" type="card" @tab-click="tabClick">
+            <el-tab-pane v-for='(item,index) in mDatas' :key='index' :label="`${index+1}. 上报人：${item.name}`" :name="index+''">
+              <div :id='`player${index}`'></div>
+            </el-tab-pane>
+          </el-tabs>
+        </div>
+      </div>
+      <div id="player" v-else></div>
+
+      <span slot="footer" class="dialog-footer">
+        <el-button size="medium" type="danger" @click="centerDialogVisible = false">关 闭</el-button>
+      </span>
+    </el-dialog>
+  </div>
+  <script src="./js/vue.js"></script>
+  <script src="./js/element.min.js"></script>
   <script src="./js/axios.min.js"></script>
-  <script src="./js/operationRecord.js"></script>
-  <script>
-    let a = new Record({
-      url: '/operationRecord/add',
-      name: 'liu',
-      projectName: 'qdTax',
-      msg:'',
-      interval:50000,
-      success: function (res) {
-        console.log(res);
-      }
-    });
-  </script>
+  <script src="./js/player.min.js"></script>
+  <script src="./js/replay.js"></script>
 </body>
 
 </html>

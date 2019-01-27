@@ -112,7 +112,7 @@ console.log(record) //查看属性
 </html>
 ```
 
-打开`http://localhost:9527/replayer.html`查看结果
+打开`http://localhost:9527/`查看结果
 
 ## 📖 目录结构
 
@@ -152,7 +152,11 @@ console.log(record) //查看属性
 
 ## 🤝 参与共建 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
+[提交pr](https://github.com/asdjgfr/operationRecord/pulls)
+
 [提交issue](https://github.com/asdjgfr/operationRecord/issues)
+
+
 
 
 
