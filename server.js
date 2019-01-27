@@ -95,7 +95,6 @@ app.post('/operationRecord/add', function (req, res) {
         text: msg
       }
     }, function (e, r, b) {
-      console.log(b.items[0].negative_prob);
       emotion=b.items;
       addData();
     });
