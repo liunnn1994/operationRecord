@@ -41,7 +41,7 @@
             </el-table-column>
             <el-table-column label="情感倾向分析（越高心态越崩）" show-overflow-tooltip>
               <template slot-scope="scope">
-                <span :style='{color:getColorByEmotion((scope.row.emotion*100).toFixed(2)),fontWeight:parseInt(scope.row.emotion*10)*100}'>{{(scope.row.emotion*100).toFixed(2)}}</span>
+                <span class="emotion" :style='{color:getColorByEmotion((scope.row.emotion*100).toFixed(2)),fontWeight:parseInt(scope.row.emotion*10)*100}'>{{(scope.row.emotion*100).toFixed(2)}}</span>
                 <span v-if='scope.row.emotion>0.7'><a href="https://www.12306.cn/index/" title="快点买票" target="_blank">（卧槽!别看了，赶紧删库跑路吧）</a></span>
               </template>
             </el-table-column>

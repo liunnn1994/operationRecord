@@ -80,3 +80,7 @@
 .el-loading-mask{
   z-index: 99999 !important;
 }
+.emotion{
+  font-size: 30px;
+  -webkit-text-stroke: 0.5px #000;
+}
