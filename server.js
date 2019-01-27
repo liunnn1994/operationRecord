@@ -92,11 +92,11 @@ app.post('/operationRecord/add', function (req, res) {
       headers: {},
       json: true,
       body: {
-        text: '你是不是傻逼啊'
+        text: msg
       }
     }, function (e, r, b) {
-      //console.log(b.items[0].negative_prob);
-      emotion=b.items[0].negative_prob;
+      console.log(b.items[0].negative_prob);
+      emotion=b.items;
       addData();
     });
   };
