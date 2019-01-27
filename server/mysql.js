@@ -50,8 +50,8 @@ module.exports = {
    * @param {[操作人姓名,上传ip,上传时间,文件名,是否认为上报,留言信息]} params 
    * @param {表名} table 
    */
-  add: function (params = ['', '', '', '', '',''], table) {
-    var addSql = `INSERT INTO ${table}(Id,name,ip,date,dataFile,msg,isReport) VALUES(0,?,?,?,?,?,?)`;
+  add: function (params = ['', '', '', '', '', '', ''], table) {
+    var addSql = `INSERT INTO ${table}(Id,name,ip,date,dataFile,msg,emotion,isReport) VALUES(0,?,?,?,?,?,?,?)`;
     const p = new Promise(function (res, rej) {
       connection.query(addSql, params, function (err, result) {
         if (err) {

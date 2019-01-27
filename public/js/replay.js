@@ -158,6 +158,22 @@ const app = new Vue({
     tabClick(tab, event) {
       console.log(tab, event);
     },
+    getColorByEmotion(percent) {
+      const one = (255 + 255) / 100;
+      let [r, g, b] = [0, 0, 0];
+      if (percent < 50) {
+        r = one * percent;
+        g = 255;
+      };
+      if (percent >= 50) {
+        g = 255 - ((percent - 50) * one);
+        r = 255;
+      };
+      r = parseInt(r);
+      g = parseInt(g);
+      b = parseInt(b);
+      return `rgb(${r},${g},${b})`;
+    },
     multiplePlayer() {
       this.modalLoading = true;
       this.mPlayerState = true;

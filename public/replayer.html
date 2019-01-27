@@ -39,6 +39,12 @@
             </el-table-column>
             <el-table-column prop="msg" label="上报信息" show-overflow-tooltip>
             </el-table-column>
+            <el-table-column label="情感倾向分析（越高心态越崩）" show-overflow-tooltip>
+              <template slot-scope="scope">
+                <span :style='{color:getColorByEmotion((scope.row.emotion*100).toFixed(2)),fontWeight:parseInt(scope.row.emotion*10)*100}'>{{(scope.row.emotion*100).toFixed(2)}}</span>
+                <span v-if='scope.row.emotion>0.7'><a href="https://www.12306.cn/index/" title="快点买票" target="_blank">（卧槽!别看了，赶紧删库跑路吧）</a></span>
+              </template>
+            </el-table-column>
             <el-table-column label="是否人为上报" show-overflow-tooltip>
               <template slot-scope="scope">
                 {{Number(scope.row.isReport)===0?'否':'是'}}
@@ -71,7 +77,8 @@
       </el-container>
     </el-container>
 
-    <el-dialog  v-loading.fullscreen.lock="modalLoading" width='98%' top='5vh' :title="dialogTitle" :visible.sync="centerDialogVisible" @close='handleClose'>
+    <el-dialog v-loading.fullscreen.lock="modalLoading" width='98%' top='5vh' :title="dialogTitle" :visible.sync="centerDialogVisible"
+      @close='handleClose'>
       <div v-if="mPlayerState">
         <div>
           <el-tabs v-model="activeName" type="card" @tab-click="tabClick">

@@ -6,12 +6,32 @@ const mysql = require('./server/mysql'),
   path = require('path'), //系统路径模块
   app = express(),
   bodyParser = require('body-parser'),
-  port = 9527;
-
+  port = 9527,
+  qs = require('querystring'),
+  request = require('request');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'datas')));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+let access_token = '';
+
+const param = qs.stringify({
+  'grant_type': 'client_credentials',
+  'client_id': 'ALTpRaFmZ8dOeeFoxjHsQ1zH',
+  'client_secret': 'rwL0Vvmb10IfmIFn4biOEUEIHtYlOubq',
+});
+
+//获取百度ai的token,30天一换，自动储存
+let opts = {
+  url: `https://aip.baidubce.com/oauth/2.0/token?${param}`,
+  method: 'POST',
+  headers: {}
+};
+request.post(opts, function (e, r, b) {
+  access_token = JSON.parse(b)['access_token'];
+});
+
+
 
 //配置跨域
 app.all('*', function (req, res, next) {
@@ -55,12 +75,40 @@ app.post('/operationRecord/add', function (req, res) {
   const fileName = `./datas/${date}.json`;
   //接收数据
   const { name, isReport, data, table, msg } = req.body;
+  let emotion = '0';
   writeJSON(fileName, data);
-  mysql.add([name, ip, new Date(), fileName, msg, isReport], table).then((dataBase) => {
-    res.send({
-      msg: 'success'
-    });
+
+  const token = qs.stringify({
+    access_token,
+    charset: 'UTF-8'
   });
+
+  if(msg===''){
+    addData();
+  }else{
+    request.post({
+      url: `https://aip.baidubce.com/rpc/2.0/nlp/v1/sentiment_classify?${token}`,
+      method: 'POST',
+      headers: {},
+      json: true,
+      body: {
+        text: '你是不是傻逼啊'
+      }
+    }, function (e, r, b) {
+      //console.log(b.items[0].negative_prob);
+      emotion=b.items[0].negative_prob;
+      addData();
+    });
+  };
+
+  function addData() {
+    mysql.add([name, ip, new Date(), fileName, msg, emotion, isReport], table).then((dataBase) => {
+      res.send({
+        msg: 'success'
+      });
+    });
+  };
+
 });
 
 app.listen(port, () => console.log(`服务启动成功!端口号：${port}`));
