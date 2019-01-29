@@ -32,19 +32,21 @@
 
 ## 📦 安装
 
-1. 安装[MySQL](https://www.mysql.com/)并配置`./server/mysql.config`里的端口号及用户密码
+1. 安装[MySQL](https://www.mysql.com/)并配置`./server/mysql.config`里的端口号及用户密码。
 
-2. 安装[NodeJS](https://nodejs.org/)
+2. 导入提供的`./test.sql`文件，每个项目可以建一个表。
 
-3. 进入项目目录
+3. 安装[NodeJS](https://nodejs.org/)。
 
-4. 安装依赖
+4. 进入项目目录。
+
+5. 安装依赖：
 
    ```shell
    npm i #国内使用cnpm
    ```
 
-5. 启动项目
+6. 启动项目：
 
    ```shell
    node server
@@ -151,6 +153,15 @@ console.log(record) //查看属性
 ├── ├── mysql.js						// mysql操作
 ├── server.js							// server
 ```
+
+## 📄 TODO
+
+1. 自动引入`rrweb`以及`rrweb-player`最新版。
+2. `rrweb`与本项目代码分离，使用时自动打包压缩。
+3. 更换`MySQL`为其他轻量级数据库。
+4. 添加已读功能。
+5. 完善数据传输部分。
+6. 解耦。
 
 ## 🤝 参与共建 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
