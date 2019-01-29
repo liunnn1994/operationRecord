@@ -50,7 +50,7 @@ app.post('/operationRecord/getAllTables', function (req, res) {
     for (let i = 0, len = dataBase.length; i < len; i++) {
       msg.push({
         en: dataBase[i][table_name],
-        zh: zh[dataBase[i][table_name]]
+        zh: zh[dataBase[i][table_name].toLowerCase()]
       });
     };
     res.send(msg);
