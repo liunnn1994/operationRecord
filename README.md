@@ -1,6 +1,6 @@
 ## 利用现代浏览器的强大功能还原操作并储存 V1.0.0
 
-![示例图片](./Kapture 2019-01-25 at 15.14.45.gif)
+![示例图片](Kapture 2019-01-29 at 15.29.59.gif)
 
 **实测在`windows`下安装最新的`MySQL8.0`会报错，重置密码也不行，原因不明，解决办法是安装[MySQL 5.7.25](https://dev.mysql.com/downloads/mysql/5.7.html#downloads)。`MAC OS`下安装最新版没有问题。**
 
