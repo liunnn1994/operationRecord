@@ -45,7 +45,6 @@ app.all('*', function (req, res, next) {
 app.post('/operationRecord/getAllTables', function (req, res) {
   mysql.getAllTables().then((dataBase) => {
     let msg = [];
-    console.log();
     let table_name='table_name';
     dataBase[0]['table_name']===undefined?table_name='TABLE_NAME':'';
     for (let i = 0, len = dataBase.length; i < len; i++) {
