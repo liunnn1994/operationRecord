@@ -156,12 +156,35 @@ console.log(record) //查看属性
 
 ## 📄 TODO
 
-1. 自动引入`rrweb`以及`rrweb-player`最新版。
-2. `rrweb`与本项目代码分离，使用时自动打包压缩。
-3. 更换`MySQL`为其他轻量级数据库。
+1. ~~自动引入`rrweb`以及`rrweb-player`最新版。~~ 
+
+   现在使用npm 引入 `rrweb`。
+
+2. ~~`rrweb`与本项目代码分离，使用时自动打包压缩。~~ 
+
+   ./public/js/operationRecord.js`可以看作为稳定版的。`
+
+   `现在每次启动服务时都会询问是否打包，默认否，打包后的文件为`./public/js/operationRecord.min.js`。
+
+   同时你可以单独执行`node tools`来进行打包。
+
+3. ~~更换`MySQL`为其他轻量级数据库。~~
+
+   (本项目对数据库要求不高，`mysql`比较成熟，迁移至`MongoDB`成本过高)
+
 4. 添加已读功能。
+
 5. 完善数据传输部分。
+
 6. 解耦。
+
+## ✔ 支持环境
+
+现代浏览器及 IE11。
+
+| [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/edge/edge_48x48.png" alt="IE / Edge" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>IE / Edge | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png" alt="Firefox" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png" alt="Chrome" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/safari/safari_48x48.png" alt="Safari" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/alrra/browser-logos/master/src/opera/opera_48x48.png" alt="Opera" width="24px" height="24px" />](http://godban.github.io/browsers-support-badges/)</br>Opera |
+| --------- | --------- | --------- | --------- | --------- |
+| IE11, Edge| 14及以上| 18及以上| 6及以上| 15及以上
 
 ## 🤝 参与共建 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 
