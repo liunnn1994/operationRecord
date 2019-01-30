@@ -15,8 +15,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 let access_token = '';
 
-// require('./tools')
-
 const param = qs.stringify({
     'grant_type': 'client_credentials',
     'client_id': 'ALTpRaFmZ8dOeeFoxjHsQ1zH',
