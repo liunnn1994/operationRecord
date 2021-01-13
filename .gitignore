@@ -103,7 +103,7 @@ dist
 # TernJS port file
 .tern-port
 
-resources/
+*.local
 build/
 
 # OS
