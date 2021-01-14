@@ -1,9 +1,13 @@
 import { createApp } from "vue";
-import initElement from "./plugins/element";
+import { ElButton } from "element-plus";
 import App from "./App.vue";
-import "./index.css";
+import "./registerServiceWorker";
+import router from "./router";
+import store from "./store";
 
 const app = createApp(App);
-initElement(app);
-
-app.mount("#app");
+app.use(ElButton);
+app
+  .use(store)
+  .use(router)
+  .mount("#app");
