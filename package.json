@@ -15,5 +15,6 @@
   "bugs": {
     "url": "https://github.com/asdjgfr/operationRecord/issues"
   },
-  "homepage": "https://github.com/asdjgfr/operationRecord#readme"
+  "homepage": "https://github.com/asdjgfr/operationRecord#readme",
+  "devDependencies": {}
 }

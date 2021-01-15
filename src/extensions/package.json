@@ -1,0 +1,28 @@
+{
+  "name": "extensions",
+  "version": "1.0.0",
+  "description": "扩展程序",
+  "author": "liu",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "ejs": "^3.1.5",
+    "fs-extra": "^9.0.1",
+    "nodemon": "^2.0.7",
+    "prettier": "2.2.1"
+  },
+  "scripts": {
+    "dev": "nodemon ./index.js dev",
+    "build": "node ./index.js build"
+  },
+  "homepage": "https://github.com/asdjgfr/operationRecord#readme",
+  "nodemonConfig": {
+    "ignore": [
+      "test/*",
+      "docs/*",
+      "dist/*"
+    ],
+    "watch": ["./"],
+    "ext": "js,mjs,json,ejs",
+    "delay": 2500
+  }
+}

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/bootstrap.min.css" />
+    <link rel="stylesheet" href="./css/popup.css" />
+  </head>
+  <body>
+    <div class="container">
+      <ul class="nav nav-tabs nav-fill" role="tablist">
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link active"
+            id="pills-control-tab"
+            data-bs-toggle="pill"
+            href="#pills-profile"
+            role="tab"
+            aria-controls="pills-profile"
+            aria-selected="false"
+            >操作</a
+          >
+        </li>
+        <li class="nav-item" role="presentation">
+          <a
+            class="nav-link"
+            id="pills-settings-tab"
+            data-bs-toggle="pill"
+            href="#pills-settings"
+            role="tab"
+            aria-controls="pills-settings"
+            aria-selected="true"
+            >设置</a
+          >
+        </li>
+      </ul>
+      <div class="tab-content" id="pills-tabContent">
+        <div
+          class="tab-pane fade show active"
+          id="pills-profile"
+          role="tabpanel"
+          aria-labelledby="pills-control-tab"
+        >
+          阿萨德
+        </div>
+        <div
+          class="tab-pane fade"
+          id="pills-settings"
+          role="tabpanel"
+          aria-labelledby="pills-settings-tab"
+        ></div>
+      </div>
+    </div>
+    <script src="./js/lib/jsrender.min.js"></script>
+    <script src="./js/lib/bootstrap.min.js"></script>
+
+    <script src="./js/popup.js"></script>
+  </body>
+</html>

@@ -19,7 +19,7 @@
     {
       "matches": ["<all_urls>"],
       "js": ["js/content-script.js"],
-      "run_at": "document_start"
+      "run_at": "document_end"
     }
   ],
   "permissions": [
@@ -32,7 +32,10 @@
     "http://*/*",
     "https://*/*"
   ],
-  "web_accessible_resources": ["js/inject.js"],
+  "web_accessible_resources": [
+    "js/inject/OperationRecord.js",
+    "js/inject/run.js"
+  ],
   "homepage_url": "https://www.2077tech.com",
   "omnibox": { "keyword": "or" },
   "description": "__MSG_pluginDesc__",
