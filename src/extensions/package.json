@@ -21,7 +21,9 @@
       "docs/*",
       "dist/*"
     ],
-    "watch": ["./"],
+    "watch": [
+      "./"
+    ],
     "ext": "js,mjs,json,ejs",
     "delay": 2500
   }

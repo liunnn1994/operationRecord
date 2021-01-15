@@ -14,7 +14,7 @@ switch (action) {
       .then(() => {
         console.log("开发环境启动成功。");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log("开发环境启动失败：", e);
       });
     break;
@@ -23,7 +23,7 @@ switch (action) {
       .then(() => {
         console.log("打包成功。");
       })
-      .catch(e => {
+      .catch((e) => {
         console.log("打包失败：", e);
       });
     break;
@@ -49,13 +49,21 @@ async function build() {
     const tp = path.join(templatesPath, p);
     if (fs.statSync(tp).isDirectory()) {
       try {
+        const configPath = path.join(tp, "config.json");
+
+        const config = fs.existsSync(configPath)
+          ? fs.readJsonSync(configPath)
+          : {};
         // 读取入口ejs
         fs.writeFileSync(
           path.join(buildPath, `${p}.html`),
-          prettier.format(await ejs.renderFile(path.join(tp, "index.ejs")), {
-            semi: true,
-            parser: "html"
-          })
+          prettier.format(
+            await ejs.renderFile(path.join(tp, "index.ejs"), { config }),
+            {
+              semi: true,
+              parser: "html",
+            }
+          )
         );
       } catch (e) {
         console.log("模板转换失败：", e);
