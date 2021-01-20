@@ -1,12 +1,32 @@
 <form action="#">
+    <% items = [{
+        label:"服务器地址",
+        type:"url",
+        key:"host-name",
+        describedby:{
+          key:"urlHelp",
+          text:"e.g. http://localhost:9527"
+        }
+    },{
+        label:"鼠标遮罩颜色",
+        type:"color",
+        key:"masker-color"
+    }] %>
+    <% items.forEach(function(item,index){ %>
     <div class="mb-3">
-        <label for="host-name" class="form-label">服务器地址</label>
-        <input type="url" class="form-control" id="host-name" aria-describedby="urlHelp">
-        <div id="urlHelp" class="form-text">e.g. http://localhost:6666</div>
+        <label for="<%=item.key%>" class="form-label"><%=item.label%></label>
+        <% switch (item.type) {
+        case "url" : %>
+        <input type="url" class="form-control" id="<%=item.key%>" <%=item.describedby?`aria-describedby="${item.describedby.key}"`:null%>>
+        <% break;
+        case "color" : %>
+        <input type="color" class="form-control" id="<%=item.key%>" <%=item.describedby?`aria-describedby="${item.describedby.key}"`:null%>>
+        <% break;
+        } %>
+        <% if (item.describedby) { %>
+            <div id="<%=item.describedby.key%>" class="form-text"><%=item.describedby.text%></div>
+        <% } %>
     </div>
-    <div class="mb-3">
-        <label for="masker-color" class="form-label">鼠标遮罩颜色</label>
-        <input type="color" class="form-control" id="masker-color">
-    </div>
+    <% }); %>
     <button type="submit" class="btn btn-primary">保存</button>
 </form>
