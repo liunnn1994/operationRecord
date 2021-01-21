@@ -1,8 +1,8 @@
-function initOperationRecord() {
-  const config = {};
-  const or = new OR({
-    config
+(function () {
+  Object.defineProperty(console, "OPS_REC", {
+    value: function () {
+      console.log("OPS_REC注入成功");
+    },
+    writable: false,
   });
-  or.init();
-}
-initOperationRecord();
+})();
