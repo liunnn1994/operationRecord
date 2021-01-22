@@ -1,44 +1,39 @@
 {
   "manifest_version": 2,
-  "name": "operation record",
-  "version": "1.0.0",
+  "name": "__MSG_extName__",
+  "homepage_url": "http://localhost:8080/",
+  "description": "A Vue Browser Extension",
+  "default_locale": "en",
+  "permissions": [
+    "activeTab",
+    "<all_urls>",
+    "*://*/*"
+  ],
   "icons": {
-    "16": "img/icon.png",
-    "48": "img/icon.png",
-    "128": "img/icon.png"
+    "16": "icons/16.png",
+    "48": "icons/48.png",
+    "128": "icons/128.png"
   },
   "background": {
-    "scripts": ["js/background.js"]
+    "scripts": [
+      "js/background.js"
+    ],
+    "persistent": false
   },
+  "devtools_page": "devtools.html",
   "browser_action": {
-    "default_icon": "img/icon.png",
-    "default_title": "operation record的运行辅助扩展。",
-    "default_popup": "popup.html"
-  },
-  "content_scripts": [
-    {
-      "matches": ["<all_urls>"],
-      "js": ["js/content-script.js"],
-      "run_at": "document_end"
+    "default_popup": "popup.html",
+    "default_title": "__MSG_extName__",
+    "default_icon": {
+      "19": "icons/19.png",
+      "38": "icons/38.png"
     }
-  ],
-  "permissions": [
-    "contextMenus",
-    "tabs",
-    "notifications",
-    "webRequest",
-    "webRequestBlocking",
-    "storage",
-    "http://*/*",
-    "https://*/*"
-  ],
-  "web_accessible_resources": [
-    "js/inject/OperationRecord.js",
-    "js/inject/run.js"
-  ],
-  "homepage_url": "https://www.2077tech.com",
-  "omnibox": { "keyword": "or" },
-  "description": "__MSG_pluginDesc__",
-  "default_locale": "zh_CN",
-  "devtools_page": "devtools.html"
+  },
+  "options_ui": {
+    "page": "options.html",
+    "browser_style": true
+  },
+  "chrome_url_overrides": {
+    "newtab": "override.html"
+  }
 }

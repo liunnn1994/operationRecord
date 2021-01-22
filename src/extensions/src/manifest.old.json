@@ -1,0 +1,45 @@
+{
+  "manifest_version": 2,
+  "name": "operation record",
+  "version": "1.0.0",
+  "icons": {
+    "16": "img/icon.png",
+    "48": "img/icon.png",
+    "128": "img/icon.png"
+  },
+  "background": {
+    "scripts": ["js/background.js"]
+  },
+  "browser_action": {
+    "default_icon": "img/icon.png",
+    "default_title": "operation record的运行辅助扩展。",
+    "default_popup": "popup.html"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content-script.js"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": [
+    "desktopCapture",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
+  ],
+  "web_accessible_resources": [
+    "js/inject/OperationRecord.js",
+    "js/inject/run.js"
+  ],
+  "homepage_url": "https://www.2077tech.com",
+  "omnibox": { "keyword": "or" },
+  "description": "__MSG_pluginDesc__",
+  "default_locale": "zh_CN",
+  "devtools_page": "devtools.html"
+}
