@@ -1,13 +1,21 @@
 {
   "manifest_version": 2,
-  "name": "__MSG_extName__",
-  "homepage_url": "http://localhost:8080/",
+  "name": "operation record",
+  "homepage_url": "https://github.com/asdjgfr/operationRecord",
   "description": "A Vue Browser Extension",
-  "default_locale": "en",
+  "default_locale": "zh_CN",
   "permissions": [
     "activeTab",
     "<all_urls>",
-    "*://*/*"
+    "*://*/*",
+    "desktopCapture",
+    "contextMenus",
+    "tabs",
+    "notifications",
+    "webRequestBlocking",
+    "storage",
+    "http://*/*",
+    "https://*/*"
   ],
   "icons": {
     "16": "icons/16.png",
@@ -15,15 +23,13 @@
     "128": "icons/128.png"
   },
   "background": {
-    "scripts": [
-      "js/background.js"
-    ],
+    "scripts": ["js/background.js"],
     "persistent": false
   },
   "devtools_page": "devtools.html",
   "browser_action": {
     "default_popup": "popup.html",
-    "default_title": "__MSG_extName__",
+    "default_title": "",
     "default_icon": {
       "19": "icons/19.png",
       "38": "icons/38.png"
@@ -35,5 +41,14 @@
   },
   "chrome_url_overrides": {
     "newtab": "override.html"
-  }
+  },
+  "omnibox": { "keyword": "or" },
+  "web_accessible_resources": ["js/inject/inject.js"],
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["js/content-script.js"],
+      "run_at": "document_end"
+    }
+  ]
 }
