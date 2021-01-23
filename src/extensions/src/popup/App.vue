@@ -1,5 +1,9 @@
 <template>
-  <hello-world />
+  <div>
+    <el-button type="primary">主要按钮</el-button>
+    <el-radio label="1">备选项</el-radio>
+    <hello-world />
+  </div>
 </template>
 
 <script>
@@ -7,7 +11,7 @@ import HelloWorld from "@/components/HelloWorld.vue";
 
 export default {
   name: "App",
-  components: { HelloWorld }
+  components: { HelloWorld },
 };
 </script>
 
