@@ -1,22 +1,16 @@
 <template>
-  <div>
-    <hello-world />
-    设置
-  </div>
+  <Options />
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
-
+import Options from "@/components/Options";
 export default {
   name: "App",
-  components: { HelloWorld },
+  components: { Options },
 };
 </script>
 
 <style>
 html {
-  width: 400px;
-  height: 400px;
 }
 </style>

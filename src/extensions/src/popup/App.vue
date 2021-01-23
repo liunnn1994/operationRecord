@@ -2,16 +2,19 @@
   <div>
     <el-button type="primary">主要按钮</el-button>
     <el-radio label="1">备选项</el-radio>
-    <hello-world />
   </div>
 </template>
 
 <script>
-import HelloWorld from "@/components/HelloWorld.vue";
+import { getSyncStorage } from "@/lib/storage";
 
 export default {
   name: "App",
-  components: { HelloWorld },
+  components: {},
+  async mounted() {
+    const opt = await getSyncStorage({ options: {} });
+    console.log(opt);
+  },
 };
 </script>
 
