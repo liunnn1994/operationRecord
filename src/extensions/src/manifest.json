@@ -39,9 +39,6 @@
     "page": "options.html",
     "browser_style": true
   },
-  "chrome_url_overrides": {
-    "newtab": "override.html"
-  },
   "omnibox": { "keyword": "or" },
   "web_accessible_resources": ["js/inject/inject.js"],
   "content_scripts": [

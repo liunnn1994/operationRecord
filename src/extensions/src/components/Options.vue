@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import { getSyncStorage, setSyncStorage } from "@/lib/storage";
+import { bg } from "@/lib/pubFn";
 
 export default {
   name: "Options",
@@ -78,6 +78,19 @@ export default {
           ],
         },
         {
+          name: "general ",
+          title: "通用配置",
+          children: [
+            {
+              label: "方法名称",
+              key: "fnName",
+              type: "input",
+              required: false,
+              placeholder: "默认是 OPS_REC",
+            },
+          ],
+        },
+        {
           name: "display",
           title: "显示配置",
           children: [
@@ -100,6 +113,7 @@ export default {
       form: {
         hostName: "",
         maskerColor: "rgba(255,215,0,0.8)",
+        fnName: "OPS_REC",
       },
       serverStatusLoading: false,
       message: {
@@ -140,22 +154,26 @@ export default {
         this.activeNames.length,
         ...this.options.map((opt) => opt.name)
       );
-      const opts = await getSyncStorage({ options: this.form });
+      const opts = await bg.getSyncStorage({ options: this.form });
       for (const [key, value] of Object.entries(opts.options)) {
         this.$set(this.form, key, value);
       }
     },
-    onSave() {
+    async onSave(needMsg = true) {
       this.message.close();
-      this.$refs.form.validate(async (valid) => {
-        if (valid) {
-          this.message = this.$message.success("保存成功");
-          await setSyncStorage({ options: this.form });
-        } else {
-          this.message = this.$message.error("保存失败");
-          return false;
-        }
-      });
+      if (needMsg) {
+        this.$refs.form.validate(async (valid) => {
+          if (valid) {
+            this.message = this.$message.success("保存成功");
+            await bg.setSyncStorage({ options: this.form });
+          } else {
+            this.message = this.$message.error("保存失败");
+            return false;
+          }
+        });
+      } else {
+        await bg.setSyncStorage({ options: this.form });
+      }
     },
   },
 };

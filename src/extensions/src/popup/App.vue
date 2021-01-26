@@ -1,19 +1,22 @@
 <template>
-  <div>
-    <el-button type="primary">主要按钮</el-button>
-    <el-radio label="1">备选项</el-radio>
-  </div>
+  <el-container direction="vertical">
+    <popup-main />
+    <popup-footer />
+  </el-container>
 </template>
 
 <script>
-import { getSyncStorage } from "@/lib/storage";
+import PopupFooter from "@/components/PopupFooter";
+import PopupMain from "@/components/PopupMain";
+import { bg } from "@/lib/pubFn";
 
 export default {
   name: "App",
-  components: {},
+  components: { PopupFooter, PopupMain },
   async mounted() {
-    const opt = await getSyncStorage({ options: {} });
+    const opt = await bg.getSyncStorage({ options: {} });
     console.log(opt);
+    console.log("挂载", new Date().toLocaleString());
   },
 };
 </script>
@@ -21,6 +24,12 @@ export default {
 <style>
 html {
   width: 400px;
-  height: 400px;
+}
+.start-rec {
+  width: 630px;
+  height: 520px;
+}
+.align-center {
+  text-align: center;
 }
 </style>
