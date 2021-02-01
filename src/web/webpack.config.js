@@ -23,6 +23,7 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     library: "OperationRecord",
+    libraryTarget: "var",
   },
   optimization: {
     minimize: true,
@@ -33,4 +34,10 @@ module.exports = {
     ],
   },
   devtool: "source-map",
+  devServer: {
+    contentBase: [path.join(__dirname, "dist"), path.join(__dirname, "dev")],
+    compress: true,
+    port: 8989,
+    injectClient: false,
+  },
 };

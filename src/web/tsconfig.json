@@ -1,9 +1,11 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "declarationDir": "./dist/",
     "noImplicitAny": true,
-    "module": "es6",
+    "module": "ESNext",
     "target": "es5",
-    "allowJs": false
+    "allowJs": false,
+    "declaration": true
   }
 }
