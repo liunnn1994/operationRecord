@@ -3,8 +3,8 @@
     "outDir": "./dist/",
     "declarationDir": "./dist/",
     "noImplicitAny": true,
-    "module": "ESNext",
-    "target": "ESNext",
+    "module": "ES2020",
+    "target": "ES6",
     "allowJs": false,
     "declaration": true
   }
