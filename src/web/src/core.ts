@@ -1,3 +1,4 @@
+import { checkEnv } from "./lib/index";
 import { ORInterface, iProps, FetchConfig } from "./interfaces/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
@@ -8,6 +9,10 @@ class OperationRecord implements ORInterface {
   url: string;
   fetchConfig: FetchConfig;
   constructor(props: iProps) {
+    const check = checkEnv();
+    if (check !== "") {
+      throw new Error(check);
+    }
     const defaultConfig: iProps = {
       url: "local",
       fetchConfig: {},
