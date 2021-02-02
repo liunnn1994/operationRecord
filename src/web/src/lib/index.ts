@@ -1,3 +1,4 @@
+import { envErrors } from "./errorStatus";
 /**
  * 检查运行环境
  *
@@ -5,7 +6,14 @@
 export function checkEnv() {
   let res = "";
   if (!navigator.mediaDevices) {
-    res = "您的设备不支持mediaDevices API。请更新chrome或更换现代浏览器重试。";
+    if (
+      !/localhost|127.0.0.1/.test(location?.hostname ?? "") ||
+      location?.protocol !== "https"
+    ) {
+      res = envErrors.NotLocalhostOrHttps;
+    } else {
+      res = envErrors.NotSupportMediaDevices;
+    }
   }
   return res;
 }

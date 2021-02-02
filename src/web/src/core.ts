@@ -8,15 +8,21 @@ class OperationRecord implements ORInterface {
   private isREC = false;
   url: string;
   fetchConfig: FetchConfig;
+  mediaConstraints: any;
   constructor(props: iProps) {
     const check = checkEnv();
     if (check !== "") {
-      throw new Error(check);
+      console.error(check);
     }
     const defaultConfig: iProps = {
       url: "local",
       fetchConfig: {},
+      mediaConstraints: {
+        video: true,
+        audio: true,
+      },
     };
+
     if (props) {
       Object.assign(defaultConfig, props);
     }

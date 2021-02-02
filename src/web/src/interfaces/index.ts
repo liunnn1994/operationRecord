@@ -2,12 +2,9 @@ declare global {
   interface MediaDevices {
     getDisplayMedia(constraints?: MediaStreamConstraints): Promise<MediaStream>;
   }
-
-  // if constraints config still lose some prop, you can define it by yourself also
   interface MediaTrackConstraintSet {
     displaySurface?: ConstrainDOMString;
     logicalSurface?: ConstrainBoolean;
-    // more....
   }
 }
 export interface FetchConfig {
@@ -37,9 +34,25 @@ export interface FetchConfig {
 export interface iProps {
   url?: "local" | string;
   fetchConfig?: FetchConfig;
+  mediaConstraints?: any;
 }
 
 export interface ORInterface extends iProps {
   startREC: Function;
   stopREC: Function;
+}
+
+interface MediaDevicesErrorStatus {
+  key:
+    | "AbortError"
+    | "InvalidStateError"
+    | "NotAllowedError"
+    | "NotFoundError"
+    | "NotReadableError"
+    | "OverconstrainedError"
+    | "TypeError";
+}
+
+export interface ErrorStatus {
+  key: MediaDevicesErrorStatus["key"];
 }
