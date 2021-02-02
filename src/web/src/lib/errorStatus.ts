@@ -11,6 +11,7 @@ export const mediaDevicesErrors = {
     "创建流后，由于无法生成兼容的流导致应用指定的 constraints 失效。",
   TypeError:
     "指定的 constraints 包括调用 getDisplayMedia() 时不允许的constraints。 这些不受支持的constraints是 advanced 的，任何约束又有一个名为 min 或 exact 的成员。",
+  StreamNotDetected: "未检测到stream。",
 };
 
 export const envErrors = {
