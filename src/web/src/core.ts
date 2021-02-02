@@ -5,7 +5,8 @@ import stopREC from "./actions/stopREC";
 const { version, author, license, homepage } = require("../package.json");
 
 class OperationRecord implements ORInterface {
-  private isREC = false;
+  private isREC: boolean = false;
+  private stream: any = undefined;
   url: string;
   fetchConfig: FetchConfig;
   mediaConstraints: any;

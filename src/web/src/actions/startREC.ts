@@ -1,18 +1,16 @@
-export default function () {
-  this.isREC = true;
+import { mediaDevicesErrors } from "../lib/errorStatus";
+import { ErrorStatus } from "../interfaces/index";
 
-  navigator.mediaDevices
-    .getDisplayMedia({
-      video: true,
-      audio: false,
-    })
-    .then((stream: any) => {
-      const video = document.querySelector("video");
-      video.srcObject = stream;
-      console.log("执行", stream);
-    })
-    .catch((err: any) => {
-      console.error(err);
-    });
-  return "开始录制";
+export default async function () {
+  this.isREC = true;
+  try {
+    this.stream = await navigator.mediaDevices.getDisplayMedia(
+      this.mediaConstraints
+    );
+  } catch (e) {
+    const name = e.name as ErrorStatus["key"];
+    const errorMsg = mediaDevicesErrors[name] ?? "";
+    console.error(errorMsg, e);
+  }
+  return this.stream;
 }
