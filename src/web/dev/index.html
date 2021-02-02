@@ -3,10 +3,12 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>测试页面</title>
-    <link rel="icon" href="./favicon-32x32.png" type="image/png">
+    <link rel="icon" href="./favicon-32x32.png" type="image/png" />
     <script type="text/javascript" src="operationRecord.js"></script>
   </head>
   <body>
+    <button type="button" id="start-btn">共享</button>
+    <button type="button" id="stop-btn">停止</button>
     <h1>h1-h6是asd标题标签</h1>
     <video controls src="" width="200"></video>
     <p>p是段落标签</p>
@@ -44,7 +46,6 @@
     <bdo dir="rtl">我可以把文字排序倒置，必须有dir</bdo>
     <blockquote>我是被自动缩进的引用，我可以很长很长</blockquote>
     <cite>我是引用，我将变成斜体字</cite>
-    <button type="button">都用我来设置按钮</button>
     <canvas></canvas>
     <datalist id="input的那个表格list">
       <option value="我是input那个表格里的下拉选项"></option>
@@ -81,7 +82,6 @@
     <form action="#">我向服务器传输数据</form>
     <hgroup>标题集合</hgroup>
     <i>斜体文字</i>
-    <iframe src="./index.html"></iframe>
     <label>
       <input name="给控件起个名字" value="把我传给数据库" />
     </label>
@@ -126,5 +126,19 @@
       <textarea rows="10" cols="30">我是一个文本框</textarea>
     </label>
     <time>时间：21：00</time>
+    <script>
+      const video = document.querySelector("video");
+      const startBtn = document.querySelector("#start-btn");
+      const stopBtn = document.querySelector("#stop-btn");
+      const or = new OperationRecord();
+      startBtn.addEventListener("click", async function () {
+        const stream = await or.startREC();
+        video.srcObject = stream;
+        console.log("执行", stream);
+      });
+      stopBtn.addEventListener("click", async function () {
+        or.stopREC();
+      });
+    </script>
   </body>
 </html>
