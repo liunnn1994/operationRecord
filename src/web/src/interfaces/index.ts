@@ -35,11 +35,16 @@ export interface iProps {
   url?: "local" | string;
   fetchConfig?: FetchConfig;
   mediaConstraints?: any;
+  mimeType?: string;
 }
 
 export interface ORInterface extends iProps {
   startREC: Function;
   stopREC: Function;
+  _toBlob: Function;
+  toWebm: Function;
+  _download: Function;
+  getSupportedMimeTypes: Function;
 }
 
 interface MediaDevicesErrorStatus {
