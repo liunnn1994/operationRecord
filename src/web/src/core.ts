@@ -2,6 +2,7 @@ import { checkEnv } from "./lib/index";
 import { ORInterface, iProps, FetchConfig } from "./interfaces/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
+import toggleREC from "./actions/toggleREC";
 import download from "./actions/download";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
 
@@ -45,6 +46,7 @@ class OperationRecord implements ORInterface {
   }
   startREC = startREC.bind(this);
   stopREC = stopREC.bind(this);
+  toggleREC = toggleREC.bind(this);
   _download = download.bind(this);
   getSupportedMimeTypes = getSupportedMimeTypes.bind(this);
   _dataavailableCB() {
