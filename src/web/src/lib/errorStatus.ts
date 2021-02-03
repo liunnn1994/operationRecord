@@ -19,4 +19,8 @@ export const envErrors = {
     "由于chrome政策限制，mediaDevices 需要在本机IP（127.0.0.1或localhost）或https下才可使用。",
   NotSupportMediaDevices:
     "您的设备不支持mediaDevices API。请更新chrome或更换现代浏览器重试。",
+  LanguagePackNotFound: "语言包未找到！",
+};
+export const generalErrors = {
+  LanguagePackNotFound: "语言包未找到！",
 };

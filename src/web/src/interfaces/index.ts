@@ -36,15 +36,15 @@ export interface iProps {
   fetchConfig?: FetchConfig;
   mediaConstraints?: any;
   mimeType?: string;
+  lang?: string;
 }
 
 export interface ORInterface extends iProps {
   startREC: Function;
   stopREC: Function;
-  _toBlob: Function;
-  toWebm: Function;
   _download: Function;
   getSupportedMimeTypes: Function;
+  _dataavailableCB: Function;
 }
 
 interface MediaDevicesErrorStatus {

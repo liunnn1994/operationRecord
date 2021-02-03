@@ -7,8 +7,8 @@ export function checkEnv() {
   let res = "";
   if (!navigator.mediaDevices) {
     if (
-      !/localhost|127.0.0.1/.test(location?.hostname ?? "") ||
-      location?.protocol !== "https"
+      !/localhost|127.0.0.1/.test(location.hostname ?? "") ||
+      location.protocol !== "https"
     ) {
       res = envErrors.NotLocalhostOrHttps;
     } else {

@@ -2,8 +2,6 @@ import { checkEnv } from "./lib/index";
 import { ORInterface, iProps, FetchConfig } from "./interfaces/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
-import toBlob from "./actions/toBlob";
-import toWebm from "./actions/toWebm";
 import download from "./actions/download";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
 
@@ -12,6 +10,9 @@ const { version, author, license, homepage } = require("../package.json");
 class OperationRecord implements ORInterface {
   private isREC: boolean = false;
   private stream: any = undefined;
+  private mediaRecorder: any = undefined;
+  private recordedChunks: any[] = [];
+  private startTime: number = 0;
   url: string;
   fetchConfig: FetchConfig;
   mediaConstraints: any;
@@ -28,6 +29,7 @@ class OperationRecord implements ORInterface {
         audio: true,
       },
       mimeType: getSupportedMimeTypes()[0],
+      lang: "zh",
     };
 
     if (props) {
@@ -43,10 +45,11 @@ class OperationRecord implements ORInterface {
   }
   startREC = startREC.bind(this);
   stopREC = stopREC.bind(this);
-  _toBlob = toBlob.bind(this);
-  toWebm = toWebm.bind(this);
   _download = download.bind(this);
   getSupportedMimeTypes = getSupportedMimeTypes.bind(this);
+  _dataavailableCB() {
+    // 初始化dataavailable的回调，用来解决事件异步的问题
+  }
 }
 
 for (const [key, value] of Object.entries({

@@ -1,6 +1,6 @@
 export default function () {
   const { mimeType } = this;
-  let extname = mimeType.split(";")[0][1];
+  let extname = mimeType.split(";")[0].split("/")[1];
   switch (extname) {
     case "x-matroska":
       extname = "mkv";

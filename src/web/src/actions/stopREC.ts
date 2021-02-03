@@ -1,11 +1,15 @@
-import { mediaDevicesErrors } from "../lib/errorStatus";
-
 export default function () {
-  this.isREC = false;
-  try {
-    this.stream.getTracks().forEach((track: any) => track.stop());
-  } catch (e) {
-    console.warn(mediaDevicesErrors.StreamNotDetected, e);
-  }
-  return "停止录制";
+  this._dataavailableCB = () => {
+    this.isREC = false;
+    this.startTime = 0;
+    this.mediaRecorder = undefined;
+    this.stream = undefined;
+    this.recordedChunks.splice(0);
+    this._dataavailableCB = function () {}.bind(this);
+  };
+
+  // 停止所有track
+  (this.stream?.getTracks() ?? []).forEach((track: any) => track.stop());
+  // 停止mediaRecorder
+  this.mediaRecorder?.stop();
 }
