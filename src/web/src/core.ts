@@ -4,7 +4,9 @@ import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
 import toggleREC from "./actions/toggleREC";
 import download from "./actions/download";
+import initDom from "./actions/initDom";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
+import { merge } from "lodash-es";
 
 const { version, author, license, homepage } = require("../package.json");
 
@@ -31,18 +33,16 @@ class OperationRecord implements ORInterface {
       },
       mimeType: getSupportedMimeTypes()[0],
       lang: "zh",
+      dom: {
+        show: true,
+        style: {
+          ...(props.dom?.style ?? {}),
+        },
+      },
     };
 
-    if (props) {
-      Object.assign(defaultConfig, props);
-    }
-
-    for (const [key, value] of Object.entries(defaultConfig)) {
-      Object.defineProperty(this, key, {
-        value,
-        writable: true,
-      });
-    }
+    merge(this, defaultConfig, props);
+    initDom.call(this);
   }
   startREC = startREC.bind(this);
   stopREC = stopREC.bind(this);

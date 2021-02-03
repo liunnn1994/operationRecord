@@ -31,6 +31,8 @@
     "webpack-dev-server": "^3.11.2"
   },
   "dependencies": {
-    "@types/dom-mediacapture-record": "^1.0.7"
+    "@types/dom-mediacapture-record": "^1.0.7",
+    "@types/lodash-es": "^4.17.4",
+    "lodash-es": "^4.17.20"
   }
 }

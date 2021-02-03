@@ -32,6 +32,7 @@ module.exports = {
         include: /\.min\.js$/,
       }),
     ],
+    usedExports: true,
   },
   devtool: "source-map",
   devServer: {

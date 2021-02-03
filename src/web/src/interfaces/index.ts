@@ -36,6 +36,10 @@ interface HotKeys {
   stop?: KeyboardEvent["code"] | KeyboardEvent["code"][];
   toggleREC?: KeyboardEvent["code"] | KeyboardEvent["code"][];
 }
+interface DomOptions {
+  show?: boolean;
+  style: any;
+}
 
 export interface iProps {
   url?: "local" | string;
@@ -44,6 +48,7 @@ export interface iProps {
   mimeType?: string;
   lang?: string;
   hotKeys?: HotKeys;
+  dom?: DomOptions;
 }
 
 export interface ORInterface extends iProps {
