@@ -31,12 +31,19 @@ export interface FetchConfig {
   integrity?: string;
 }
 
+interface HotKeys {
+  start?: KeyboardEvent["code"] | KeyboardEvent["code"][];
+  stop?: KeyboardEvent["code"] | KeyboardEvent["code"][];
+  toggleREC?: KeyboardEvent["code"] | KeyboardEvent["code"][];
+}
+
 export interface iProps {
   url?: "local" | string;
   fetchConfig?: FetchConfig;
   mediaConstraints?: any;
   mimeType?: string;
   lang?: string;
+  hotKeys?: HotKeys;
 }
 
 export interface ORInterface extends iProps {
