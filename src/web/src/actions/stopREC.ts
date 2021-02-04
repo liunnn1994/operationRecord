@@ -15,6 +15,7 @@ export default function () {
         .querySelector(`[${opsRecSVGType}="${item}"]`)
         .setAttribute(opsRecShow, (item !== "pause").toString());
     });
+    this.onStopREC && this.onStopREC();
   };
 
   // 停止所有track

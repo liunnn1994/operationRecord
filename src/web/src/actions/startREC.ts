@@ -53,5 +53,6 @@ export default async function () {
       dom.setAttribute(opsRecShow, (!!index).toString());
     }
   );
+  this.onStartREC && this.onStartREC(this.stream);
   return this.stream;
 }

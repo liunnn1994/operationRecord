@@ -49,6 +49,10 @@ export interface iProps {
   lang?: string;
   hotKeys?: HotKeys;
   dom?: DomOptions;
+  onStartREC?: Function;
+  onStopREC?: Function;
+  onPauseREC?: Function;
+  onResumeREC?: Function;
 }
 
 export interface ORInterface extends iProps {

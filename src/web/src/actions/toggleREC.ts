@@ -11,10 +11,12 @@ export default function () {
     case "recording":
       mediaRecorder.pause();
       this.status = "pause";
+      this.onPauseREC && this.onPauseREC();
       break;
     case "paused":
       mediaRecorder.resume();
       this.status = "recording";
+      this.onResumeREC && this.onResumeREC();
       break;
   }
   if (this.status === "pause" || this.status === "recording") {
