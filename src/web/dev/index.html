@@ -5,159 +5,109 @@
     <title>测试页面</title>
     <link rel="icon" href="./favicon-32x32.png" type="image/png" />
     <script type="text/javascript" src="operationRecord.js"></script>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      canvas {
+        width: 100%;
+        height: 400px;
+      }
+    </style>
   </head>
   <body>
-    <button type="button" id="start-btn">共享</button>
-    <button type="button" id="stop-btn">停止</button>
-    <h1>h1-h6是asd标题标签</h1>
     <video controls src="" width="200"></video>
-    <svg
-      viewbox="0 0 1024 1024"
-      xmlns="http://www.w3.org/2000/svg"
-      width="128"
-      height="128"
-    >
-      <path
-        d="M512.104171 127.921872c106.045982 0 202.091556 42.918413 271.469379 112.504578 69.586165 69.586165 112.504578 165.423398 112.504578 271.469379 0 106.045982-42.918413 202.091556-112.504578 271.46938-69.586165 69.586165-165.423398 112.504578-271.469379 112.504577-106.045982 0-202.091556-42.918413-271.46938-112.504577-69.586165-69.586165-112.504578-165.423398-112.504577-271.46938 0-106.045982 42.918413-202.091556 112.504577-271.469379 69.377823-69.377823 165.423398-112.504578 271.46938-112.504578z"
-        fill="#00C9CA"
-      ></path>
-      <path
-        d="M647.73469 376.26531c-34.793082-34.793082-82.711699-56.252289-135.838861-56.252289s-101.045778 21.459207-135.838861 56.252289c-34.793082 34.793082-56.252289 82.711699-56.252288 135.838861s21.459207 101.045778 56.252288 135.838861c34.793082 34.793082 82.711699 56.252289 135.838861 56.252288s101.045778-21.459207 135.838861-56.252288c34.793082-34.793082 56.252289-82.711699 56.252289-135.838861s-21.459207-101.045778-56.252289-135.838861z"
-        fill="#424242"
-      ></path>
-      <path
-        d="M613.774975 410.225025c-26.042726-26.042726-62.08586-42.085046-101.879146-42.085045-39.793286 0-75.836419 16.042319-101.879145 42.085045s-42.085046 62.08586-42.085046 101.879146c0 39.793286 16.042319 75.836419 42.085046 101.879145s62.08586 42.085046 101.879145 42.085046c39.793286 0 75.836419-16.042319 101.879146-42.085046s42.085046-62.08586 42.085045-101.879145c0.208342-39.793286-16.042319-75.836419-42.085045-101.879146z"
-        fill="#F44336"
-      ></path>
-    </svg>
-    <p>p是段落标签</p>
-    <a href="https://www.baidu.com/" target="_blank"
-      >a标签是插入超链接的，herf指定链接地址，target指定新窗口开启</a
-    >
-    <br />
-    <wbr />
-    <img
-      src="./foo.png"
-      alt="这是一个图片，加载不出来时显示我"
-      width="100"
-      height="60"
-    />
-    <hr />
-
-    <abbr title="China">CN</abbr>
-    <address>
-      rcw <a href="mailto:small_pupil@126.com"></a>
-      <br />
-      tel:18888888888
-    </address>
-    <map>一般和area一起用，管理里面的area</map>
-    <article>我这里指定面页的独立部分内容，也可以是页眉</article>
-    <header>介绍性内容，在article里面</header>
-    <aside>语义化标签，我也不知道什么意思</aside>
-    <audio controls="controls">
-      <source src="" type="视频类型" />
-    </audio>
-    <b>我可以把字体加粗</b>
-    <ul>
-      <li>我是做表格用的，必须在ul里或者ol里面</li>
-    </ul>
-    <bdi>把我隔离出来</bdi>
-    <bdo dir="rtl">我可以把文字排序倒置，必须有dir</bdo>
-    <blockquote>我是被自动缩进的引用，我可以很长很长</blockquote>
-    <cite>我是引用，我将变成斜体字</cite>
-    <canvas></canvas>
-    <datalist id="input的那个表格list">
-      <option value="我是input那个表格里的下拉选项"></option>
-    </datalist>
-    <dl>
-      <dt>1</dt>
-      <dd>2</dd>
-    </dl>
-    <del>我会被划上删除线</del>
-    <s>我也会被划上删除线</s>
-    <ins>我会被划上下划线，表示修改</ins>
-    <u>我才是名正言顺的下划线</u>
-    <details>
-      <summary>点我能看到很多</summary>
-      <p>很多</p>
-    </details>
-    <em>我是强调文本</em><br />
-    <strong>我能加粗文本</strong><br />
-    <dfn>反正我是斜的，定义项目</dfn><br />
-    <code>一段电脑代码</code><br />
-    <samp>计算机样本</samp><br />
-    <kbd>键盘输入</kbd><br />
-    <var>变量</var>
-    <dialog open="">我差不多一个是个th的批注，但我很大，还不能隐藏</dialog>
-    <div class="属性" id="自己体会" lang="语言">
-      我将被很多属性标记，太幸福了
-    </div>
-    <embed src="" />
-    <fieldset>我被用在form下，我下面的input属于我，哼</fieldset>
-    <figure>
-      <figcaption>我属于figure</figcaption>
-    </figure>
-    <footer>我相当于页脚</footer>
-    <form action="#">我向服务器传输数据</form>
-    <hgroup>标题集合</hgroup>
-    <i>斜体文字</i>
-    <label>
-      <input name="给控件起个名字" value="把我传给数据库" />
-    </label>
-    <label>单选控件类型</label>
-    <menu>我定义一个命令列表或菜单，但好像没有浏览器支持我</menu>
-    <meter value="2" min="0" max="10">0到10之间，输出2，相当于20%</meter>
-    <nav>导航链接，索引，目录，菜单</nav>
-    <object>
-      外部资源
-      <param name="" value="" />
-      定义资源
-    </object>
-    <label>
-      <select>
-        定义一个下拉菜单
-        <optgroup label="下拉菜单里的分类">
-          下拉菜单里的分类
-          <option>分类里面的选项</option>
-        </optgroup>
-      </select>
-    </label>
-    <output>显示计算或用户操作的结果</output>
-    <pre>你怎样输入的，      我就怎么显示</pre>
-    <progress value="88" max="100"></progress>
-    <q>显示为引号包含</q>
-    <ruby>帅<rp>(</rp><rt>shuai</rt><rp>)</rp></ruby>
-    <section>定义文档独立的一部分</section>
-    <small>我是最小号的字体</small>
-    <span>想给我加样式就这么用</span>
-    <sub>下标</sub>
-    <sup>上标</sup>
-    大表哥，里面有很多tr组成,边框为1 横向定义的表格，表示一行数据
-    <table>
-      <thead>
-        <tr>
-          <th>加粗版表头文档</th>
-          <td>表中内容</td>
-        </tr>
-      </thead>
-    </table>
-    <label>
-      <textarea rows="10" cols="30">我是一个文本框</textarea>
-    </label>
-    <time>时间：21：00</time>
+    <canvas id="c" height="400"></canvas>
     <script>
       const video = document.querySelector("video");
-      const startBtn = document.querySelector("#start-btn");
-      const stopBtn = document.querySelector("#stop-btn");
-      const or = new OperationRecord();
-      startBtn.addEventListener("click", async function () {
-        const stream = await or.startREC();
-        video.srcObject = stream;
-        console.log("执行", stream);
+      const c = document.querySelector("#c");
+      const gl = c.getContext("webgl");
+      const or = new OperationRecord({
+        onStartREC(stream) {
+          video.srcObject = stream;
+          console.log("执行", stream);
+        },
       });
-      stopBtn.addEventListener("click", async function () {
-        or.stopREC();
-      });
+      // 顶点着色器代码(决定顶在哪里，大小)
+      const VSHADER_SOURCE =
+        "attribute vec4 a_Position;\n" +
+        "void main() {\n" +
+        "  gl_Position = a_Position;\n" + // 设置顶点的位置
+        "  gl_PointSize = 3.0;\n" + // 设置顶点的大小
+        "}\n";
+
+      // 片元着色器代码（给像素上色）
+      const FSHADER_SOURCE =
+        "void main() {\n" +
+        "  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" + // 设置顶点的颜色
+        "}\n";
+
+      function main() {
+        const program = createProgram(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+        gl.program = program;
+        gl.useProgram(program);
+
+        const n = initVertexBuffers(gl);
+
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        // 每一次重绘时的背景色
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+
+        // 清除 <canvas>
+        gl.clear(gl.COLOR_BUFFER_BIT);
+        // 画n个点
+        gl.drawArrays(gl.POINTS, 0, n);
+      }
+      function initVertexBuffers(gl) {
+        const n = 100000;
+        const vertices = new Float32Array(
+          Array.from({ length: n * 2 }, () => {
+            return Math.random() * (Math.random() > 0.5 ? 1 : -1);
+          })
+        );
+
+        // 创建一个缓存对象，用于存放顶点数据
+        const vertexBuffer = gl.createBuffer();
+        // 绑定缓存对象
+        gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
+        // 把数据写到缓冲对象中
+        gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
+        // 获取顶点着色器代码中的顶点变量
+        const a_Position = gl.getAttribLocation(gl.program, "a_Position");
+        console.log(a_Position);
+        // 设置变量获取数据规则
+        gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
+        // 允许变量从 ARRAY_BUFFER目标上绑定的缓冲区对象获取数据
+        gl.enableVertexAttribArray(a_Position);
+
+        return n;
+      }
+
+      // 创建一个program（相当于着色器的上下文）
+      function createProgram(gl, vshader, fshader) {
+        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
+        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
+        const program = gl.createProgram();
+        gl.attachShader(program, vertexShader);
+        gl.attachShader(program, fragmentShader);
+
+        gl.linkProgram(program);
+        return program;
+      }
+      function loadShader(gl, type, source) {
+        const shader = gl.createShader(type);
+        gl.shaderSource(shader, source);
+        gl.compileShader(shader);
+        return shader;
+      }
+      resize();
+      main();
+      window.addEventListener("resize", resize);
+
+      function resize() {
+        c.width = document.body.clientWidth;
+      }
     </script>
   </body>
 </html>
