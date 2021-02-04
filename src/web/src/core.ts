@@ -6,16 +6,18 @@ import toggleREC from "./actions/toggleREC";
 import download from "./actions/download";
 import initDom from "./actions/initDom";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
+import { clickDom } from "./actions/initDom";
 import { merge } from "lodash-es";
 
 const { version, author, license, homepage } = require("../package.json");
 
 class OperationRecord implements ORInterface {
-  private isREC: boolean = false;
   private stream: any = undefined;
   private mediaRecorder: any = undefined;
   private recordedChunks: any[] = [];
   private startTime: number = 0;
+  public status: string = "stop";
+  public DOM: HTMLElement | undefined;
   url: string;
   fetchConfig: FetchConfig;
   mediaConstraints: any;
@@ -36,7 +38,13 @@ class OperationRecord implements ORInterface {
       dom: {
         show: true,
         style: {
-          ...(props.dom?.style ?? {}),
+          position: "fixed",
+          right: "2rem",
+          bottom: "2rem",
+          width: "40px",
+          height: "40px",
+          zIndex: "1000",
+          cursor: "pointer",
         },
       },
     };
@@ -52,6 +60,7 @@ class OperationRecord implements ORInterface {
   _dataavailableCB() {
     // 初始化dataavailable的回调，用来解决事件异步的问题
   }
+  _clickDom = clickDom.bind(this);
 }
 
 for (const [key, value] of Object.entries({

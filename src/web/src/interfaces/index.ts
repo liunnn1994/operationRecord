@@ -58,6 +58,7 @@ export interface ORInterface extends iProps {
   _download: Function;
   getSupportedMimeTypes: Function;
   _dataavailableCB: Function;
+  _clickDom: Function;
 }
 
 interface MediaDevicesErrorStatus {
@@ -73,4 +74,9 @@ interface MediaDevicesErrorStatus {
 
 export interface ErrorStatus {
   key: MediaDevicesErrorStatus["key"];
+}
+
+export interface InsertRule {
+  selector: string;
+  style: Object;
 }

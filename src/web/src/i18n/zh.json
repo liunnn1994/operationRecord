@@ -1,3 +1,7 @@
 {
-  "downloadConfirm": "检测到您的url为local，是否下载？"
+  "downloadConfirm": "检测到您的url为local，是否下载？",
+  "startREC": "开始录制",
+  "stopREC": "停止录制",
+  "pauseREC": "暂停录制",
+  "resumeREC": "继续录制"
 }

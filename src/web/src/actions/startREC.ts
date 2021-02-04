@@ -1,6 +1,8 @@
 import { mediaDevicesErrors } from "../lib/errorStatus";
 import { ErrorStatus } from "../interfaces/index";
 import i18n from "../i18n/index";
+import { toggleSVGVisible } from "../lib/index";
+import { opsRecShow } from "../lib/globalVars";
 
 export default async function () {
   this.stopREC();
@@ -40,8 +42,16 @@ export default async function () {
     }
     this._dataavailableCB();
   });
-  this.isREC = true;
+  this.status = "recording";
   this.startTime = new Date().getTime();
   mediaRecorder.start();
+
+  toggleSVGVisible.call(this, ":scope > div:last-child svg");
+
+  [...this.DOM.querySelectorAll(":scope > div:first-child svg")].forEach(
+    (dom: HTMLElement, index: number) => {
+      dom.setAttribute(opsRecShow, (!!index).toString());
+    }
+  );
   return this.stream;
 }
