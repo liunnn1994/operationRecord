@@ -108,7 +108,7 @@ export default function (this: ORInterface) {
         width: "100%",
         height: "100%",
         "background-color": "#fff",
-        transition: "0.2s ease-in-out .5s",
+        transition: "all 0.2s ease-in-out , transform 0.2s ease-in-out .2s",
         transform: "translate(0)",
         "border-radius": "50%",
         border: "1px solid transparent",
