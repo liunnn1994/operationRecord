@@ -108,7 +108,7 @@ export default function (this: ORInterface) {
         width: "100%",
         height: "100%",
         "background-color": "#fff",
-        transition: "0.2s",
+        transition: "0.2s ease-in-out .5s",
         transform: "translate(0)",
         "border-radius": "50%",
         border: "1px solid transparent",
@@ -120,7 +120,7 @@ export default function (this: ORInterface) {
     {
       selector: `[${opsRecBox}]:hover >div:nth-of-type(1)`,
       style: {
-        transform: "translate(-100%)",
+        transform: "translate(calc(-100% - 5px))",
       },
     },
     {
