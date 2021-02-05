@@ -3,8 +3,9 @@ import { ErrorStatus } from "../interfaces/index";
 import i18n from "../i18n/index";
 import { toggleSVGVisible } from "../lib/index";
 import { opsRecShow } from "../lib/globalVars";
+import { ORInterface } from "../interfaces/index";
 
-export default async function () {
+export default async function (this: ORInterface) {
   this.stopREC();
   let isAllow = false;
   try {
@@ -20,13 +21,16 @@ export default async function () {
   if (!isAllow) {
     return undefined;
   }
-  const videoTrack = this.stream.getVideoTracks()[0];
+  const videoTrack = this.stream?.getVideoTracks()[0];
   if (videoTrack) {
     videoTrack.addEventListener("ended", () => {
       this.stopREC();
     });
   }
 
+  if (!this.stream) {
+    return undefined;
+  }
   const mediaRecorder = new MediaRecorder(this.stream, {
     mimeType: this.mimeType,
   });
@@ -35,7 +39,9 @@ export default async function () {
     if (event.data.size > 0) {
       this.recordedChunks.push(event.data);
       if (this.url === "local") {
-        confirm(i18n(this.lang).downloadConfirm) ? this._download() : void 0;
+        confirm(i18n(this.lang ?? "").downloadConfirm)
+          ? this._download()
+          : void 0;
       }
     } else {
       console.error(mediaDevicesErrors.StreamNotDetected);
@@ -48,11 +54,13 @@ export default async function () {
 
   toggleSVGVisible.call(this, ":scope > div:last-child svg");
 
-  [...this.DOM.querySelectorAll(":scope > div:first-child svg")].forEach(
-    (dom: HTMLElement, index: number) => {
+  const doms = this.DOM?.querySelectorAll(":scope > div:first-child svg");
+  if (doms) {
+    [...doms].forEach((dom: Element, index: number) => {
       dom.setAttribute(opsRecShow, (!!index).toString());
-    }
-  );
+    });
+  }
+
   this.onStartREC && this.onStartREC(this.stream);
   return this.stream;
 }

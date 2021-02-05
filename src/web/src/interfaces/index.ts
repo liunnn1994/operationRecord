@@ -56,6 +56,12 @@ export interface iProps {
 }
 
 export interface ORInterface extends iProps {
+  DOM: HTMLElement | undefined;
+  startTime: number;
+  status: string;
+  recordedChunks: any[];
+  mediaRecorder: MediaRecorder | undefined;
+  stream: MediaStream | undefined;
   startREC: Function;
   stopREC: Function;
   toggleREC: Function;

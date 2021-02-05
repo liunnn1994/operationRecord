@@ -2,6 +2,7 @@ import { envErrors } from "./errorStatus";
 import { isArray } from "lodash-es";
 import { InsertRule } from "../interfaces/index";
 import { opsRecShow } from "./globalVars";
+import { ORInterface } from "../interfaces/index";
 
 /**
  * 检查运行环境
@@ -34,19 +35,22 @@ export function insertRule(rules: InsertRule | InsertRule[]) {
     styleSheet = document.createElement("style");
     document.head.appendChild(styleSheet);
   }
-  const r: object[] = isArray(rules) ? rules : [rules];
+  const r: InsertRule[] = isArray(rules) ? rules : [rules];
   r.forEach((rule: InsertRule) => {
-    styleSheet.sheet.insertRule(
+    styleSheet?.sheet?.insertRule(
       `${rule.selector}{${objectToCssString(rule.style)}}`
     );
   });
 }
 
-export function toggleSVGVisible(selector: string) {
-  [...this.DOM.querySelectorAll(selector)].forEach((dom: HTMLElement) => {
-    dom.setAttribute(
-      opsRecShow,
-      (dom.getAttribute(opsRecShow) !== "true").toString()
-    );
-  });
+export function toggleSVGVisible(this: ORInterface, selector: string) {
+  const doms = this.DOM?.querySelectorAll(selector);
+  if (doms) {
+    [...doms].forEach((dom: Element) => {
+      dom.setAttribute(
+        opsRecShow,
+        (dom.getAttribute(opsRecShow) !== "true").toString()
+      );
+    });
+  }
 }

@@ -7,8 +7,13 @@ import {
   opsRecIcon,
   opsRecSVGType,
 } from "../lib/globalVars";
+import { ORInterface } from "../interfaces/index";
 
-export const clickDom = function (type: string, e: MouseEvent) {
+export const clickDom = function (
+  this: ORInterface,
+  type: string,
+  e: MouseEvent
+) {
   const { status } = this;
   if (type === "playPause") {
     switch (status) {
@@ -16,7 +21,7 @@ export const clickDom = function (type: string, e: MouseEvent) {
         this.startREC();
         break;
       case "recording":
-      case "pause":
+      case "paused":
         this.toggleREC();
         break;
     }
@@ -64,8 +69,8 @@ const createSvg = function (
   parent.appendChild(svg);
 };
 
-export default function () {
-  if (!this.dom.show) {
+export default function (this: ORInterface) {
+  if (!this.dom?.show) {
     // 如果不需要dom直接返回undefined
     return undefined;
   }
@@ -135,8 +140,8 @@ export default function () {
       dom,
       playPauseBox,
       index,
-      index ? i18n(this.lang).pauseREC : i18n(this.lang).resumeREC,
-      index ? "pause" : "play"
+      index ? i18n(this.lang ?? "").pauseREC : i18n(this.lang ?? "").resumeREC,
+      index ? "paused" : "play"
     );
   });
   [record, stop].forEach((dom: any[], index: number) => {
@@ -144,7 +149,7 @@ export default function () {
       dom,
       recordStopBox,
       index,
-      index ? i18n(this.lang).stopREC : i18n(this.lang).startREC,
+      index ? i18n(this.lang ?? "").stopREC : i18n(this.lang ?? "").startREC,
       index ? "stop" : "record"
     );
   });

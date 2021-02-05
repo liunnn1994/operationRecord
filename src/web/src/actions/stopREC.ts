@@ -1,7 +1,8 @@
 import { toggleSVGVisible } from "../lib/index";
 import { opsRecShow, opsRecSVGType } from "../lib/globalVars";
+import { ORInterface } from "../interfaces/index";
 
-export default function () {
+export default function (this: ORInterface) {
   this._dataavailableCB = () => {
     this.status = "stop";
     this.startTime = 0;
@@ -10,10 +11,10 @@ export default function () {
     this.recordedChunks.splice(0);
     this._dataavailableCB = function () {}.bind(this);
     toggleSVGVisible.call(this, ":scope > div:last-child svg");
-    ["pause", "play"].forEach((item) => {
+    ["paused", "play"].forEach((item) => {
       document
         .querySelector(`[${opsRecSVGType}="${item}"]`)
-        .setAttribute(opsRecShow, (item !== "pause").toString());
+        ?.setAttribute(opsRecShow, (item !== "paused").toString());
     });
     this.onStopREC && this.onStopREC();
   };
@@ -23,7 +24,7 @@ export default function () {
   // 停止mediaRecorder
   const { mediaRecorder } = this;
   if (mediaRecorder) {
-    if (mediaRecorder.state === "pause") {
+    if (mediaRecorder.state === "paused") {
       mediaRecorder.resume();
       this.status = "recording";
     }

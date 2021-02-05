@@ -60,7 +60,7 @@
         gl.drawArrays(gl.POINTS, 0, n);
       }
       function initVertexBuffers(gl) {
-        const n = 100000;
+        const n = 10000;
         const vertices = new Float32Array(
           Array.from({ length: n * 2 }, () => {
             return Math.random() * (Math.random() > 0.5 ? 1 : -1);

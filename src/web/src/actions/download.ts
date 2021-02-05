@@ -1,6 +1,8 @@
-export default function () {
+import { ORInterface } from "../interfaces/index";
+
+export default function (this: ORInterface) {
   const { mimeType } = this;
-  let extname = mimeType.split(";")[0].split("/")[1];
+  let extname = mimeType?.split(";")[0].split("/")[1] ?? "";
   switch (extname) {
     case "x-matroska":
       extname = "mkv";
@@ -20,5 +22,5 @@ export default function () {
   }${now.getDate()}${now.getTime().toString().substr(-4)}.${extname}`;
   a.click();
   window.URL.revokeObjectURL(url);
-  a.parentNode.removeChild(a);
+  a.parentNode?.removeChild(a);
 }

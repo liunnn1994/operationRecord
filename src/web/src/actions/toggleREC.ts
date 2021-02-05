@@ -1,7 +1,8 @@
 import { mediaDevicesErrors } from "../lib/errorStatus";
 import { opsRecSVGType, opsRecShow } from "../lib/globalVars";
+import { ORInterface } from "../interfaces/index";
 
-export default function () {
+export default function (this: ORInterface) {
   if (this.mediaRecorder === undefined) {
     console.warn(mediaDevicesErrors.RecordingNotInProgress);
     return "not running";
@@ -10,7 +11,7 @@ export default function () {
   switch (mediaRecorder.state) {
     case "recording":
       mediaRecorder.pause();
-      this.status = "pause";
+      this.status = "paused";
       this.onPauseREC && this.onPauseREC();
       break;
     case "paused":
@@ -19,12 +20,12 @@ export default function () {
       this.onResumeREC && this.onResumeREC();
       break;
   }
-  if (this.status === "pause" || this.status === "recording") {
-    const status = this.status === "pause" ? "play" : "pause";
-    ["pause", "play"].forEach((item) => {
+  if (this.status === "paused" || this.status === "recording") {
+    const status = this.status === "paused" ? "play" : "paused";
+    ["paused", "play"].forEach((item) => {
       document
         .querySelector(`[${opsRecSVGType}="${item}"]`)
-        .setAttribute(opsRecShow, (item === status).toString());
+        ?.setAttribute(opsRecShow, (item === status).toString());
     });
   }
 
