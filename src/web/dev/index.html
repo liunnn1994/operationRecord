@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="cn">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>测试页面</title>
@@ -17,77 +17,86 @@
     </style>
   </head>
   <body>
-    <video controls src="" width="200"></video>
+    <video controls width="50%" autoplay></video>
+    <br />
+    <button>webgl 10w个点随机运动</button>
     <canvas id="c" height="400"></canvas>
     <script>
       const video = document.querySelector("video");
       const c = document.querySelector("#c");
+      const btn = document.querySelector("button");
       const gl = c.getContext("webgl");
+      let isAnimate = false;
       const or = new OperationRecord({
         onStartREC(stream) {
           video.srcObject = stream;
           console.log("执行", stream);
         },
       });
-      // 顶点着色器代码(决定顶在哪里，大小)
-      const VSHADER_SOURCE =
-        "attribute vec4 a_Position;\n" +
-        "void main() {\n" +
-        "  gl_Position = a_Position;\n" + // 设置顶点的位置
-        "  gl_PointSize = 3.0;\n" + // 设置顶点的大小
-        "}\n";
+      // 顶点着色器
+      const vertexShader = `
+      attribute vec4 a_Position;
+      void main() {
+        gl_Position = a_Position;
+        gl_PointSize = 1.5;
+      }`;
+      // 片元着色器
+      const fragmentShader = `
+      void main() {
+        gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);
+      }`;
 
-      // 片元着色器代码（给像素上色）
-      const FSHADER_SOURCE =
-        "void main() {\n" +
-        "  gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);\n" + // 设置顶点的颜色
-        "}\n";
+      const n = 100_000;
 
-      function main() {
-        const program = createProgram(gl, VSHADER_SOURCE, FSHADER_SOURCE);
+      let vertices = new Float32Array(
+        Array.from({ length: n * 2 }, () => {
+          return Math.random() * (Math.random() > 0.5 ? 1 : -1);
+        })
+      );
+
+      function initGL() {
+        const program = createProgram(gl, vertexShader, fragmentShader);
         gl.program = program;
         gl.useProgram(program);
-
-        const n = initVertexBuffers(gl);
-
-        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
-        // 每一次重绘时的背景色
-        gl.clearColor(0.0, 0.0, 0.0, 1.0);
-
-        // 清除 <canvas>
-        gl.clear(gl.COLOR_BUFFER_BIT);
-        // 画n个点
-        gl.drawArrays(gl.POINTS, 0, n);
+        refresh();
       }
-      function initVertexBuffers(gl) {
-        const n = 10000;
-        const vertices = new Float32Array(
-          Array.from({ length: n * 2 }, () => {
-            return Math.random() * (Math.random() > 0.5 ? 1 : -1);
-          })
-        );
 
-        // 创建一个缓存对象，用于存放顶点数据
+      function refresh(move = true) {
+        gl.viewport(0, 0, gl.canvas.width, gl.canvas.height);
+        gl.clearColor(0.0, 0.0, 0.0, 1.0);
+        gl.clear(gl.COLOR_BUFFER_BIT);
+
+        gl.drawArrays(gl.POINTS, 0, initVertexBuffers(gl, move));
+
+        if (isAnimate) {
+          requestAnimationFrame(refresh);
+        }
+      }
+
+      function initVertexBuffers(gl, move = true) {
+        if (move) {
+          for (let i = 0; i < vertices.length; i++) {
+            let target = vertices[i] + 0.01 * (Math.random() > 0.5 ? 1 : -1);
+            if (target > 1) {
+              target -= Math.random();
+            } else if (target < -1) {
+              target += Math.random();
+            }
+            vertices[i] = target;
+          }
+        }
         const vertexBuffer = gl.createBuffer();
-        // 绑定缓存对象
         gl.bindBuffer(gl.ARRAY_BUFFER, vertexBuffer);
-        // 把数据写到缓冲对象中
         gl.bufferData(gl.ARRAY_BUFFER, vertices, gl.STATIC_DRAW);
-        // 获取顶点着色器代码中的顶点变量
         const a_Position = gl.getAttribLocation(gl.program, "a_Position");
-        console.log(a_Position);
-        // 设置变量获取数据规则
         gl.vertexAttribPointer(a_Position, 2, gl.FLOAT, false, 0, 0);
-        // 允许变量从 ARRAY_BUFFER目标上绑定的缓冲区对象获取数据
         gl.enableVertexAttribArray(a_Position);
-
         return n;
       }
 
-      // 创建一个program（相当于着色器的上下文）
-      function createProgram(gl, vshader, fshader) {
-        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vshader);
-        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fshader);
+      function createProgram(gl, vShader, fShader) {
+        const vertexShader = loadShader(gl, gl.VERTEX_SHADER, vShader);
+        const fragmentShader = loadShader(gl, gl.FRAGMENT_SHADER, fShader);
         const program = gl.createProgram();
         gl.attachShader(program, vertexShader);
         gl.attachShader(program, fragmentShader);
@@ -95,18 +104,30 @@
         gl.linkProgram(program);
         return program;
       }
+
       function loadShader(gl, type, source) {
         const shader = gl.createShader(type);
         gl.shaderSource(shader, source);
         gl.compileShader(shader);
         return shader;
       }
-      resize();
-      main();
-      window.addEventListener("resize", resize);
 
+      initGL();
+      resize();
+
+      window.addEventListener("resize", resize);
+      btn.addEventListener("click", function () {
+        isAnimate = !isAnimate;
+        if (isAnimate) {
+          requestAnimationFrame(refresh);
+          this.innerText = "停止";
+        } else {
+          this.innerText = "继续";
+        }
+      });
       function resize() {
         c.width = document.body.clientWidth;
+        refresh(false);
       }
     </script>
   </body>
