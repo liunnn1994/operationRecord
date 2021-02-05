@@ -27,11 +27,10 @@
       const btn = document.querySelector("button");
       const gl = c.getContext("webgl");
       let isAnimate = false;
-      const or = new OperationRecord({
-        onStartREC(stream) {
-          video.srcObject = stream;
-          console.log("执行", stream);
-        },
+      const or = new OperationRecord({});
+      or.on("startREC", function (stream) {
+        video.srcObject = stream;
+        console.log("执行", stream);
       });
       // 顶点着色器
       const vertexShader = `
