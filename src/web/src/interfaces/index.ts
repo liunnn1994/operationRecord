@@ -65,6 +65,7 @@ export interface ORInterface extends iProps {
   startREC: Function;
   stopREC: Function;
   toggleREC: Function;
+  on: Function;
   _download: Function;
   getSupportedMimeTypes: Function;
   _dataavailableCB: Function;

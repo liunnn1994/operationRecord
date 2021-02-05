@@ -5,6 +5,7 @@ import stopREC from "./actions/stopREC";
 import toggleREC from "./actions/toggleREC";
 import download from "./actions/download";
 import initDom from "./actions/initDom";
+import onEvents from "./actions/events";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
 import { clickDom } from "./actions/initDom";
 import { merge } from "lodash-es";
@@ -56,6 +57,7 @@ class OperationRecord implements ORInterface {
   stopREC: Function = stopREC.bind(this);
   toggleREC: Function = toggleREC.bind(this);
   _download: Function = download.bind(this);
+  on: Function = onEvents.bind(this);
   getSupportedMimeTypes: Function = getSupportedMimeTypes.bind(this);
   _dataavailableCB() {
     // 初始化dataavailable的回调，用来解决事件异步的问题
