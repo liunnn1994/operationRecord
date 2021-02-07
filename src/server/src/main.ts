@@ -18,8 +18,8 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, swaggerOptions);
   SwaggerModule.setup("api", app, document);
-  await app.listen(8990);
+  await app.listen(process.env.PORT);
 }
 bootstrap().then(() => {
-  console.log("项目启动成功，端口：", process.env);
+  console.log("项目启动成功，端口：", process.env.PORT);
 });
