@@ -8,6 +8,7 @@ import initDom from "./actions/initDom";
 import onEvents from "./actions/events";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
 import { clickDom } from "./actions/initDom";
+import { errorCollector, logger } from "./actions/errorHandler";
 import { merge } from "lodash-es";
 
 const { version, author, license, homepage } = require("../package.json");
@@ -16,6 +17,7 @@ class OperationRecord implements ORInterface {
   stream = undefined;
   mediaRecorder = undefined;
   recordedChunks: any[] = [];
+  logs = [];
   startTime = 0;
   status = "stop";
   DOM: HTMLElement | undefined;
@@ -63,6 +65,8 @@ class OperationRecord implements ORInterface {
     // 初始化dataavailable的回调，用来解决事件异步的问题
   }
   _clickDom: Function = clickDom.bind(this);
+  logger: Function = logger.bind(this);
+  _errorCollector: Function = errorCollector.bind(this);
 }
 
 for (const [key, value] of Object.entries({

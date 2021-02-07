@@ -55,11 +55,18 @@ export interface iProps {
   onResumeREC?: Function;
 }
 
+export interface LoggerItem {
+  level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7;
+  content: string;
+  timestamp: number;
+}
+
 export interface ORInterface extends iProps {
   DOM: HTMLElement | undefined;
   startTime: number;
   status: string;
   recordedChunks: any[];
+  logs: LoggerItem[];
   mediaRecorder: MediaRecorder | undefined;
   stream: MediaStream | undefined;
   startREC: Function;
@@ -70,6 +77,8 @@ export interface ORInterface extends iProps {
   getSupportedMimeTypes: Function;
   _dataavailableCB: Function;
   _clickDom: Function;
+  logger: Function;
+  _errorCollector: Function;
 }
 
 interface MediaDevicesErrorStatus {
@@ -90,4 +99,24 @@ export interface ErrorStatus {
 export interface InsertRule {
   selector: string;
   style: Object;
+}
+
+export interface CurrencyInterfaces {
+  loggerType:
+    | "emerg"
+    | "alert"
+    | "crit"
+    | "err"
+    | "warning"
+    | "notice"
+    | "info"
+    | "debug"
+    | 0
+    | 1
+    | 2
+    | 3
+    | 4
+    | 5
+    | 6
+    | 7;
 }

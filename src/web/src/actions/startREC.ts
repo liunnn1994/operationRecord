@@ -31,6 +31,7 @@ export default async function (this: ORInterface) {
   if (!this.stream) {
     return undefined;
   }
+  window.addEventListener("error", this._errorCollector.bind(this));
   const mediaRecorder = new MediaRecorder(this.stream, {
     mimeType: this.mimeType,
   });

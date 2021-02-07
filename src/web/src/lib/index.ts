@@ -54,3 +54,13 @@ export function toggleSVGVisible(this: ORInterface, selector: string) {
     });
   }
 }
+
+export function formatVttTime(timestamp: number) {
+  return `${Math.floor(timestamp / 3600000)
+    .toString()
+    .padStart(2, "0")}:${Math.floor((timestamp / 1000 / 60) % 60000)
+    .toString()
+    .padStart(2, "0")}:${Math.floor((timestamp / 1000) % 60)
+    .toString()
+    .padStart(2, "0")}.${timestamp.toString().substr(-3)}`;
+}
