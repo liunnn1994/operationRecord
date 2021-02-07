@@ -1,6 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { AppController } from "./app.controller";
 import { AppService } from "./app.service";
+import { repositoryUrl } from "./lib/globalVars";
 
 describe("AppController", () => {
   let appController: AppController;
@@ -15,10 +16,8 @@ describe("AppController", () => {
   });
 
   describe("root", () => {
-    it("should return 'https://github.com/asdjgfr/operationRecord'", () => {
-      expect(appController.getIndex()).toBe(
-        "https://github.com/asdjgfr/operationRecord",
-      );
+    it(`should return ${repositoryUrl}`, () => {
+      expect(appController.getIndex()).toBe(repositoryUrl);
     });
   });
 });
