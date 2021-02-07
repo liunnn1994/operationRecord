@@ -20,7 +20,7 @@
     <video controls width="50%" autoplay></video>
     <br />
     <button id="move">webgl 10w个点随机运动</button>
-    <button id="error">生成错误</button>
+    <button id="error">开始生成随机错误</button>
     <canvas id="c" height="400"></canvas>
     <script>
       const video = document.querySelector("video");
@@ -131,8 +131,10 @@
       errorBtn.addEventListener("click", function () {
         autoMakeError = !autoMakeError;
         if (!autoMakeError) {
+          this.innerText = "停止生成随机错误";
           throwError.call(this);
         } else {
+          this.innerText = "开始生成随机错误";
           clearTimeout(timer);
         }
       });
