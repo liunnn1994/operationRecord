@@ -19,14 +19,18 @@
   <body>
     <video controls width="50%" autoplay></video>
     <br />
-    <button>webgl 10w个点随机运动</button>
+    <button id="move">webgl 10w个点随机运动</button>
+    <button id="error">生成错误</button>
     <canvas id="c" height="400"></canvas>
     <script>
       const video = document.querySelector("video");
       const c = document.querySelector("#c");
-      const btn = document.querySelector("button");
+      const btn = document.querySelector("#move");
+      const errorBtn = document.querySelector("#error");
       const gl = c.getContext("webgl");
       let isAnimate = false;
+      let autoMakeError = true;
+      let timer = null;
       const or = new OperationRecord({});
       or.on("startREC", function (stream) {
         video.srcObject = stream;
@@ -124,6 +128,30 @@
           this.innerText = "继续";
         }
       });
+      errorBtn.addEventListener("click", function () {
+        autoMakeError = !autoMakeError;
+        if (!autoMakeError) {
+          throwError.call(this);
+        } else {
+          clearTimeout(timer);
+        }
+      });
+      function throwError() {
+        timer = setTimeout(
+          throwError.bind(this, timer),
+          Math.round(Math.random() * 2000)
+        );
+
+        throw new Error(
+          `随机错误：${Array.from(
+            {
+              length: Math.ceil(Math.random() * 15),
+            },
+            () =>
+              String.fromCodePoint(Math.round(Math.random() * 20901) + 19968)
+          ).join("")}。`
+        );
+      }
       function resize() {
         c.width = document.body.clientWidth;
         refresh(false);
