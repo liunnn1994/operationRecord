@@ -19,7 +19,7 @@ export const logger = function (
   }
   this.logs.push({
     level,
-    content: isError(e) ? e.stack : e,
+    content: isError(e) ? e.stack : String(e),
     timestamp: new Date().getTime(),
   } as LoggerItem);
 };

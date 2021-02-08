@@ -2,7 +2,7 @@ import {
   Body,
   Controller,
   Post,
-  UploadedFiles,
+  UploadedFile,
   UseInterceptors,
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
@@ -13,12 +13,9 @@ import { SampleDto } from "./sample.dto";
 export class UploadController {
   constructor(private readonly uploadService: UploadService) {}
 
-  @UseInterceptors(FileInterceptor("files"))
-  @Post("upload")
-  uploadFile(@Body() body: SampleDto, @UploadedFiles() files) {
-    console.log(files);
-    return {
-      body,
-    };
+  @Post("/upload")
+  @UseInterceptors(FileInterceptor("file"))
+  uploadFile(@Body() body: SampleDto, @UploadedFile() file) {
+    return { filename: `${body["filename"]}.${body["extname"]}` };
   }
 }

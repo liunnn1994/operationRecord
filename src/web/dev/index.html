@@ -29,21 +29,13 @@
       let isAnimate = false;
       let timer = null;
 
-      const socket = new WebSocket("ws://localhost:8990");
-      socket.onopen = function () {
-        console.log("socket连接");
-
-        socket.send(JSON.stringify({ event: "events", data: "asdasdas" }));
-        socket.onmessage = function (data) {
-          console.log("socket返回", data);
-        };
-      };
-
-      const or = new OperationRecord({});
+      const or = new OperationRecord({
+        url: "http://127.0.0.1:8990",
+      });
       or.on("startREC", function (stream) {
         video.srcObject = stream;
         console.log("执行", stream);
-        // throwError();
+        throwError();
       });
       or.on("stopREC", function () {
         clearTimeout(timer);
@@ -146,16 +138,16 @@
           throwError.bind(this, timer),
           Math.round(Math.random() * 2000)
         );
-
-        throw new Error(
-          `随机错误：${Array.from(
-            {
-              length: Math.ceil(Math.random() * 15),
-            },
-            () =>
-              String.fromCodePoint(Math.round(Math.random() * 20901) + 19968)
-          ).join("")}。`
-        );
+        const randomStr = `随机错误：${Array.from(
+          {
+            length: Math.ceil(Math.random() * 15),
+          },
+          () => String.fromCodePoint(Math.round(Math.random() * 20901) + 19968)
+        ).join("")}。`;
+        if (Math.random() > 0.5) {
+          throw new Error(`捕获window${randomStr}`);
+        }
+        or.logger(Math.round(Math.random() * 7), `主动上报${randomStr}`);
       }
       function resize() {
         c.width = document.body.clientWidth;

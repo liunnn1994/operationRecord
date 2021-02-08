@@ -82,6 +82,7 @@ export interface ORInterface extends iProps {
   getBlob: Function;
   getExtname: Function;
   reset: Function;
+  _upload: Function;
 }
 
 interface MediaDevicesErrorStatus {

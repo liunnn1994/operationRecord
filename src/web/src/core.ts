@@ -4,7 +4,7 @@ import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
 import { reset } from "./actions/stopREC";
 import toggleREC from "./actions/toggleREC";
-import download from "./actions/download";
+import { download, upload } from "./actions/downloadAndUpload";
 import initDom from "./actions/initDom";
 import onEvents from "./actions/events";
 import { getBlob, getExtname } from "./actions/events";
@@ -72,6 +72,7 @@ class OperationRecord implements ORInterface {
   getBlob: Function = getBlob.bind(this);
   getExtname: Function = getExtname.bind(this);
   reset: Function = reset.bind(this);
+  _upload: Function = upload.bind(this);
 }
 
 for (const [key, value] of Object.entries({

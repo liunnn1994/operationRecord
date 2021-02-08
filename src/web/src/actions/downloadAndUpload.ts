@@ -1,6 +1,13 @@
 import { ORInterface } from "../interfaces/index";
 import { formatVttTime } from "../lib/index";
+import i18n from "../i18n/index";
 
+const generateFilename = function (): string {
+  const now = new Date();
+  return `${now.getFullYear()}${
+    now.getMonth() + 1
+  }${now.getDate()}${now.getTime().toString().substr(-4)}`;
+};
 const generateVideo = function (this: ORInterface, fileName: string) {
   const url = URL.createObjectURL(this.getBlob());
   generateDownloadLink.call(this, url, fileName, this.getExtname());
@@ -21,7 +28,7 @@ ${logs
 ${formatVttTime(timestamp - startTime)} --> ${formatVttTime(
       nextTamp - startTime
     )}
-错误等级：${log.level}
+${i18n(this.lang).errorLevel}：${log.level}
 ${log.content}`;
   })
   .join("")}`;
@@ -48,11 +55,28 @@ const generateDownloadLink = function (
   a.parentNode?.removeChild(a);
 };
 
-export default function (this: ORInterface) {
-  const now = new Date();
-  const fileName = `${now.getFullYear()}${
-    now.getMonth() + 1
-  }${now.getDate()}${now.getTime().toString().substr(-4)}`;
+export function download(this: ORInterface) {
+  const fileName = generateFilename();
   generateVideo.call(this, fileName);
   generateVtt.call(this, fileName);
+}
+export async function upload(this: ORInterface) {
+  console.log("上传");
+  const formData = new FormData();
+  formData.append("file", this.getBlob());
+  formData.append("extname", this.getExtname());
+  formData.append("filename", generateFilename());
+  formData.append("logs", JSON.stringify(this.logs));
+
+  try {
+    const res = await fetch(
+      `${(this.url as string).replace(/\/+$/, "")}/upload`,
+      {
+        method: "POST",
+        body: formData,
+      }
+    );
+  } catch (e) {
+    console.error(`${i18n(this.lang).uploadFail}：`, e);
+  }
 }

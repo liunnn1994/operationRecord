@@ -3,5 +3,7 @@
   "startREC": "开始录制",
   "stopREC": "停止录制",
   "pauseREC": "暂停录制",
-  "resumeREC": "继续录制"
+  "resumeREC": "继续录制",
+  "uploadFail": "上传失败",
+  "errorLevel": "错误等级"
 }

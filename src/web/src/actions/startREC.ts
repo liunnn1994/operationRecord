@@ -44,6 +44,8 @@ export default async function (this: ORInterface) {
         confirm(i18n(this.lang ?? "").downloadConfirm)
           ? this._download()
           : void 0;
+      } else {
+        this._upload();
       }
     } else {
       console.error(mediaDevicesErrors.StreamNotDetected);

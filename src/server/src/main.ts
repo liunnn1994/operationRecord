@@ -4,7 +4,7 @@ import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
-
+  app.enableCors(process.env.CORS ? JSON.parse(process.env.CORS) : {});
   const options = new DocumentBuilder()
     .setTitle("接口文档")
     .setDescription("后端接口")
@@ -16,5 +16,9 @@ async function bootstrap() {
   await app.listen(process.env.PORT);
 }
 bootstrap().then(() => {
-  console.log("项目启动成功，端口：", process.env.PORT);
+  console.log(
+    new Date().toLocaleString(),
+    "项目启动成功，端口：",
+    process.env.PORT,
+  );
 });
