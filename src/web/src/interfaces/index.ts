@@ -79,6 +79,9 @@ export interface ORInterface extends iProps {
   _clickDom: Function;
   logger: Function;
   _errorCollector: Function;
+  getBlob: Function;
+  getExtname: Function;
+  reset: Function;
 }
 
 interface MediaDevicesErrorStatus {

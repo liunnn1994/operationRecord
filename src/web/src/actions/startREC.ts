@@ -7,6 +7,7 @@ import { ORInterface } from "../interfaces/index";
 
 export default async function (this: ORInterface) {
   this.stopREC();
+  this.reset();
   let isAllow = false;
   try {
     this.stream = await navigator.mediaDevices.getDisplayMedia(

@@ -2,10 +2,12 @@ import { checkEnv } from "./lib/index";
 import { ORInterface, iProps, FetchConfig } from "./interfaces/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
+import { reset } from "./actions/stopREC";
 import toggleREC from "./actions/toggleREC";
 import download from "./actions/download";
 import initDom from "./actions/initDom";
 import onEvents from "./actions/events";
+import { getBlob, getExtname } from "./actions/events";
 import getSupportedMimeTypes from "./actions/getSupportedMimeTypes";
 import { clickDom } from "./actions/initDom";
 import { errorCollector, logger } from "./actions/errorHandler";
@@ -67,6 +69,9 @@ class OperationRecord implements ORInterface {
   _clickDom: Function = clickDom.bind(this);
   logger: Function = logger.bind(this);
   _errorCollector: Function = errorCollector.bind(this);
+  getBlob: Function = getBlob.bind(this);
+  getExtname: Function = getExtname.bind(this);
+  reset: Function = reset.bind(this);
 }
 
 for (const [key, value] of Object.entries({

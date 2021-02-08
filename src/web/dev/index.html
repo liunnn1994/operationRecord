@@ -25,15 +25,25 @@
       const video = document.querySelector("video");
       const c = document.querySelector("#c");
       const btn = document.querySelector("#move");
-      const errorBtn = document.querySelector("#error");
       const gl = c.getContext("webgl");
       let isAnimate = false;
       let timer = null;
+
+      const socket = new WebSocket("ws://localhost:8990");
+      socket.onopen = function () {
+        console.log("socket连接");
+
+        socket.send(JSON.stringify({ event: "events", data: "asdasdas" }));
+        socket.onmessage = function (data) {
+          console.log("socket返回", data);
+        };
+      };
+
       const or = new OperationRecord({});
       or.on("startREC", function (stream) {
         video.srcObject = stream;
         console.log("执行", stream);
-        throwError();
+        // throwError();
       });
       or.on("stopREC", function () {
         clearTimeout(timer);
@@ -151,20 +161,6 @@
         c.width = document.body.clientWidth;
         refresh(false);
       }
-
-      const socket = new WebSocket("ws://localhost:8990");
-      socket.onopen = function () {
-        console.log("socket连接");
-        socket.send(
-          JSON.stringify({
-            event: "events",
-            data: "test",
-          })
-        );
-        socket.onmessage = function (data) {
-          console.log("socket返回", data);
-        };
-      };
     </script>
   </body>
 </html>

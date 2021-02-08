@@ -2,18 +2,8 @@ import { ORInterface } from "../interfaces/index";
 import { formatVttTime } from "../lib/index";
 
 const generateVideo = function (this: ORInterface, fileName: string) {
-  const { mimeType } = this;
-  let extname = mimeType?.split(";")[0].split("/")[1] ?? "";
-  switch (extname) {
-    case "x-matroska":
-      extname = "mkv";
-      break;
-  }
-  const blob = new Blob(this.recordedChunks, {
-    type: mimeType,
-  });
-  const url = URL.createObjectURL(blob);
-  generateDownloadLink.call(this, url, fileName, extname);
+  const url = URL.createObjectURL(this.getBlob());
+  generateDownloadLink.call(this, url, fileName, this.getExtname());
   window.URL.revokeObjectURL(url);
 };
 

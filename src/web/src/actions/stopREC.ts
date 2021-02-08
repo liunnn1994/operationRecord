@@ -2,15 +2,18 @@ import { toggleSVGVisible } from "../lib/index";
 import { opsRecShow, opsRecSVGType } from "../lib/globalVars";
 import { ORInterface } from "../interfaces/index";
 
+export function reset(this: ORInterface) {
+  this.startTime = 0;
+  this.mediaRecorder = undefined;
+  this.stream = undefined;
+  this.recordedChunks.splice(0);
+  this.logs.splice(0);
+}
+
 export default function (this: ORInterface) {
   this._dataavailableCB = () => {
     window.removeEventListener("error", this._errorCollector.bind(this));
     this.status = "stop";
-    this.startTime = 0;
-    this.mediaRecorder = undefined;
-    this.stream = undefined;
-    this.recordedChunks.splice(0);
-    this.logs.splice(0);
     this._dataavailableCB = function () {}.bind(this);
     toggleSVGVisible.call(this, ":scope > div:last-child svg");
     ["paused", "play"].forEach((item) => {
