@@ -33,6 +33,8 @@ export default function (this: ORInterface) {
       mediaRecorder.resume();
       this.status = "recording";
     }
-    mediaRecorder.stop();
+    try{
+      mediaRecorder.stop();
+    }catch (e) {}
   }
 }
