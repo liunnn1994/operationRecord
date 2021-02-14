@@ -63,10 +63,10 @@ export function download(this: ORInterface) {
 export async function upload(this: ORInterface) {
   console.log("上传");
   const formData = new FormData();
-  formData.append("file", this.getBlob());
   formData.append("extname", this.getExtname());
   formData.append("filename", generateFilename());
   formData.append("logs", JSON.stringify(this.logs));
+  formData.append("file", this.getBlob());
 
   try {
     const res = await fetch(

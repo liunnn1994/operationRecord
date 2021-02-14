@@ -1,3 +1,6 @@
 export class SampleDto {
-  name: string;
+  extname: string;
+  filename: string;
+  logs: string[];
+  file: BinaryType;
 }
