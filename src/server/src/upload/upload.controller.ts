@@ -7,13 +7,18 @@ import {
 } from "@nestjs/common";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { UploadService } from "./upload.service";
+import { RecordManagementService } from "../recordManagement/recordManagement.service";
 import { SampleDto } from "./sample.dto";
 import { diskStorage } from "multer";
-import { UploadInterface } from "./upload.interface";
+import HttpStatusCode from "../lib/HttpStatusCode";
+import { ResInterface } from "../lib/globalInterface";
 
 @Controller()
 export class UploadController {
-  constructor(private readonly uploadService: UploadService) {}
+  constructor(
+    private readonly uploadService: UploadService,
+    private readonly recordManagementService: RecordManagementService,
+  ) {}
 
   @Post("/upload")
   @UseInterceptors(
@@ -27,9 +32,8 @@ export class UploadController {
       }),
     }),
   )
-  uploadFile(@Body() body: SampleDto, @UploadedFile() file) {
-    console.log(file);
-    this.uploadService.create({
+  uploadFile(@Body() body: SampleDto, @UploadedFile() file): ResInterface {
+    this.recordManagementService.create({
       name: file.filename,
       path: file.destination,
       mimetype: file.mimetype,
@@ -37,7 +41,7 @@ export class UploadController {
       logs: body.logs,
       originalname: file.originalname,
       encoding: file.originalname,
-    } as UploadInterface);
-    return file;
+    });
+    return { code: HttpStatusCode.OK, data: file, message: "" };
   }
 }
