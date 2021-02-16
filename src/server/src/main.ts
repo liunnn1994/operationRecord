@@ -6,6 +6,7 @@ import { join } from "path";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
+  app.setGlobalPrefix("v1");
   app.enableCors(process.env.CORS ? JSON.parse(process.env.CORS) : {});
   app.useStaticAssets(join(__dirname, "..", "public"), {
     prefix: "/static",
@@ -18,7 +19,6 @@ async function bootstrap() {
     .build();
   const document = SwaggerModule.createDocument(app, options);
   SwaggerModule.setup("api", app, document);
-
   await app.listen(process.env.PORT);
 }
 bootstrap().then(() => {
