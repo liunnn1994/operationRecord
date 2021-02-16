@@ -2,6 +2,7 @@ import { Body, Controller, Post } from "@nestjs/common";
 import { RecordManagementService } from "./recordManagement.service";
 import { ResInterface } from "../lib/globalInterface";
 import HttpStatusCode from "../lib/HttpStatusCode";
+import { RecordManagementFindByPKDto } from "./recordManagement.dto";
 
 @Controller()
 export class RecordManagementController {
@@ -10,7 +11,9 @@ export class RecordManagementController {
   ) {}
 
   @Post("/get-record-by-id")
-  async getRecordByID(@Body() body): Promise<ResInterface> {
+  async getRecordByID(
+    @Body() body: RecordManagementFindByPKDto,
+  ): Promise<ResInterface> {
     const res = await this.recordManagementService.findByPK(body.id);
     return {
       code: res.success

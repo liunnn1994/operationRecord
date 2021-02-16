@@ -8,7 +8,7 @@ import {
 import { FileInterceptor } from "@nestjs/platform-express";
 import { UploadService } from "./upload.service";
 import { RecordManagementService } from "../recordManagement/recordManagement.service";
-import { SampleDto } from "./sample.dto";
+import { UploadDto } from "./upload.dto";
 import { diskStorage } from "multer";
 import HttpStatusCode from "../lib/HttpStatusCode";
 import { ResInterface } from "../lib/globalInterface";
@@ -33,7 +33,7 @@ export class UploadController {
     }),
   )
   async uploadFile(
-    @Body() body: SampleDto,
+    @Body() body: UploadDto,
     @UploadedFile() file,
   ): Promise<ResInterface> {
     const item = await this.recordManagementService.create({
