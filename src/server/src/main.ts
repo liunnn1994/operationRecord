@@ -2,13 +2,13 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { SwaggerModule, DocumentBuilder } from "@nestjs/swagger";
 import { NestExpressApplication } from "@nestjs/platform-express";
-import { join } from "path";
+import { publicDir } from "./lib/globalVars";
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
   app.setGlobalPrefix("v1");
   app.enableCors(process.env.CORS ? JSON.parse(process.env.CORS) : {});
-  app.useStaticAssets(join(__dirname, "..", "public"), {
+  app.useStaticAssets(publicDir, {
     prefix: "/static",
   });
 
