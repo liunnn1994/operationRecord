@@ -12,6 +12,7 @@ import { UploadDto } from "./upload.dto";
 import { diskStorage } from "multer";
 import HttpStatusCode from "../lib/HttpStatusCode";
 import { ResInterface } from "../lib/globalInterface";
+import { uploadDir } from "../lib/globalVars";
 
 @Controller()
 export class UploadController {
@@ -24,7 +25,7 @@ export class UploadController {
   @UseInterceptors(
     FileInterceptor("file", {
       storage: diskStorage({
-        destination: "./public/uploads",
+        destination: uploadDir,
         filename(req, file, cb) {
           const { body } = req;
           return cb(null, `${body.filename}.${body.extname}`);
