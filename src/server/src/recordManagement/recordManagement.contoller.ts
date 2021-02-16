@@ -1,12 +1,7 @@
-import {
-  Body,
-  Controller,
-  Post,
-  UploadedFile,
-  UseInterceptors,
-} from "@nestjs/common";
-import { FileInterceptor } from "@nestjs/platform-express";
+import { Body, Controller, Post } from "@nestjs/common";
 import { RecordManagementService } from "./recordManagement.service";
+import { ResInterface } from "../lib/globalInterface";
+import HttpStatusCode from "../lib/HttpStatusCode";
 
 @Controller()
 export class RecordManagementController {
@@ -15,7 +10,14 @@ export class RecordManagementController {
   ) {}
 
   @Post("/get-record-by-id")
-  getRecordByID() {
-    return "";
+  async getRecordByID(@Body() body): Promise<ResInterface> {
+    const res = await this.recordManagementService.findByPK(body.id);
+    return {
+      code: res.success
+        ? HttpStatusCode.OK
+        : HttpStatusCode.INTERNAL_SERVER_ERROR,
+      data: res.data,
+      message: res.message,
+    };
   }
 }

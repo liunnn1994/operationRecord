@@ -4,3 +4,9 @@ export interface ResInterface {
   data: unknown;
   message: string;
 }
+export interface DatabaseResInf {
+  success: boolean;
+  message: string;
+  error?: Error | undefined;
+  data?: unknown;
+}

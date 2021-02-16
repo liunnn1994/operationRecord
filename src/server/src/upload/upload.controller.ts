@@ -32,16 +32,27 @@ export class UploadController {
       }),
     }),
   )
-  uploadFile(@Body() body: SampleDto, @UploadedFile() file): ResInterface {
-    this.recordManagementService.create({
+  async uploadFile(
+    @Body() body: SampleDto,
+    @UploadedFile() file,
+  ): Promise<ResInterface> {
+    const item = await this.recordManagementService.create({
       name: file.filename,
       path: file.destination,
       mimetype: file.mimetype,
-      size: file.size,
+      size: String(file.size),
       logs: body.logs,
       originalname: file.originalname,
-      encoding: file.originalname,
+      encoding: file.encoding,
     });
-    return { code: HttpStatusCode.OK, data: file, message: "" };
+    return {
+      code: item.success
+        ? HttpStatusCode.OK
+        : HttpStatusCode.INTERNAL_SERVER_ERROR,
+      data: item.data ?? file,
+      message: item.error
+        ? `${item.message}：${String(item.error)}`
+        : item.message,
+    };
   }
 }

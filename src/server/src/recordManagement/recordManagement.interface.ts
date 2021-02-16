@@ -1,7 +1,7 @@
 export interface RecordManagementInterface {
   name: string;
   mimetype: string;
-  size: number;
+  size: string;
   logs: string[];
   path: string;
   originalname: string;
