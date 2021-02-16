@@ -4,6 +4,9 @@ import { Repository, Connection } from "typeorm";
 import { RecordManagementInterface } from "./recordManagement.interface";
 import { RecordManagement } from "./recordManagement.entity";
 import { DatabaseResInf } from "../lib/globalInterface";
+import { removeSync } from "fs-extra";
+import { join } from "path";
+import { uploadDir } from "../lib/globalVars";
 
 @Injectable()
 export class RecordManagementService {
@@ -34,15 +37,39 @@ export class RecordManagementService {
   }
 
   async findByPK(id: string): Promise<DatabaseResInf> {
-    const item = await this.rmRepository.findOne(id);
+    const ids = [...new Set(id.split(","))];
+    const items = await this.rmRepository.find({
+      where: ids.map((id) => ({ id })),
+    });
 
-    if (item !== undefined) {
-      return { success: true, message: "查找成功", data: item };
+    if (items.length === ids.length) {
+      return { success: true, message: "查找成功", data: items };
+    } else if (items.length === 0) {
+      return { success: false, message: `ID：${id} 不存在` };
+    } else {
+      return {
+        success: true,
+        data: items,
+        message: `部分查找成功，ID：${ids.filter(
+          (id) => !items.some((item) => Number(item.id) === Number(id)),
+        )} 不存在`,
+      };
     }
-    return { success: false, message: `ID：${id} 不存在` };
   }
 
-  async remove(id: string): Promise<void> {
-    await this.rmRepository.delete(id);
+  async remove(id: string): Promise<DatabaseResInf> {
+    const ids = [...new Set(id.split(","))];
+    const items = await this.rmRepository.find({
+      where: ids.map((id) => ({ id })),
+    });
+    items.forEach((item) => {
+      removeSync(join(uploadDir, item.name));
+    });
+    await this.rmRepository.delete(ids);
+    return { success: true, message: `ID：${ids.join(",")}删除成功` };
+    try {
+    } catch (e) {
+      return { success: false, message: `删除失败：${e}` };
+    }
   }
 }
