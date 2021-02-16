@@ -70,7 +70,7 @@ export async function upload(this: ORInterface) {
 
   try {
     const res = await fetch(
-      `${(this.url as string).replace(/\/+$/, "")}/upload`,
+      `${(this.url as string).replace(/\/+$/, "")}/v1/upload`,
       {
         method: "POST",
         body: formData,
