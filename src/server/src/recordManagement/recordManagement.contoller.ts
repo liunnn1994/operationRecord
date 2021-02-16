@@ -23,4 +23,12 @@ export class RecordManagementController {
       message: res.message,
     };
   }
+  @Post("/get-all-records")
+  async getAllRecords(): Promise<ResInterface> {
+    return {
+      code: HttpStatusCode.OK,
+      data: await this.recordManagementService.findAll(),
+      message: "查找成功",
+    };
+  }
 }
