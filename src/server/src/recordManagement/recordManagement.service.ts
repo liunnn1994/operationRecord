@@ -36,6 +36,24 @@ export class RecordManagementService {
     return this.rmRepository.find();
   }
 
+  async findByLimit(skip = "0", take = "10"): Promise<DatabaseResInf> {
+    try {
+      console.log(skip, take);
+      const items = await this.rmRepository
+        .createQueryBuilder()
+        .skip(Number(skip))
+        .take(Number(take))
+        .getMany();
+      return {
+        success: true,
+        data: items,
+        message: "查找成功",
+      };
+    } catch (e) {
+      return { success: false, data: [], message: `查找失败：${e}` };
+    }
+  }
+
   async findByPK(id: string): Promise<DatabaseResInf> {
     const ids = [...new Set(id.split(","))];
     const items = await this.rmRepository.find({

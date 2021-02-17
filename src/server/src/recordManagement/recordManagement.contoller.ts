@@ -2,7 +2,10 @@ import { Body, Controller, Post } from "@nestjs/common";
 import { RecordManagementService } from "./recordManagement.service";
 import { ResInterface } from "../lib/globalInterface";
 import HttpStatusCode from "../lib/HttpStatusCode";
-import { RecordManagementFindByPKDto } from "./recordManagement.dto";
+import {
+  RecordManagementFindByLimitDto,
+  RecordManagementFindByPKDto,
+} from "./recordManagement.dto";
 
 @Controller()
 export class RecordManagementController {
@@ -23,6 +26,7 @@ export class RecordManagementController {
       message: res.message,
     };
   }
+
   @Post("/get-all-records")
   async getAllRecords(): Promise<ResInterface> {
     return {
@@ -31,6 +35,24 @@ export class RecordManagementController {
       message: "查找成功",
     };
   }
+
+  @Post("/get-records-by-limit")
+  async getRecordsByLimit(
+    @Body() body: RecordManagementFindByLimitDto,
+  ): Promise<ResInterface> {
+    const res = await this.recordManagementService.findByLimit(
+      body.skip,
+      body.take,
+    );
+    return {
+      code: res.success
+        ? HttpStatusCode.OK
+        : HttpStatusCode.INTERNAL_SERVER_ERROR,
+      data: res.data,
+      message: res.message,
+    };
+  }
+
   @Post("/remove-records-by-ids")
   async removeRecordsByIDs(
     @Body() body: RecordManagementFindByPKDto,
