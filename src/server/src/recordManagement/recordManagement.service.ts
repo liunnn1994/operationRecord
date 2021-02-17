@@ -87,9 +87,10 @@ export class RecordManagementService {
     items.forEach((item) => {
       removeSync(join(uploadDir, item.name));
     });
-    await this.rmRepository.delete(ids);
-    return { success: true, message: `ID：${ids.join(",")}删除成功` };
+
     try {
+      await this.rmRepository.delete(ids);
+      return { success: true, message: `ID：${ids.join(",")}删除成功` };
     } catch (e) {
       return { success: false, message: `删除失败：${e}` };
     }
