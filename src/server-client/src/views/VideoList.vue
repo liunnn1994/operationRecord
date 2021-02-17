@@ -55,8 +55,13 @@ export default defineComponent({
     await this.refreshTable();
   },
   methods: {
-    handleView(row: unknown) {
-      console.log(row);
+    handleView(row: any) {
+      this.$router.push({
+        path: "details",
+        query: {
+          id: row.id,
+        },
+      });
     },
     async handleDel(row: any) {
       try {

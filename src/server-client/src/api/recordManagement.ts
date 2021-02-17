@@ -13,7 +13,7 @@ export async function getRecsByLimit(skip: number, take: number): Promise<Res> {
   return post("/v1/get-records-by-limit", { skip, take });
 }
 
-export async function getRecsByIDs(id: number): Promise<Res> {
+export async function getRecsByIDs(id: number | string): Promise<Res> {
   return post("/v1/get-record-by-ids", { id });
 }
 

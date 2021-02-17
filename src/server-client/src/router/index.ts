@@ -9,6 +9,13 @@ export const routes = [
       import(/* webpackChunkName: "videoList" */ "../views/VideoList.vue"),
   },
   {
+    path: "/details",
+    name: "Details",
+    title: "詳情",
+    component: () =>
+      import(/* webpackChunkName: "videoList" */ "../views/Details.vue"),
+  },
+  {
     path: "/about",
     name: "About",
     title: "关于",
