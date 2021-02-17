@@ -70,13 +70,10 @@ export async function upload(this: ORInterface) {
   formData.append("file", this.getBlob());
 
   try {
-    const res = await fetch(
-      `${(this.url as string).replace(/\/+$/, "")}/v1/upload`,
-      {
-        method: "POST",
-        body: formData,
-      }
-    );
+    await fetch(`${(this.url as string).replace(/\/+$/, "")}/v1/upload`, {
+      method: "POST",
+      body: formData,
+    });
   } catch (e) {
     console.error(`${i18n(this.lang).uploadFail}：`, e);
   }
