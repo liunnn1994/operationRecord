@@ -1,15 +1,17 @@
 import { createRouter, createWebHistory } from "vue-router";
 
-const routes = [
+export const routes = [
   {
     path: "/",
     name: "VideoList",
+    title: "列表",
     component: () =>
-      import(/* webpackChunkName: "about" */ "../views/VideoList.vue"),
+      import(/* webpackChunkName: "videoList" */ "../views/VideoList.vue"),
   },
   {
     path: "/about",
     name: "About",
+    title: "关于",
     component: () =>
       import(/* webpackChunkName: "about" */ "../views/About.vue"),
   },
