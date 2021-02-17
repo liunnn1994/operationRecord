@@ -61,7 +61,6 @@ export function download(this: ORInterface) {
   generateVtt.call(this, fileName);
 }
 export async function upload(this: ORInterface) {
-  console.log("上传");
   const formData = new FormData();
   formData.append("extname", this.getExtname());
   formData.append("filename", generateFilename());
