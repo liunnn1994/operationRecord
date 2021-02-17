@@ -1,11 +1,5 @@
 <template>
-  <el-button type="primary">按钮</el-button>
+  <router-view />
 </template>
-
-<script>
-export default {
-  name: "App",
-};
-</script>
 
 <style></style>
