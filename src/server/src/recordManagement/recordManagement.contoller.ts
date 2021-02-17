@@ -17,7 +17,7 @@ export class RecordManagementController {
   async getRecordByID(
     @Body() body: RecordManagementFindByPKDto,
   ): Promise<ResInterface> {
-    const res = await this.recordManagementService.findByPK(body.id);
+    const res = await this.recordManagementService.findByPK(String(body.id));
     return {
       code: res.success
         ? HttpStatusCode.OK
@@ -66,7 +66,7 @@ export class RecordManagementController {
   async removeRecordsByIDs(
     @Body() body: RecordManagementFindByPKDto,
   ): Promise<ResInterface> {
-    const res = await this.recordManagementService.remove(body.id);
+    const res = await this.recordManagementService.remove(String(body.id));
     return {
       code: res.success
         ? HttpStatusCode.OK
