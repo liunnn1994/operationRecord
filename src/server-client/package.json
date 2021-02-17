@@ -55,5 +55,10 @@
     "> 1%",
     "last 2 versions",
     "not dead"
-  ]
+  ],
+  "vue": {
+    "devServer": {
+      "proxy": "http://localhost:8990"
+    }
+  }
 }
