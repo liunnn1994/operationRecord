@@ -65,7 +65,14 @@ export class RecordManagementService {
     });
 
     if (items.length === ids.length) {
-      return { success: true, message: "查找成功", data: items };
+      return {
+        success: true,
+        message: "查找成功",
+        data: items.map((item) => ({
+          ...item,
+          path: `/static/uploads/${item.name}`,
+        })),
+      };
     } else if (items.length === 0) {
       return { success: false, message: `ID：${id} 不存在` };
     } else {
