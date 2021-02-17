@@ -66,6 +66,7 @@ export async function upload(this: ORInterface) {
   formData.append("extname", this.getExtname());
   formData.append("filename", generateFilename());
   formData.append("logs", JSON.stringify(this.logs));
+  formData.append("startTime", String(this.startTime));
   formData.append("file", this.getBlob());
 
   try {
