@@ -36,9 +36,12 @@ export class RecordManagementService {
     return this.rmRepository.find();
   }
 
+  getTotalCount(): Promise<number> {
+    return this.rmRepository.count();
+  }
+
   async findByLimit(skip = "0", take = "10"): Promise<DatabaseResInf> {
     try {
-      console.log(skip, take);
       const items = await this.rmRepository
         .createQueryBuilder()
         .skip(Number(skip))

@@ -36,6 +36,15 @@ export class RecordManagementController {
     };
   }
 
+  @Post("/get-all-records-count")
+  async getTotalCount(): Promise<ResInterface> {
+    return {
+      code: HttpStatusCode.OK,
+      data: await this.recordManagementService.getTotalCount(),
+      message: "查找成功",
+    };
+  }
+
   @Post("/get-records-by-limit")
   async getRecordsByLimit(
     @Body() body: RecordManagementFindByLimitDto,
