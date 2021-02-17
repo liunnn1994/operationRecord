@@ -32,8 +32,9 @@ export class RecordManagementService {
     }
   }
 
-  findAll(): Promise<RecordManagement[]> {
-    return this.rmRepository.find();
+  async findAll(): Promise<RecordManagement[]> {
+    const items = await this.rmRepository.find();
+    return items.map((item) => ({ ...item, logs: [], path: "" }));
   }
 
   getTotalCount(): Promise<number> {
@@ -49,7 +50,7 @@ export class RecordManagementService {
         .getMany();
       return {
         success: true,
-        data: items,
+        data: items.map((item) => ({ ...item, logs: [], path: "" })),
         message: "查找成功",
       };
     } catch (e) {
