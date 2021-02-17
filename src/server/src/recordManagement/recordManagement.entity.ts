@@ -7,7 +7,10 @@ export class RecordManagement {
   // 文件名
   @Column()
   name: string;
-  // mime类型
+  // 開始時間
+  @Column()
+  startTime: string;
+  // mimetype
   @Column()
   mimetype: string;
   // 大小
@@ -19,6 +22,9 @@ export class RecordManagement {
   // 路径
   @Column()
   path: string;
+  // 字幕名稱
+  @Column()
+  subtitle: string;
   // 原始名称
   @Column()
   originalname: string;

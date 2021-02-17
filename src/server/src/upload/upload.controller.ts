@@ -13,6 +13,7 @@ import { diskStorage } from "multer";
 import HttpStatusCode from "../lib/HttpStatusCode";
 import { ResInterface } from "../lib/globalInterface";
 import { uploadDir } from "../lib/globalVars";
+import { RecordManagementInterface } from "../recordManagement/recordManagement.interface";
 
 @Controller()
 export class UploadController {
@@ -37,15 +38,19 @@ export class UploadController {
     @Body() body: UploadDto,
     @UploadedFile() file,
   ): Promise<ResInterface> {
-    const item = await this.recordManagementService.create({
+    const { logs } = body;
+    const newRec: RecordManagementInterface = {
       name: file.filename,
       path: file.destination,
       mimetype: file.mimetype,
       size: String(file.size),
-      logs: body.logs,
+      logs: Array.isArray(JSON.parse(logs)) ? JSON.parse(logs) : [],
       originalname: file.originalname,
       encoding: file.encoding,
-    });
+      startTime: body.startTime,
+    };
+    const item = await this.recordManagementService.create(newRec);
+    this.uploadService.generateVtt(newRec);
     return {
       code: item.success
         ? HttpStatusCode.OK

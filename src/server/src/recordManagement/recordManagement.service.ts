@@ -5,7 +5,7 @@ import { RecordManagementInterface } from "./recordManagement.interface";
 import { RecordManagement } from "./recordManagement.entity";
 import { DatabaseResInf } from "../lib/globalInterface";
 import { removeSync } from "fs-extra";
-import { join } from "path";
+import { join, extname } from "path";
 import { uploadDir } from "../lib/globalVars";
 
 @Injectable()
@@ -24,6 +24,9 @@ export class RecordManagementService {
     newItem.logs = item.logs;
     newItem.originalname = item.originalname;
     newItem.encoding = item.encoding;
+    newItem.startTime = item.startTime;
+    newItem.subtitle = item.name.replace(extname(item.name), "") + ".vtt";
+
     try {
       await this.connection.manager.save(newItem);
       return { success: true, message: "创建成功", data: newItem };
@@ -71,6 +74,7 @@ export class RecordManagementService {
         data: items.map((item) => ({
           ...item,
           path: `/static/uploads/${item.name}`,
+          subtitle: `/static/uploads/${item.subtitle}`,
         })),
       };
     } else if (items.length === 0) {
