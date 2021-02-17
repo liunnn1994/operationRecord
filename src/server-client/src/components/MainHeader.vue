@@ -13,11 +13,11 @@ import { routes } from "@/router/index";
 export default defineComponent({
   name: "MainHeader",
   computed: {
-    routePath() {
+    routePath(): string {
       return this.$route.path;
     },
     header() {
-      const { routePath } = this;
+      const routePath = this.routePath as string;
       return routes.find((route) => route.path === routePath)?.title ?? "404";
     },
   },

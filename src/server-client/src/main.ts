@@ -11,6 +11,9 @@ import {
   ElIcon,
   ElTable,
   ElTableColumn,
+  ElPagination,
+  ElMessageBox,
+  ElMessage,
 } from "element-plus";
 import locale from "element-plus/lib/locale";
 import lang from "element-plus/lib/locale/lang/zh-cn";
@@ -20,6 +23,7 @@ import App from "./App.vue";
 import router from "./router";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
 import { faHome, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
+import "element-plus/lib/theme-chalk/index.css";
 
 const app = createApp(App);
 
@@ -43,7 +47,13 @@ locale.use(lang);
   ElIcon,
   ElTable,
   ElTableColumn,
+  ElPagination,
 ].forEach((component: any) => {
-  app.use(component);
+  app.component(component.name, component);
 });
+
+[ElMessageBox, ElMessage].forEach((plugin: any) => {
+  app.use(plugin);
+});
+
 app.mount("#app");
