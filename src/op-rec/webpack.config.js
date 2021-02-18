@@ -26,6 +26,7 @@ module.exports = {
     library: "OperationRecord",
     libraryTarget: "umd",
     libraryExport: "default",
+    umdNamedDefine: true,
   },
   optimization: {
     minimize: true,
