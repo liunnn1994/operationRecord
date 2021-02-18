@@ -1,6 +1,6 @@
 {
   "name": "op-rec",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "web端录制库",
   "main": "./dist/operationRecord.min.js",
   "scripts": {

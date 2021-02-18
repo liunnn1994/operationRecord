@@ -6273,10 +6273,10 @@ onetime@^5.1.0:
   dependencies:
     mimic-fn "^2.1.0"
 
-op-rec@^1.0.4:
-  version "1.0.4"
-  resolved "http://172.16.104.140:4873/op-rec/-/op-rec-1.0.4.tgz#33a8506cd757069245b6ba68a7c29fead1c9458d"
-  integrity sha1-M6hQbNdXBpJFtrpop8Kf6tHJRY0=
+op-rec@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.npmjs.org/op-rec/-/op-rec-1.0.5.tgz#0d8935763599d67658e9d0692f24c1d2565340c4"
+  integrity sha512-FyODGZVvb43wuOOZrwoFz8ZyfBNbgb6+PtbVu7GITyB/5EmV8vV9rk5Q7bZAOon8PmBFQolQxfhJ9WfhIE4hFw==
   dependencies:
     "@types/dom-mediacapture-record" "^1.0.7"
     "@types/lodash-es" "^4.17.4"
