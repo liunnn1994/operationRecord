@@ -23,7 +23,8 @@ module.exports = {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
     library: "OperationRecord",
-    libraryTarget: "var",
+    libraryTarget: "umd",
+    umdNamedDefine: true,
   },
   optimization: {
     minimize: true,
