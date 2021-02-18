@@ -4,10 +4,7 @@ import { InsertRule } from "../interfaces/index";
 import { opsRecShow } from "./globalVars";
 import { ORInterface } from "../interfaces/index";
 
-/**
- * 检查运行环境
- *
- * */
+// 检查运行环境
 export function checkEnv() {
   let res = "";
   if (!navigator.mediaDevices) {
@@ -23,7 +20,7 @@ export function checkEnv() {
   return res;
 }
 
-export function objectToCssString(object: Object) {
+export function objectToCssString(object: object) {
   return Object.entries(object)
     .map(([k, v]) => `${k}:${v}`)
     .join(";");

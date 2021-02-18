@@ -3,13 +3,14 @@ import { ORInterface } from "../interfaces/index";
 export default function (
   this: ORInterface,
   type: "startREC" | "stopREC" | "pauseREC" | "resumeREC",
-  cb: Function
+  cb: () => void
 ) {
   const fnName = ("on" + type.replace(/^\S/, (s) => s.toUpperCase())) as
     | "onStartREC"
     | "onStopREC"
     | "onPauseREC"
     | "onResumeREC";
+  // @ts-ignore
   this[fnName] = cb;
 }
 

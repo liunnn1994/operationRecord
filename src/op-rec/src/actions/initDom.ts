@@ -9,11 +9,7 @@ import {
 } from "../lib/globalVars";
 import { ORInterface } from "../interfaces/index";
 
-export const clickDom = function (
-  this: ORInterface,
-  type: string,
-  e: MouseEvent
-) {
+export const clickDom = function (this: ORInterface, type: string) {
   const { status } = this;
   if (type === "playPause") {
     switch (status) {

@@ -12,12 +12,16 @@ export default function (this: ORInterface) {
     case "recording":
       mediaRecorder.pause();
       this.status = "paused";
-      this.onPauseREC && this.onPauseREC();
+      if (this.onPauseREC) {
+        this.onPauseREC();
+      }
       break;
     case "paused":
       mediaRecorder.resume();
       this.status = "recording";
-      this.onResumeREC && this.onResumeREC();
+      if (this.onResumeREC) {
+        this.onResumeREC();
+      }
       break;
   }
   if (this.status === "paused" || this.status === "recording") {

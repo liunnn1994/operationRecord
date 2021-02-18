@@ -4,10 +4,11 @@ const TerserPlugin = require("terser-webpack-plugin");
 module.exports = {
   mode: "none",
   entry: {
-    operationRecord: "./src/index.ts",
-    "operationRecord.min": "./src/index.ts",
+    operationRecord: "./src/core.ts",
+    "operationRecord.min": "./src/core.ts",
   },
   module: {
+    unknownContextCritical: false,
     rules: [
       {
         test: /\.tsx?$/,
@@ -24,7 +25,7 @@ module.exports = {
     filename: "[name].js",
     library: "OperationRecord",
     libraryTarget: "umd",
-    umdNamedDefine: true,
+    libraryExport: "default",
   },
   optimization: {
     minimize: true,

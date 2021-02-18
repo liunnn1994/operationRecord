@@ -41,7 +41,7 @@ interface DomOptions {
   style: any;
 }
 
-export interface iProps {
+export interface IProps {
   url?: "local" | string;
   fetchConfig?: FetchConfig;
   mediaConstraints?: any;
@@ -49,10 +49,10 @@ export interface iProps {
   lang?: string;
   hotKeys?: HotKeys;
   dom?: DomOptions;
-  onStartREC?: Function;
-  onStopREC?: Function;
-  onPauseREC?: Function;
-  onResumeREC?: Function;
+  onStartREC?: (stream: MediaStream) => {};
+  onStopREC?: () => void;
+  onPauseREC?: () => void;
+  onResumeREC?: () => void;
 }
 
 export interface LoggerItem {
@@ -61,7 +61,7 @@ export interface LoggerItem {
   timestamp: number;
 }
 
-export interface ORInterface extends iProps {
+export interface ORInterface extends IProps {
   DOM: HTMLElement | undefined;
   startTime: number;
   status: string;
@@ -69,20 +69,23 @@ export interface ORInterface extends iProps {
   logs: LoggerItem[];
   mediaRecorder: MediaRecorder | undefined;
   stream: MediaStream | undefined;
-  startREC: Function;
-  stopREC: Function;
-  toggleREC: Function;
-  on: Function;
-  _download: Function;
-  getSupportedMimeTypes: Function;
-  _dataavailableCB: Function;
-  _clickDom: Function;
-  logger: Function;
-  _errorCollector: Function;
-  getBlob: Function;
-  getExtname: Function;
-  reset: Function;
-  _upload: Function;
+  startREC: () => void;
+  stopREC: () => void;
+  toggleREC: () => void;
+  on: () => void;
+  _download: () => void;
+  getSupportedMimeTypes: () => void;
+  _dataavailableCB: () => void;
+  _clickDom: (type: string) => void;
+  logger: (
+    type: CurrencyInterfaces["loggerType"],
+    e: ErrorEvent | string
+  ) => void;
+  _errorCollector: (e: ErrorEvent) => void;
+  getBlob: () => string | Blob;
+  getExtname: () => string;
+  reset: () => void;
+  _upload: () => void;
 }
 
 interface MediaDevicesErrorStatus {
@@ -102,7 +105,7 @@ export interface ErrorStatus {
 
 export interface InsertRule {
   selector: string;
-  style: Object;
+  style: object;
 }
 
 export interface CurrencyInterfaces {

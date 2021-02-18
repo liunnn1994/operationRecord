@@ -1,9 +1,8 @@
 import { mediaDevicesErrors } from "../lib/errorStatus";
-import { ErrorStatus } from "../interfaces/index";
+import { ErrorStatus, ORInterface } from "../interfaces/index";
 import i18n from "../i18n/index";
 import { toggleSVGVisible } from "../lib/index";
 import { opsRecShow } from "../lib/globalVars";
-import { ORInterface } from "../interfaces/index";
 
 export default async function (this: ORInterface) {
   this.stopREC();
@@ -41,9 +40,9 @@ export default async function (this: ORInterface) {
     if (event.data.size > 0) {
       this.recordedChunks.push(event.data);
       if (this.url === "local") {
-        confirm(i18n(this.lang ?? "").downloadConfirm)
-          ? this._download()
-          : void 0;
+        if (confirm(i18n(this.lang ?? "").downloadConfirm)) {
+          this._download();
+        }
       } else {
         this._upload();
       }
@@ -64,7 +63,8 @@ export default async function (this: ORInterface) {
       dom.setAttribute(opsRecShow, (!!index).toString());
     });
   }
-
-  this.onStartREC && this.onStartREC(this.stream);
+  if (this.onStartREC) {
+    this.onStartREC(this.stream);
+  }
   return this.stream;
 }

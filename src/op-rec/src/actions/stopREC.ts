@@ -14,14 +14,18 @@ export default function (this: ORInterface) {
   this._dataavailableCB = () => {
     window.removeEventListener("error", this._errorCollector.bind(this));
     this.status = "stop";
-    this._dataavailableCB = function () {}.bind(this);
+    this._dataavailableCB = () => {
+      /**/
+    };
     toggleSVGVisible.call(this, ":scope > div:last-child svg");
     ["paused", "play"].forEach((item) => {
       document
         .querySelector(`[${opsRecSVGType}="${item}"]`)
         ?.setAttribute(opsRecShow, (item !== "paused").toString());
     });
-    this.onStopREC && this.onStopREC();
+    if (this.onStopREC) {
+      this.onStopREC();
+    }
   };
 
   // 停止所有track
@@ -33,8 +37,10 @@ export default function (this: ORInterface) {
       mediaRecorder.resume();
       this.status = "recording";
     }
-    try{
+    try {
       mediaRecorder.stop();
-    }catch (e) {}
+    } catch (e) {
+      /**/
+    }
   }
 }

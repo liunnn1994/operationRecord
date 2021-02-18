@@ -1,5 +1,5 @@
 import { checkEnv } from "./lib/index";
-import { ORInterface, iProps, FetchConfig } from "./interfaces/index";
+import { ORInterface, IProps, FetchConfig } from "./interfaces/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
 import { reset } from "./actions/stopREC";
@@ -13,8 +13,6 @@ import { clickDom } from "./actions/initDom";
 import { errorCollector, logger } from "./actions/errorHandler";
 import { merge } from "lodash-es";
 
-const { version, author, license, homepage } = require("../package.json");
-
 class OperationRecord implements ORInterface {
   stream = undefined;
   mediaRecorder = undefined;
@@ -26,12 +24,12 @@ class OperationRecord implements ORInterface {
   url: string | undefined;
   fetchConfig: FetchConfig | undefined;
   mediaConstraints: any;
-  constructor(props: iProps) {
+  constructor(props: IProps) {
     const check = checkEnv();
     if (check !== "") {
       console.error(check);
     }
-    const defaultConfig: iProps = {
+    const defaultConfig: IProps = {
       url: "local",
       fetchConfig: {},
       mediaConstraints: {
@@ -55,35 +53,37 @@ class OperationRecord implements ORInterface {
     };
 
     merge(this, defaultConfig, props);
+    // @ts-ignore
     initDom.call(this);
   }
-  startREC: Function = startREC.bind(this);
-  stopREC: Function = stopREC.bind(this);
-  toggleREC: Function = toggleREC.bind(this);
-  _download: Function = download.bind(this);
-  on: Function = onEvents.bind(this);
-  getSupportedMimeTypes: Function = getSupportedMimeTypes.bind(this);
+  // @ts-ignore
+  startREC: () => void = startREC.bind(this);
+  // @ts-ignore
+  stopREC: () => void = stopREC.bind(this);
+  // @ts-ignore
+  toggleREC: () => void = toggleREC.bind(this);
+  // @ts-ignore
+  _download: () => void = download.bind(this);
+  // @ts-ignore
+  on = onEvents.bind(this);
+  getSupportedMimeTypes: () => void = getSupportedMimeTypes.bind(this);
   _dataavailableCB() {
     // 初始化dataavailable的回调，用来解决事件异步的问题
   }
-  _clickDom: Function = clickDom.bind(this);
-  logger: Function = logger.bind(this);
-  _errorCollector: Function = errorCollector.bind(this);
-  getBlob: Function = getBlob.bind(this);
-  getExtname: Function = getExtname.bind(this);
-  reset: Function = reset.bind(this);
-  _upload: Function = upload.bind(this);
-}
-
-for (const [key, value] of Object.entries({
-  version,
-  author,
-  license,
-  homepage,
-})) {
-  Object.defineProperty(OperationRecord.prototype, key, {
-    value,
-  });
+  // @ts-ignore
+  _clickDom = clickDom.bind(this);
+  // @ts-ignore
+  logger = logger.bind(this);
+  // @ts-ignore
+  _errorCollector = errorCollector.bind(this);
+  // @ts-ignore
+  getBlob: () => void = getBlob.bind(this);
+  // @ts-ignore
+  getExtname: () => void = getExtname.bind(this);
+  // @ts-ignore
+  reset: () => void = reset.bind(this);
+  // @ts-ignore
+  _upload: () => void = upload.bind(this);
 }
 
 export default OperationRecord;
