@@ -53,7 +53,12 @@ export class RecordManagementService {
         .getMany();
       return {
         success: true,
-        data: items.map((item) => ({ ...item, logs: [], path: "" })),
+        data: items.map((item) => ({
+          ...item,
+          logs: [],
+          path: "",
+          size: (Number(item.size) / 1024 / 1024).toFixed(2),
+        })),
         message: "查找成功",
       };
     } catch (e) {

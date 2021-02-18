@@ -29,4 +29,8 @@ export default defineComponent({
 });
 </script>
 
-<style scoped></style>
+<style scoped>
+.main-header-box{
+  padding-top: 10px;
+}
+</style>

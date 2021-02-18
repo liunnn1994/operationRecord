@@ -1,10 +1,10 @@
 <template>
   <div class="video-list">
     <el-table :data="tableData" border style="width: 100%">
-      <el-table-column prop="name" label="名称" width="150" />
+      <el-table-column prop="name" label="名称" />
       <el-table-column prop="mimetype" label="mime类型" />
       <el-table-column prop="encoding" label="编码格式" />
-      <el-table-column prop="size" label="大小" />
+      <el-table-column prop="size" label="大小（MB）" />
       <el-table-column label="操作" align="center">
         <template #default="scope"
           ><el-button @click="handleView(scope.row)" type="primary" size="small"

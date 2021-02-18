@@ -11,7 +11,7 @@ export const routes = [
   {
     path: "/details",
     name: "Details",
-    title: "詳情",
+    title: "详情",
     component: () =>
       import(/* webpackChunkName: "videoList" */ "../views/Details.vue"),
   },
