@@ -1,5 +1,5 @@
 import { checkEnv } from "./lib/index";
-import { IProps, FetchConfig } from "./types/op-rec";
+import { IProps, FetchConfig, GlobalTypesInterfaces } from "./types/op-rec";
 import OpRecInterface from "./types/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
@@ -20,7 +20,7 @@ class OpRec implements OpRecInterface {
   recordedChunks: any[] = [];
   logs = [];
   startTime = 0;
-  status = "stop";
+  status: GlobalTypesInterfaces["status"] = "stop";
   DOM: HTMLElement | undefined;
   url: string | undefined;
   fetchConfig: FetchConfig | undefined;

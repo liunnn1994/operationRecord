@@ -101,6 +101,7 @@ export interface CurrencyInterfaces {
     | 7;
 }
 
-export interface EventsInterfaces {
+export interface GlobalTypesInterfaces {
   fnName: "onStartREC" | "onStopREC" | "onPauseREC" | "onResumeREC";
+  status: "recording" | "stop" | "paused";
 }
