@@ -1,4 +1,4 @@
-<h1 align="center">op-rec</h1>
+<h1 align="center">OpRec</h1>
 
 <div align="center">利用现代浏览器所提供的强大 API 录制，回放并保存任意界面中的用户操作</div>
 
@@ -14,7 +14,7 @@
 
 ## Constructor
 
-OpRec()
+**OpRec()**
 
   创建一个新的录制实例。
 
@@ -22,15 +22,15 @@ OpRec()
 
 # 实例属性
 
-OpRec.prototype.DOM （HTMLElement | undefined）
+**OpRec.prototype.DOM** （HTMLElement | undefined）
 
 ​    用于ui操作的dom，当`DomOptions.show`为`false`的时候返回`undefined`。
 
-OpRec.prototype.startTime （number）
+**OpRec.prototype.startTime** （number）
 
 ​    录制开始时的时间戳，默认为0。
 
-OpRec.prototype.status （number）
+**OpRec.prototype.status** （number）
 
 ​    录制开始时的时间戳，默认为0。
 

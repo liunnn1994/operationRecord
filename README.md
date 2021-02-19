@@ -1,4 +1,4 @@
-<h1 align="center">op-rec</h1>
+<h1 align="center">OpRec</h1>
 
 <div align="center">Use the powerful API  by modern browser to record, play back and save user operations in any interface.</div>
 
