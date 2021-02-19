@@ -22,7 +22,7 @@ declare class OpRecInterface {
   logs: LoggerItem[];
   mediaRecorder: MediaRecorder | undefined;
   stream: MediaStream | undefined;
-  startREC: () => void;
+  startREC: () => Promise<void>;
   stopREC: () => void;
   toggleREC: () => void;
   on: () => void;
