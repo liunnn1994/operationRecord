@@ -29,7 +29,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "[name].js",
-    library: "OperationRecord",
+    library: "OpRec",
     libraryTarget: "umd",
     libraryExport: "default",
     umdNamedDefine: true,

@@ -14,7 +14,7 @@ import { clickDom } from "./actions/initDom";
 import { errorCollector, logger } from "./actions/errorHandler";
 import { merge } from "lodash-es";
 
-class OperationRecord implements OpRecInterface {
+class OpRec implements OpRecInterface {
   stream = undefined;
   mediaRecorder = undefined;
   recordedChunks: any[] = [];
@@ -87,4 +87,4 @@ class OperationRecord implements OpRecInterface {
   _upload: () => void = upload.bind(this);
 }
 
-export default OperationRecord;
+export default OpRec;
