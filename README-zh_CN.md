@@ -8,7 +8,7 @@
 
 # 简述
 
-利用现代浏览器的强大`api`*([MediaDevices.getDisplayMedia()](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getDisplayMedia))*录制并回放用户任意界面（不限于浏览器中）的操作，并提供主动上报的功能。
+利用现代浏览器的强大`api` *([MediaDevices.getDisplayMedia()](https://developer.mozilla.org/en-US/docs/Web/API/MediaDevices/getDisplayMedia))* 录制并回放用户任意界面（不限于浏览器中）的操作，并提供主动上报的功能。
 
 ---
 
