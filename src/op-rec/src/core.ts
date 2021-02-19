@@ -1,5 +1,6 @@
 import { checkEnv } from "./lib/index";
-import { ORInterface, IProps, FetchConfig } from "./interfaces/index";
+import { IProps, FetchConfig } from "./types/op-rec";
+import OpRecInterface from "./types/index";
 import startREC from "./actions/startREC";
 import stopREC from "./actions/stopREC";
 import { reset } from "./actions/stopREC";
@@ -13,7 +14,7 @@ import { clickDom } from "./actions/initDom";
 import { errorCollector, logger } from "./actions/errorHandler";
 import { merge } from "lodash-es";
 
-class OperationRecord implements ORInterface {
+class OperationRecord implements OpRecInterface {
   stream = undefined;
   mediaRecorder = undefined;
   recordedChunks: any[] = [];

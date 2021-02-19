@@ -7,9 +7,9 @@ import {
   opsRecIcon,
   opsRecSVGType,
 } from "../lib/globalVars";
-import { ORInterface } from "../interfaces/index";
+import OpRecInterface from "../types/index";
 
-export const clickDom = function (this: ORInterface, type: string) {
+export const clickDom = function (this: OpRecInterface, type: string) {
   const { status } = this;
   if (type === "playPause") {
     switch (status) {
@@ -65,7 +65,7 @@ const createSvg = function (
   parent.appendChild(svg);
 };
 
-export default function (this: ORInterface) {
+export default function (this: OpRecInterface) {
   if (!this.dom?.show) {
     // 如果不需要dom直接返回undefined
     return undefined;

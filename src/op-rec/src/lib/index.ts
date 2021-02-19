@@ -1,8 +1,8 @@
 import { envErrors } from "./errorStatus";
 import { isArray } from "lodash-es";
-import { InsertRule } from "../interfaces/index";
+import { InsertRule } from "../types/op-rec";
 import { opsRecShow } from "./globalVars";
-import { ORInterface } from "../interfaces/index";
+import OpRecInterface from "../types/index";
 
 // 检查运行环境
 export function checkEnv() {
@@ -40,7 +40,7 @@ export function insertRule(rules: InsertRule | InsertRule[]) {
   });
 }
 
-export function toggleSVGVisible(this: ORInterface, selector: string) {
+export function toggleSVGVisible(this: OpRecInterface, selector: string) {
   const doms = this.DOM?.querySelectorAll(selector);
   if (doms) {
     [...doms].forEach((dom: Element) => {

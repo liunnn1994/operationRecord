@@ -1,13 +1,10 @@
-import {
-  CurrencyInterfaces,
-  LoggerItem,
-  ORInterface,
-} from "../interfaces/index";
+import { CurrencyInterfaces, LoggerItem } from "../types/op-rec";
+import OpRecInterface from "../types/index";
 import { logLevels } from "../lib/globalVars";
 import { isError } from "lodash-es";
 
 export const logger = function (
-  this: ORInterface,
+  this: OpRecInterface,
   type: CurrencyInterfaces["loggerType"],
   e: ErrorEvent | string
 ) {
@@ -23,6 +20,6 @@ export const logger = function (
     timestamp: new Date().getTime(),
   } as LoggerItem);
 };
-export const errorCollector = function (this: ORInterface, e: ErrorEvent) {
+export const errorCollector = function (this: OpRecInterface, e: ErrorEvent) {
   this.logger(3, e.error);
 };

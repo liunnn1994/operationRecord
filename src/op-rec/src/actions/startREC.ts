@@ -1,10 +1,11 @@
 import { mediaDevicesErrors } from "../lib/errorStatus";
-import { ErrorStatus, ORInterface } from "../interfaces/index";
+import { ErrorStatus } from "../types/op-rec";
+import OpRecInterface from "../types/index";
 import i18n from "../i18n/index";
 import { toggleSVGVisible } from "../lib/index";
 import { opsRecShow } from "../lib/globalVars";
 
-export default async function (this: ORInterface) {
+export default async function (this: OpRecInterface) {
   this.stopREC();
   this.reset();
   let isAllow = false;

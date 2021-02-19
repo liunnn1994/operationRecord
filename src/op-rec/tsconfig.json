@@ -3,8 +3,10 @@
     "outDir": "./dist/",
     "noImplicitAny": true,
     "module": "ESNext",
-    "target": "ESNext",
+    "target": "ES6",
     "allowJs": false,
-    "strict": true
+    "strict": true,
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true
   }
 }

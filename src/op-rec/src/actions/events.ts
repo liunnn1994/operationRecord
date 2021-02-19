@@ -1,20 +1,17 @@
-import { ORInterface } from "../interfaces/index";
+import OpRecInterface from "../types/index";
+import { EventsInterfaces } from "../types/op-rec";
 
 export default function (
-  this: ORInterface,
+  this: OpRecInterface,
   type: "startREC" | "stopREC" | "pauseREC" | "resumeREC",
   cb: () => void
 ) {
-  const fnName = ("on" + type.replace(/^\S/, (s) => s.toUpperCase())) as
-    | "onStartREC"
-    | "onStopREC"
-    | "onPauseREC"
-    | "onResumeREC";
-  // @ts-ignore
-  this[fnName] = cb;
+  const fnName = ("on" +
+    type.replace(/^\S/, (s) => s.toUpperCase())) as EventsInterfaces["fnName"];
+  this[fnName] = cb as any;
 }
 
-export function getExtname(this: ORInterface) {
+export function getExtname(this: OpRecInterface) {
   const { mimeType } = this;
   let extname = mimeType?.split(";")[0].split("/")[1] ?? "";
   switch (extname) {
@@ -24,7 +21,7 @@ export function getExtname(this: ORInterface) {
   }
   return extname;
 }
-export function getBlob(this: ORInterface) {
+export function getBlob(this: OpRecInterface) {
   return new Blob(this.recordedChunks, {
     type: this.mimeType,
   });

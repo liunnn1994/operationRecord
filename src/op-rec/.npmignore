@@ -12,3 +12,4 @@ tsconfig.json
 note.md
 *.log
 *.error
+webpack.config.js

@@ -61,33 +61,6 @@ export interface LoggerItem {
   timestamp: number;
 }
 
-export interface ORInterface extends IProps {
-  DOM: HTMLElement | undefined;
-  startTime: number;
-  status: string;
-  recordedChunks: any[];
-  logs: LoggerItem[];
-  mediaRecorder: MediaRecorder | undefined;
-  stream: MediaStream | undefined;
-  startREC: () => void;
-  stopREC: () => void;
-  toggleREC: () => void;
-  on: () => void;
-  _download: () => void;
-  getSupportedMimeTypes: () => void;
-  _dataavailableCB: () => void;
-  _clickDom: (type: string) => void;
-  logger: (
-    type: CurrencyInterfaces["loggerType"],
-    e: ErrorEvent | string
-  ) => void;
-  _errorCollector: (e: ErrorEvent) => void;
-  getBlob: () => string | Blob;
-  getExtname: () => string;
-  reset: () => void;
-  _upload: () => void;
-}
-
 interface MediaDevicesErrorStatus {
   key:
     | "AbortError"
@@ -126,4 +99,8 @@ export interface CurrencyInterfaces {
     | 5
     | 6
     | 7;
+}
+
+export interface EventsInterfaces {
+  fnName: "onStartREC" | "onStopREC" | "onPauseREC" | "onResumeREC";
 }

@@ -1,4 +1,4 @@
-import { ORInterface } from "../interfaces/index";
+import OpRecInterface from "../types/index";
 import { formatVttTime } from "../lib/index";
 import i18n from "../i18n/index";
 
@@ -8,13 +8,13 @@ const generateFilename = function (): string {
     now.getMonth() + 1
   }${now.getDate()}${now.getTime().toString().substr(-4)}`;
 };
-const generateVideo = function (this: ORInterface, fileName: string) {
+const generateVideo = function (this: OpRecInterface, fileName: string) {
   const url = URL.createObjectURL(this.getBlob());
   generateDownloadLink.call(this, url, fileName, this.getExtname());
   window.URL.revokeObjectURL(url);
 };
 
-const generateVtt = function (this: ORInterface, fileName: string) {
+const generateVtt = function (this: OpRecInterface, fileName: string) {
   const { startTime } = this;
   const header = `WEBVTT - ${fileName}字幕文件`;
   const { logs } = this;
@@ -41,7 +41,7 @@ ${log.content}`;
 };
 
 const generateDownloadLink = function (
-  this: ORInterface,
+  this: OpRecInterface,
   url: string,
   fileName: string,
   extname: string
@@ -55,12 +55,12 @@ const generateDownloadLink = function (
   a.parentNode?.removeChild(a);
 };
 
-export function download(this: ORInterface) {
+export function download(this: OpRecInterface) {
   const fileName = generateFilename();
   generateVideo.call(this, fileName);
   generateVtt.call(this, fileName);
 }
-export async function upload(this: ORInterface) {
+export async function upload(this: OpRecInterface) {
   const formData = new FormData();
   formData.append("extname", this.getExtname());
   formData.append("filename", generateFilename());

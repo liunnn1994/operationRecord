@@ -1,8 +1,8 @@
 import { toggleSVGVisible } from "../lib/index";
 import { opsRecShow, opsRecSVGType } from "../lib/globalVars";
-import { ORInterface } from "../interfaces/index";
+import OpRecInterface from "../types/index";
 
-export function reset(this: ORInterface) {
+export function reset(this: OpRecInterface) {
   this.startTime = 0;
   this.mediaRecorder = undefined;
   this.stream = undefined;
@@ -10,7 +10,7 @@ export function reset(this: ORInterface) {
   this.logs.splice(0);
 }
 
-export default function (this: ORInterface) {
+export default function (this: OpRecInterface) {
   this._dataavailableCB = () => {
     window.removeEventListener("error", this._errorCollector.bind(this));
     this.status = "stop";

@@ -1,8 +1,8 @@
 import { mediaDevicesErrors } from "../lib/errorStatus";
 import { opsRecSVGType, opsRecShow } from "../lib/globalVars";
-import { ORInterface } from "../interfaces/index";
+import OpRecInterface from "../types/index";
 
-export default function (this: ORInterface) {
+export default function (this: OpRecInterface) {
   if (this.mediaRecorder === undefined) {
     console.warn(mediaDevicesErrors.RecordingNotInProgress);
     return "not running";

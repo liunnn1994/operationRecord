@@ -4,7 +4,7 @@
   "description": "web端录制库",
   "main": "dist/op-rec.common.js",
   "unpkg": "dist/operationRecord.js",
-  "typings": "src/interfaces/index.d.ts",
+  "typings": "src/types/index.d.ts",
   "scripts": {
     "dev": "webpack serve",
     "build": "webpack",
