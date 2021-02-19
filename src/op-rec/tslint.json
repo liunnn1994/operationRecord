@@ -11,6 +11,6 @@
     "no-submodule-imports": [true, "src"]
   },
   "linterOptions": {
-    "exclude": ["**/*.json", "node_modules"]
+    "exclude": ["**/*.json", "node_modules", "./src/op-rec.common.ts"]
   }
 }

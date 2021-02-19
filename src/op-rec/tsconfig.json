@@ -1,12 +1,10 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
-    "declarationDir": "./dist/",
     "noImplicitAny": true,
     "module": "ESNext",
-    "target": "ES6",
+    "target": "ESNext",
     "allowJs": false,
-    "declaration": true,
     "strict": true
   }
 }

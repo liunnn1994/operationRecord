@@ -1,6 +1,7 @@
 .git/
 .vscode/
 .idea/
+dev/
 node_modules/
 .gitignore
 .npmignore

@@ -2,7 +2,9 @@
   "name": "op-rec",
   "version": "1.0.5",
   "description": "web端录制库",
-  "main": "./dist/operationRecord.min.js",
+  "main": "dist/op-rec.common.js",
+  "unpkg": "dist/operationRecord.js",
+  "typings": "src/interfaces/index.d.ts",
   "scripts": {
     "dev": "webpack serve",
     "build": "webpack",
@@ -37,6 +39,7 @@
   "dependencies": {
     "@types/dom-mediacapture-record": "^1.0.7",
     "@types/lodash-es": "^4.17.4",
+    "copy-webpack-plugin": "^7.0.0",
     "lodash-es": "^4.17.20",
     "pre-commit": "^1.2.2"
   },

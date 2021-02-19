@@ -1,5 +1,6 @@
 const path = require("path");
 const TerserPlugin = require("terser-webpack-plugin");
+const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   mode: "none",
@@ -17,6 +18,11 @@ module.exports = {
       },
     ],
   },
+  plugins: [
+    new CopyPlugin({
+      patterns: [{ from: path.resolve(__dirname, "src/op-rec.common.js") }],
+    }),
+  ],
   resolve: {
     extensions: [".tsx", ".ts", ".js"],
   },
