@@ -12,9 +12,6 @@
 import MainHeader from "@/components/MainHeader.vue";
 import MainFooter from "@/components/MainFooter.vue";
 import { defineComponent } from "vue";
-import or from "op-rec";
-
-console.log(new or());
 
 export default defineComponent({
   name: "App",
