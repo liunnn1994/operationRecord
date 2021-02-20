@@ -7,6 +7,7 @@
     <img src="https://img.badgesize.io/https://unpkg.com/op-rec@latest?label=gzip%20size%3A%20JS&compression=gzip" alt="gzip">
   </a>
 </p>
+
 [English](https://github.com/asdjgfr/operationRecord) |  简体中文
 
    * [OpRec](#oprec)
