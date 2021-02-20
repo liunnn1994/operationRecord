@@ -6,8 +6,8 @@ const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 module.exports = {
   mode: "none",
   entry: {
-    operationRecord: "./src/core.ts",
-    "operationRecord.min": "./src/core.ts",
+    "op-rec": "./src/core.ts",
+    "op-rec.min": "./src/core.ts",
   },
   module: {
     unknownContextCritical: false,

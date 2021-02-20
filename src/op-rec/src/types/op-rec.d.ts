@@ -103,5 +103,5 @@ export interface CurrencyInterfaces {
 
 export interface GlobalTypesInterfaces {
   fnName: "onStartREC" | "onStopREC" | "onPauseREC" | "onResumeREC";
-  status: "recording" | "stop" | "paused";
+  status: "recording" | "stop" | "paused" | "inactive";
 }
