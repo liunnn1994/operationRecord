@@ -1,6 +1,6 @@
 {
   "name": "op-rec",
-  "version": "1.0.10",
+  "version": "1.0.11",
   "description": "web端录制库",
   "main": "dist/op-rec.common.js",
   "unpkg": "dist/op-rec.js",

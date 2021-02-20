@@ -30,7 +30,8 @@ export default defineComponent({
           title: "github",
         },
         {
-          href: "/about",
+          href:
+            "https://github.com/asdjgfr/operationRecord/blob/master/README.md",
           icon: "info-circle",
           title: "关于",
         },

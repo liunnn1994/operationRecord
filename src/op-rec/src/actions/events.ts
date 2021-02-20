@@ -3,11 +3,13 @@ import { GlobalTypesInterfaces } from "../types/op-rec";
 
 export default function (
   this: OpRecInterface,
-  type: "startREC" | "stopREC" | "pauseREC" | "resumeREC",
+  type: GlobalTypesInterfaces["eventsType"],
   cb: () => void
 ) {
   const fnName = ("on" +
-    type.replace(/^\S/, (s) => s.toUpperCase())) as GlobalTypesInterfaces["fnName"];
+    type.replace(/^\S/, (s) =>
+      s.toUpperCase()
+    )) as GlobalTypesInterfaces["fnName"];
   this[fnName] = cb as any;
 }
 

@@ -1,8 +1,7 @@
 {
   "name": "operation-record",
   "version": "2.0.0",
-  "description": "v2版本重构",
-  "main": "index.js",
+  "description": "利用现代浏览器所提供的强大 API 录制，回放并保存任意界面中的用户操作",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },

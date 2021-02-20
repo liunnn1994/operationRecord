@@ -26,7 +26,7 @@ declare class OpRecInterface {
   startREC: () => Promise<void>;
   stopREC: () => void;
   toggleREC: () => void;
-  on: () => void;
+  on: (type: GlobalTypesInterfaces["eventsType"], cb: () => void) => void;
   _download: () => void;
   getSupportedMimeTypes: () => void;
   _dataavailableCB: () => void;

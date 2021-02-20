@@ -15,13 +15,6 @@ export const routes = [
     component: () =>
       import(/* webpackChunkName: "videoList" */ "../views/Details.vue"),
   },
-  {
-    path: "/about",
-    name: "About",
-    title: "关于",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/About.vue"),
-  },
 ];
 
 const router = createRouter({
