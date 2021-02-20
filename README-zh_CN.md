@@ -124,7 +124,7 @@ node main.js
 
 - react
 
-  ```react
+  ```jsx
   import React from "react";
   import ReactDOM from "react-dom";
   import OpRec from "op-rec";
