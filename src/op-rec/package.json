@@ -3,7 +3,7 @@
   "version": "1.0.10",
   "description": "web端录制库",
   "main": "dist/op-rec.common.js",
-  "unpkg": "dist/operationRecord.js",
+  "unpkg": "dist/op-rec.js",
   "typings": "src/types/index.d.ts",
   "scripts": {
     "dev": "webpack serve",
