@@ -9,6 +9,7 @@ import {
   HotKeys,
   IProps,
   LoggerItem,
+  GlobalTypesInterfaces,
 } from "./op-rec";
 
 export as namespace opRec;
@@ -17,7 +18,7 @@ export = OpRecInterface;
 declare class OpRecInterface {
   DOM: HTMLElement | undefined;
   startTime: number;
-  status: string;
+  status: GlobalTypesInterfaces["status"];
   recordedChunks: any[];
   logs: LoggerItem[];
   mediaRecorder: MediaRecorder | undefined;
