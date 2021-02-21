@@ -5,5 +5,6 @@
 
 English | [简体中文](https://github.com/asdjgfr/operationRecord/blob/master/README-zh_CN.md)
 
-
 ## English docs eta soon.
+
+Please use [Chinese document](https://github.com/asdjgfr/operationRecord/blob/master/README-zh_CN.md) for the time being.
