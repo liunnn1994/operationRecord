@@ -25,7 +25,7 @@ class OpRec implements OpRecInterface {
   url: string | undefined;
   fetchConfig: FetchConfig | undefined;
   mediaConstraints: any;
-  private props: IProps | undefined;
+  public props: IProps | undefined;
   constructor(props?: IProps) {
     this.props = props;
     const check = checkEnv();
