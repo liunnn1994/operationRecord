@@ -53,6 +53,7 @@ export interface IProps {
   onStopREC?: () => void;
   onPauseREC?: () => void;
   onResumeREC?: () => void;
+  CSP?: string;
 }
 
 export interface LoggerItem {

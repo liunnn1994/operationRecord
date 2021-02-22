@@ -71,7 +71,7 @@ export default function (this: OpRecInterface) {
     return undefined;
   }
 
-  insertRule([
+  insertRule.call(this, [
     {
       selector: `[${opsRecBox}]`,
       style: this.dom.style,

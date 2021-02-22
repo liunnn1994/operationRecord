@@ -16,6 +16,7 @@ export as namespace opRec;
 export = OpRecInterface;
 
 declare class OpRecInterface {
+  private props?: IProps;
   DOM: HTMLElement | undefined;
   startTime: number;
   status: GlobalTypesInterfaces["status"];

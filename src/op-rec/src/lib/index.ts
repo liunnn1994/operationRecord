@@ -26,10 +26,17 @@ export function objectToCssString(object: object) {
     .join(";");
 }
 
-export function insertRule(rules: InsertRule | InsertRule[]) {
+export function insertRule(
+  this: OpRecInterface,
+  rules: InsertRule | InsertRule[]
+) {
+  console.log(this.props);
   let styleSheet = document.querySelector("style");
   if (styleSheet === null) {
     styleSheet = document.createElement("style");
+    if (this.props?.CSP !== undefined) {
+      styleSheet.nonce = this.props?.CSP;
+    }
     document.head.appendChild(styleSheet);
   }
   const r: InsertRule[] = isArray(rules) ? rules : [rules];
