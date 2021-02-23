@@ -3,9 +3,16 @@
 <p align="center">利用现代浏览器所提供的强大 API 录制，回放并保存任意界面中的用户操作</p>
 
 <p align="center">
-  <a href="https://unpkg.com/op-rec@latest" target="_blank">
-    <img src="https://img.badgesize.io/https://unpkg.com/op-rec@latest?label=gzip%20size%3A%20JS&compression=gzip" alt="gzip">
-  </a>
+  <a href="https://github.com/asdjgfr/operationRecord" target="_blank"><img src="https://img.shields.io/github/stars/asdjgfr/operationRecord?style=social" alt="star"></a>
+</p>
+<p align="center">
+<a href="https://github.com/asdjgfr/operationRecord" target="_blank"><img src="https://img.shields.io/npm/v/op-rec" alt="npm"></a>
+<a href="https://img.shields.io/github/languages/count/asdjgfr/operationRecord" target="_blank"><img src="https://img.shields.io/github/languages/count/asdjgfr/operationRecord" alt="count"></a>
+<a href="https://img.shields.io/github/languages/top/asdjgfr/operationRecord" target="_blank"><img src="https://img.shields.io/github/languages/top/asdjgfr/operationRecord" alt="top language"></a>
+<a href="https://unpkg.com/op-rec@latest" target="_blank"><img src="https://img.shields.io/bundlephobia/minzip/op-rec" alt="gzip"></a>
+<a href="https://unpkg.com/op-rec@latest" target="_blank"><img src="https://img.shields.io/npm/dt/op-rec" alt="gzip"></a>
+<a href="https://github.com/asdjgfr/operationRecord/issues" target="_blank"><img src="https://img.shields.io/github/issues/asdjgfr/operationRecord" alt="issues"></a>
+<a href="https://img.shields.io/npm/l/op-rec" target="_blank"><img src="https://img.shields.io/npm/l/op-rec" alt="license"></a>
 </p>
 
 [English](https://github.com/asdjgfr/operationRecord) | 简体中文
@@ -58,13 +65,13 @@
 > 使用 yarn
 
 ```shell
-yarn add op-rec
+$ yarn add op-rec
 ```
 
 > 使用 npm
 
 ```shell
-npm install op-rec --save
+$ npm install op-rec --save
 ```
 
 > 在浏览器中
@@ -85,15 +92,15 @@ npm install op-rec --save
 安装依赖
 
 ```shell
-yarn
-或
-npm i
+$ yarn
+# 或
+$ npm i
 ```
 
 启动
 
 ```shell
-node main.js
+$ node main.js
 ```
 
 ## 🔨 示例
@@ -202,7 +209,7 @@ $ yarn dev
 
 **LoggerItem**
 
- 记录对象
+记录对象
 
 - level: 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
@@ -226,147 +233,147 @@ $ yarn dev
 
 **url** <sup>可选</sup>
 
- 完成后上传的地址，默认为 local，地址为 local 的时候会本地生成并下载。
+完成后上传的地址，默认为 local，地址为 local 的时候会本地生成并下载。
 
 **fetchConfig** <sup>可选</sup>
 
- fetch 的配置。
+fetch 的配置。
 
 **mediaConstraints** <sup>可选</sup>
 
- [mediaConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints)配置。
+[mediaConstraints](https://developer.mozilla.org/en-US/docs/Web/API/MediaStreamConstraints)配置。
 
 **mimeType** <sup>可选</sup>
 
- mime 类型，默认会选择最佳类型。
+mime 类型，默认会选择最佳类型。
 
 **lang** <sup>可选</sup>
 
- 语言，默认 zh，暂时只有 zh。
+语言，默认 zh，暂时只有 zh。
 
 **hotKeys** <sup>可选，预留，尚未支持</sup>
 
- 快捷键。
+快捷键。
 
 **dom** <sup>可选</sup>
 
- 自动生成的 dom 配置。
+自动生成的 dom 配置。
 
 - show: boolean
 - style:{key:value}
 
- dom 为 false 或 dom.show 为 false 的时候将不会生成操作的标签。
+dom 为 false 或 dom.show 为 false 的时候将不会生成操作的标签。
 
 **onStartREC** <sup>可选</sup>
 
- 开始录制时的回调，可使用**OpRec.prototype.on("startREC",cb)**替代。
+开始录制时的回调，可使用**OpRec.prototype.on("startREC",cb)**替代。
 
 **onStopREC** <sup>可选</sup>
 
- 结束录制时的回调，可使用**OpRec.prototype.on("stopREC",cb)**替代。
+结束录制时的回调，可使用**OpRec.prototype.on("stopREC",cb)**替代。
 
 **onPauseREC** <sup>可选</sup>
 
- 暂停录制时的回调，可使用**OpRec.prototype.on("pauseREC",cb)**替代。
+暂停录制时的回调，可使用**OpRec.prototype.on("pauseREC",cb)**替代。
 
 **onResumeREC** <sup>可选</sup>
 
- 继续录制时的回调，可使用**OpRec.prototype.on("resumeREC",cb)**替代。
+继续录制时的回调，可使用**OpRec.prototype.on("resumeREC",cb)**替代。
 
 **CSP** <sup>可选</sup>
 
- 用于设置`style`的`nonce`属性。由于在内部配置`DOM`的时候创建了`inline-style`标签，这与[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src)产生了冲突，配置此项的与`meta`中的`style-src`配合使用。
+用于设置`style`的`nonce`属性。由于在内部配置`DOM`的时候创建了`inline-style`标签，这与[CSP](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Security-Policy/style-src)产生了冲突，配置此项的与`meta`中的`style-src`配合使用。
 
 ### 实例属性
 
 **OpRec.prototype.DOM** （HTMLElement | undefined）
 
- 用于 ui 操作的 dom，当`DomOptions.show`为`false`的时候返回`undefined`。
+用于 ui 操作的 dom，当`DomOptions.show`为`false`的时候返回`undefined`。
 
 **OpRec.prototype.startTime** （number）
 
- 录制开始时的时间戳，默认为 0。
+录制开始时的时间戳，默认为 0。
 
 **OpRec.prototype.status** （"recording" | "stop" | "paused" | "inactive"）
 
- 当前状态，默认为 stop。
+当前状态，默认为 stop。
 
 **OpRec.prototype.recordedChunks** （Blob[]）
 
- 包含媒体数据的[`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)，默认为 []。
+包含媒体数据的[`Blob`](https://developer.mozilla.org/zh-CN/docs/Web/API/Blob)，默认为 []。
 
 **OpRec.prototype.logs** （LoggerItem[]）
 
- 记录集合，默认为 []。
+记录集合，默认为 []。
 
 **OpRec.prototype.logs** （LoggerItem[]）
 
- 记录集合，默认为 []。
+记录集合，默认为 []。
 
 **OpRec.prototype.mediaRecorder** （MediaRecorder | undefined）
 
- MediaRecorder 实例。
+MediaRecorder 实例。
 
 **OpRec.prototype.stream** （MediaStream | undefined）
 
- MediaStream。
+MediaStream。
 
 **OpRec.prototype.mimeType** （string | undefined）
 
- mime 类型。
+mime 类型。
 
 ### 实例方法
 
 **OpRec.prototype.startREC()**
 
- 开始录制，这是一个异步方法。
+开始录制，这是一个异步方法。
 
 **OpRec.prototype.stopREC()**
 
- 结束录制。
+结束录制。
 
 **OpRec.prototype.toggleREC()**
 
- 切换录制状态。
+切换录制状态。
 
 **OpRec.prototype.on(type,cb)**
 
- event 事件。
+event 事件。
 
 **OpRec.prototype.logger(loggerLever,ErrorEvent|string)**
 
 - loggerLever:"emerg" | "alert" | "crit" | "err" | "warning" | "notice" | "info" | "debug" | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7
 
- 主动提交记录，第一个参数为记录等级，第二个参数为日志信息。
+主动提交记录，第一个参数为记录等级，第二个参数为日志信息。
 
 **OpRec.prototype.getSupportedMimeTypes()**
 
- 获取当前运行环境支持的 Mime 类型。
+获取当前运行环境支持的 Mime 类型。
 
 **OpRec.prototype.getBlob()**
 
- 获取录制后的 Blob。
+获取录制后的 Blob。
 
 **OpRec.prototype.getExtname()**
 
- 获取录制的后缀。
+获取录制的后缀。
 
 **OpRec.prototype.reset()**
 
- 重置状态。
+重置状态。
 
 ## 🤐 已知问题
 
- 由于`mysql`的库并不支持`mysql 8`新版的加密方式，所以使用`8.x`需要修改默认的加密方式：
+由于`mysql`的库并不支持`mysql 8`新版的加密方式，所以使用`8.x`需要修改默认的加密方式：
 
 ```mysql
-ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
+$ ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'password'
 ```
 
 然后刷新：
 
 ```mysql
-flush privileges;
+$ flush privileges;
 ```
 
 或者切换为`5.x`版本。
