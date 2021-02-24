@@ -30,7 +30,6 @@ export function insertRule(
   this: OpRecInterface,
   rules: InsertRule | InsertRule[]
 ) {
-  console.log(this.props);
   let styleSheet = document.querySelector("style");
   if (styleSheet === null) {
     styleSheet = document.createElement("style");
@@ -67,4 +66,8 @@ export function formatVttTime(timestamp: number) {
     .padStart(2, "0")}:${Math.floor((timestamp / 1000) % 60)
     .toString()
     .padStart(2, "0")}.${timestamp.toString().substr(-3)}`;
+}
+
+export function electronVersion() {
+  return process?.versions?.electron;
 }
